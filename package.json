@@ -2,6 +2,10 @@
   "name": "dentraliafront",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "16.5.0",
+    "npm": "8.5.5"
+  },
   "dependencies": {
     "@craco/craco": "^6.4.5",
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
