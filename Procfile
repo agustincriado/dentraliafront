@@ -1,1 +1,1 @@
-web: npm craco
+web: npm start
