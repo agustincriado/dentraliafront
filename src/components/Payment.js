@@ -84,13 +84,19 @@ const Payment = (props) => {
         cliente: datosClientes,
         eventoId: useId,
         transactionType: 'Web',
-        seguro: usePayload.seguro,
-        seguroPrice: usePayload.seguroPrice,
         direccionIP: direccionIP,
 
         quantity: usePayload.length,
-        unitPrice: usePayload.map(obj => obj.price),
-        totalPrice: usePrecio,
+        unitPrice: (usePayload.reduce((a,b) => {
+          if(b.seguro) {
+             return a+b.fullPrice
+          } else return a+b.sinSeguro
+        }, 0))/usePayload.length,
+        totalPrice: usePayload.reduce((a,b) => {
+          if(b.seguro) {
+             return a+b.fullPrice
+          } else return a+b.sinSeguro
+        }, 0),
         info: usePayload.map(obj => obj.seatInfo),
       }
 
