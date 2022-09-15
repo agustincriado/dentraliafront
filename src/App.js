@@ -17,30 +17,35 @@ import Payment from './components/Payment';
 import Gateway from './components/Gateway';
 import NotFound from './components/pages/NotFound';
 import { AuxProvider } from './context/auxContext';
+import { QueryContextProvider } from './context/QueryContext';
+import Flyer from './components/Flyer';
 function App() {
   const isDesktop = useMediaQuery({
     query: '(min-width: 1224px)'
   })
   return (
     <BrowserRouter>
-      {isDesktop ? <NavBar/> : <SideBar/>}
-      <div className='contenedor'>
+      <QueryContextProvider>
         <AuxProvider>
-        <Routes>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/about" element={<About/>} />
-          <Route path="/events" element={<MakeEvent/>}/>
-          <Route path="/faq" element={<FAQ/>}/>
-          <Route path="/newsletter" element={<Newsletter/>}/>
-          <Route path="/contact" element={<Contact/>}/>
-          <Route path="/evento/:id" element={<Planos />} />
-          <Route path="/misdatos/:id" element={<Payment />} />
-          <Route path="/gateway/:id" element={<Gateway />} />
-          <Route path="*" element={<NotFound/>} />
-        </Routes>
+        {isDesktop ? <NavBar/> : <SideBar/>}
+        <Flyer />
+        <div className='contenedor'>
+          <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/about" element={<About/>} />
+            <Route path="/events" element={<MakeEvent/>}/>
+            <Route path="/faq" element={<FAQ/>}/>
+            <Route path="/newsletter" element={<Newsletter/>}/>
+            <Route path="/contact" element={<Contact/>}/>
+            <Route path="/evento/:id" element={<Planos />} />
+            <Route path="/misdatos/:id" element={<Payment />} />
+            <Route path="/gateway/:id" element={<Gateway />} />
+            <Route path="*" element={<NotFound/>} />
+          </Routes>
+        </div>
+        <Footer />
         </AuxProvider>
-    </div>
-    <Footer />
+      </QueryContextProvider>
     </BrowserRouter>
   );
 }

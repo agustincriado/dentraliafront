@@ -5,7 +5,7 @@ import ReactHtmlParser from 'react-html-parser'
 import { useNavigate } from 'react-router-dom'
 import { useAux } from '../../context/auxContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { faTicket } from '@fortawesome/free-solid-svg-icons';
 import { Modal } from 'react-bootstrap';
 
 const Planos = () => {
@@ -23,7 +23,7 @@ const initialValues = {
 
     useEffect(()=> {
       console.log('Calling to useEffect', useId, usePlano)
-      if(useId === '') navigate('/404')
+      if(useId === '') navigate('/')
         // console.log("seteando listeners")
         // document.querySelectorAll('span[data-bs-content]').forEach(seat => 
         //   seat.addEventListener('click', (e) => {
@@ -65,7 +65,7 @@ const initialValues = {
         //   })
         // )
 
-    }, [isLoaded])
+    }, [isLoaded, useId])
     useEffect(() => {
       const addToCart = (e) => {
         if (e.target.classList.contains('selected')) {
@@ -207,6 +207,10 @@ const initialValues = {
       setCarrito(newCarrito)
     }
     
+    const emptyCart = () => {
+      setCarrito([])
+      document.querySelectorAll('.selected').forEach(item => item.classList.remove('selected'))
+    }
     return (
       <>
       <section className='eventContainer'>
@@ -223,7 +227,7 @@ const initialValues = {
           }) : '' }
       </div>
       <section className='zonasCart'>
-      <section className='zonasPrices'>
+        <section className='zonasPrices'>
             {usePlano && usePlano.zonas ? usePlano.zonas.map(function (zona) {
               if (zona.name === 'Bloqueada') {
                 return (
@@ -270,25 +274,59 @@ const initialValues = {
               }
             }) : ''}
         </section>
-        <button onClick={() => setShowCart(true)} className='btn btn-outline-primary cartModal'>
-          <FontAwesomeIcon icon={faCartShopping} className="fa-regular fa-cart-shopping" />
-        </button>
       </section>
-      <button className='btn btn-primary btnPago' onClick={handleSendPay}>Realizar pago</button>
-      </section>
-    <Modal show={showCart} onHide={() => setShowCart(false)} backdrop="static" keyboard="" size="lg">
-    <Modal.Header closeButton>
-      <Modal.Title>Carrito</Modal.Title>
-    </Modal.Header>
-    <Modal.Body className="d-flex flex-column">
-        { useCarrito.length > 0 ? (
-          <>
-            <div className="col">
-                {useCarrito.map((item, index) => (
+      <section className="entradasCart">
+      { useCarrito.length > 0 ? (
+        <>
+        <table className="table">
+            <thead>
+              <tr>
+                <th>Zona</th>
+                <th>Fila y Asiento</th>
+                <th>Seguro</th>
+                <th>Asegurar entrada</th>
+                <th>Precio asiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              {useCarrito.map((item, index) => (
+                <tr key={item.dbstring}>
+                  <td>{item.zonaName}</td>
+                  <td>{item.seatInfo}</td>
+                  <td>{item.seguroPrice}</td>
+                  <td className="">
+                  <label className="form-check-label" htmlFor={`seguro-${item.dbstring}`}>Si &nbsp;</label>
+                    <input 
+                          className="form-check-input"
+                          type="checkbox"
+                          name={`seguro-${item.dbstring}`}
+                          checked={item.seguro ? item.seguro : false }
+                          onChange={() => handleSeguro(item.dbstring, index)}
+                        />
+                        </td>
+                  <td>{Intl.NumberFormat('es-es', {style: 'currency', currency: 'EUR'}).format((Number(item.zonaPrice)+ Number(item.zonaGDG)))}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="d-flex flex-column">
+              <div className='Headers carrito'>
+                <div>Zona</div>
+                <div>Fila y Asiento</div>
+                <div>Seguro</div>
+                <div>Asegurar entrada</div>
+                <div>Preico asiento</div>
+              </div>
+              {useCarrito.map((item, index) => (
                   <>
-                    <div className="row" key={item.dbstring}>
+                    <div className="col carrito element" key={item.dbstring}>
                       <p className="col">
                         <strong>{item.seatInfo}</strong><br />
+                        {item.reducedMobility ? (
+                        <>
+                          <strong>Movilidad Reducida</strong><br/>
+                        </>
+                        ) : ''}
                         Precio con GDG: {Intl.NumberFormat('es-es', {style: 'currency', currency: 'EUR'}).format((Number(item.zonaPrice)+ Number(item.zonaGDG)))}<br />
                         Precio con seguro: {Intl.NumberFormat('es-es', {style: 'currency', currency: 'EUR'}).format((Number(item.zonaPrice)+ Number(item.zonaGDG)+Number(item.seguroPrice)))}
                       </p>
@@ -307,14 +345,7 @@ const initialValues = {
                     <hr />
                   </>
               ))}
-            </div>
-            <button className="btn btn-primary" onClick={handleSendPay}>
-              Generar entradas Total {useCarrito.length > 0 ? Intl.NumberFormat('es-ES', {style:'currency',currency:'EUR'}).format(useCarrito.reduce((a, b) => {
-                if (b.seguro) {
-                  return a + b.fullPrice
-              } else return a + b.sinSeguro
-              }, 0)) : 'precio'}
-            </button>
+          </div>
           </>
           ) : (
             <>
@@ -322,10 +353,22 @@ const initialValues = {
                 <span>No hay elementos en el carrito</span>
               </div>
               <hr />
+              {/* <button className="btn btn-primary" onClick={handleSendPay}>
+              Generar entradas Total {useCarrito.length > 0 ? Intl.NumberFormat('es-ES', {style:'currency',currency:'EUR'}).format(useCarrito.reduce((a, b) => {
+                if (b.seguro) {
+                  return a + b.fullPrice
+              } else return a + b.sinSeguro
+              }, 0)) : 'precio'}
+            </button> */}
             </>
           )}
-        </Modal.Body>
-    </Modal>
+        </section>
+        <section className="cartActions d-flex flex-column">
+          <button className="btn btn-dark" onClick={() => setId('')}>Cambiar Evento</button>
+          <button className="btn btn-dark" onClick={emptyCart}>Borrar seleccion</button>
+          <button className="btn btn-success d-flex flex-column" onClick={handleSendPay}><FontAwesomeIcon icon={faTicket} />Continuar</button>
+        </section>
+      </section>
   </>
     )
 }

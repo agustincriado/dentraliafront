@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { QueryContext } from "../context/QueryContext"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
 const Buscador = () => {
     const [usePath, setPath] = useState("")
@@ -15,13 +17,15 @@ const Buscador = () => {
     
     return (
         <div className="buscador">
-            <form onSubmit={handleSubmit}>
-            <h3>¿Qué buscas?</h3>
+            <form className="input-group" onSubmit={handleSubmit}>
+            <label className="input-group-text">
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </label>
             <input
                 type="text"
                 name="query"
                 className="form-control"
-                placeholder="Introduce el nomre del evento o la cuidad"
+                placeholder={"Buscar Eventos por nombre o ciudad"}
             />
             </form>
         </div>

@@ -1,9 +1,5 @@
 import { useAux } from "../context/auxContext"
-import { useContext } from "react"
 import { useNavigate } from "react-router"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons"
-import { faClock } from "@fortawesome/free-regular-svg-icons"
 
 const Evento = (evento) => {
     const { setId } = useAux()
@@ -14,7 +10,9 @@ const Evento = (evento) => {
         setId({
             evento:e.target.id,
             plano: e.target.dataset.planoid,
-            eventName: e.target.dataset.eventname
+            eventName: e.target.dataset.eventname,
+            eventDate: e.target.dataset.eventdate,
+            eventLocation: e.target.dataset.eventlocation
         })
         navigate('/evento/'+e.target.id)
     }
@@ -30,22 +28,22 @@ const Evento = (evento) => {
           id={evento.eventID}
           data-planoid={evento.eventPlano}
           data-eventname={evento.eventName}
+          data-eventDate={Days[eventDay] + "., "  + Months[eventMonth] + "., " +evento.eventHour}
+          data-eventLocation={evento.eventPlace + ' | ' + evento.eventProvince}
           onClick={(e) => handleClick(e)}
         >
             <div className="eventImage">
                 <img src={evento.eventSrc === '' ? 'https://mgt-media.fra1.cdn.digitaloceanspaces.com/varios/festentradas-logo.png' : evento.eventSrc} alt={evento.eventName}></img>
-                <article className="eventDate">
-                    <h6 className="eventDay">{Days[eventDay]} <span>{eventDate}</span></h6>
-                    <h6 className="eventMonth">{Months[eventMonth]}</h6>
-                    <small className="eventHour">
-                      <FontAwesomeIcon icon={faClock}/>
-                      {evento.eventHour}</small>
-                </article>
             </div>
-            <div className="eventName">
-                <h5>{evento.eventName}</h5>
-                <h6>{evento.eventPlace}</h6>
-                <small><FontAwesomeIcon icon={faLocationDot}/>{evento.eventProvince}</small>
+            <div className="eventData">
+                <h5 className="eventName"><span>{evento.eventName}</span></h5>
+                <h6 className="eventDate">{Days[eventDay]}., {Months[eventMonth]}., {evento.eventHour}</h6>
+                <small>
+                {evento.eventPlace}<br />
+                {evento.eventProvince}</small>
+                <div className="eventBook">
+                    <button className="btn">Reservar ahora</button>
+                </div>
             </div>
         </div>
     )

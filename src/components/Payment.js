@@ -9,38 +9,52 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 const Payment = (props) => {
     const { useId, setId, usePayload, setPayload } = useAux()
     const [usePrecio, setPrecio] = useState('')
-    const [useMinutes, setMinutes] = useState(10)
+    const [useMinutes, setMinutes] = useState('10')
     const [useSeconds, setSeconds] = useState('00')
     const [useEvent, setEvent] = useState({evento: ''})
     const [useNewsletter, setNewsletter] = useState(0)
     const [useGdgList, setGdgList] = useState([0,0])
     const navigate = useNavigate()
 
+    const PUBLICOS = {
+      'ATP': '(Todos los públicos)',
+      '+12': '(Mayores de 12 años)',
+      '+14': '(Mayores de 14 años)',
+      '+16': '(Mayores de 16 años)',
+      '+18': '(Mayores de 18 años)',
+      '+21': '(Mayores de 21 años)',
+      '+25': '(Mayores de 25 años)',
+      'MenoresAcomp': '(Menores acompañados)',
+      'Otros': '(Otros)',
+    }
     useEffect(() => {
         if(!useId) navigate('/404')
         console.log(usePayload)
     }, [useId])
 
 
-    // useEffect(() => {
-    //     let sampleInterval = setInterval(() => {
-    //       if (Number(useSeconds) > 0) {
-    //         setSeconds(Number(useSeconds) - 1);
-    //       }
-    //       if (Number(useSeconds) === 0) {
-    //         if (useMinutes === 0) {
-    //           clearInterval(sampleInterval);
-    //         } else {
-    //           setMinutes(useMinutes - 1);
-    //           setSeconds(59);
-    //         }
-    //       }
-    //     }, 1000);
-    //         return () => {
-    //           clearInterval(sampleInterval);
-    //         };
+    useEffect(() => {
+        let sampleInterval = setInterval(() => {
+          if (Number(useSeconds) > 0) {
+            console.log("number")
+            const newNumber = Number(useSeconds) - 1
+            console.log(newNumber, "newSecond")
+            setSeconds(newNumber);
+          }
+          if (Number(useSeconds) === 0) {
+            if (useMinutes === 0) {
+              clearInterval(sampleInterval);
+            } else {
+              setMinutes(useMinutes - 1);
+              setSeconds(59);
+            }
+          }
+        }, 1000);
+            return () => {
+              clearInterval(sampleInterval);
+            };
         
-    //   }, []);
+      }, [useMinutes,useSeconds]);
     
     useEffect(() => {
         if (usePayload.length > 0) {
@@ -126,6 +140,7 @@ const Payment = (props) => {
         <div className="container gridDisplay">
           <section>
         <div>
+          {Number(useMinutes) + ':' + Number(useSeconds)}
       {!(Number(useMinutes) && Number(useSeconds)) ? "" : (
         <p>
           {" "}
@@ -136,7 +151,7 @@ const Payment = (props) => {
     <h1 className="eventTittle">
       <strong>{useEvent.name !== '' ? useEvent.name : ''}</strong>
     </h1>
-    <h6>{useEvent.name !== '' ? convertedDate+ ' en '+ useEvent.recintoName + ' de ' + useEvent.province + ' ' + useEvent.publico : ''}</h6>
+    <h6>{useEvent.name !== '' ? convertedDate+ ' en '+ useEvent.recintoName + ' de ' + useEvent.province + ' ' + PUBLICOS[useEvent.publico] : ''}</h6>
         <div>
             <ul>
             {usePayload ? usePayload.map((ticket) => {
