@@ -4,12 +4,16 @@ import { useEffect } from "react"
 import Buscador from "../Buscador"
 import { useMediaQuery } from "react-responsive"
 const Home = () => {
-    const {setId} = useAux()
+    const {setId, setMinutes, setSeconds} = useAux()
     const isDesktop = useMediaQuery({
         query: '(min-width: 1224px)'
       })
 
-    useEffect(() =>setId(''))
+    useEffect(() =>{
+        setId('')
+        setMinutes('08')
+        setSeconds('59')
+    })
     return (
         <div className="col">
             <div className="buscadorContainer container">

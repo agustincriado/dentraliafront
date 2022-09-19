@@ -14,9 +14,18 @@ export const useAux = () => {
 export function AuxProvider({ children }) {
   const [useId, setId] = useState('')
   const [usePayload, setPayload] = useState('')
-
+  const [useMinutes, setMinutes] = useState('08')
+    const [useSeconds, setSeconds] = useState('59')
   return (
-    <oneContext.Provider value={{ useId, setId, usePayload, setPayload }}>
+    <oneContext.Provider value={{ 
+      useId,
+      setId,
+      usePayload,
+      setPayload,
+      useMinutes,
+      setMinutes,
+      useSeconds, 
+      setSeconds}}>
       {children}
     </oneContext.Provider>
   )

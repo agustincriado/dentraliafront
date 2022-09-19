@@ -20,6 +20,7 @@ const Flyer = () => {
         text: useId.eventName,
         subtext: useId.eventDate,
         info: useId.eventLocation,
+        imgsrc: useId.imgsrc ? useId.imgsrc : initialValues.imgsrc
       })
     }
   }, [useId])

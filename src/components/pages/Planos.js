@@ -5,65 +5,28 @@ import ReactHtmlParser from 'react-html-parser'
 import { useNavigate } from 'react-router-dom'
 import { useAux } from '../../context/auxContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTicket } from '@fortawesome/free-solid-svg-icons';
-import { Modal } from 'react-bootstrap';
+import { faArrowLeft, faArrowRight, faMagnifyingGlassMinus, faMagnifyingGlassPlus, faShoppingCart, faTicket } from '@fortawesome/free-solid-svg-icons';
+import { Modal, Button } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 
 const Planos = () => {
-const initialValues = {
-  zonas: ''
-}
-
-    const navigate = useNavigate()
-    const { useId, setId, setPayload } = useAux()
-    const [usePlano, setPlano] = useState(initialValues)
-    const [useTicket, setTicket] = useState('')
-    const [useCarrito, setCarrito] = useState([])
-    const [isLoaded, setLoaded] = useState(0)
-    const [showCart, setShowCart] = useState(false)
+  const initialValues = {
+    zonas: ''
+  }
+  const isDesktop = useMediaQuery({
+    query: '(min-width: 1224px)'
+  })
+  const navigate = useNavigate()
+  const { useId, setId, setPayload } = useAux()
+  const [usePlano, setPlano] = useState(initialValues)
+  const [useTicket, setTicket] = useState('')
+  const [useCarrito, setCarrito] = useState([])
+  const [isLoaded, setLoaded] = useState(0)
+  const [showCart, setShowCart] = useState(false)
 
     useEffect(()=> {
       console.log('Calling to useEffect', useId, usePlano)
       if(useId === '') navigate('/')
-        // console.log("seteando listeners")
-        // document.querySelectorAll('span[data-bs-content]').forEach(seat => 
-        //   seat.addEventListener('click', (e) => {
-        //     const node = e.target
-        //     node.classList.toggle('selected')
-        //     const nodeRow = node.dataset.rowId
-        //     const nodeCol = node.dataset.colId
-
-        //     const nodePrice = Number(node.getAttribute('data-zonaprice'))
-        //     const nodeZonaName = node.getAttribute('data-zonaname')
-        //     const dbid = node.getAttribute('data-dbid')
-        //     const dbstring = node.getAttribute('data-dbstring')
-        //     const getGDG = usePlano.zonas.filter(function(obj) {
-        //       if(obj.name === nodeZonaName) return obj
-        //     })
-
-        //     const ticket = usePlano.entradas.filter(function(obj) {
-        //       if (obj.row === nodeRow && obj.col === nodeCol) {
-        //         return obj
-        //       } else return null
-        //     })
-        //     const fullSeat = {...ticket[0],
-        //       zona: nodeZonaName,
-        //       price: nodePrice,
-        //       dbid: dbid,
-        //       dbstring: dbstring,
-        //       zonaGDG: getGDG[0].gdg,
-        //     }
-        //     // En este punto ya se recibe por parametros El ID del evento y del PLANO DE ZONAS
-        //     // para poder seguir trabajando en las entradas
-        //     //  if node does not have classlist selected active, delete it from the array
-        //     // if node is selected then push it into the array
-        //     if (node.classList.contains('selected')) {
-        //       setCarrito(prevCarrito => [...prevCarrito, fullSeat])
-
-        //     } else if (!node.classList.contains('selected')) {
-        //       setTicket(fullSeat)
-        //     }
-        //   })
-        // )
 
     }, [isLoaded, useId])
     useEffect(() => {
@@ -165,6 +128,29 @@ const initialValues = {
       }
 
       if(useId && usePlano.zonas === '') retrievePlano()
+
+      const setHalfPlano = () => {
+        const VIEWPORTS = {
+          720: 1.9,
+          1366: 0.5,
+          1400: 0.2
+        }
+        const ViewportWidth = (value) => {
+          if (720 <= value && value <= 1366) {
+            return 0.5
+          } else if ( value <= 720 && value >= 480) {
+            return 1.9
+          } else if (value < 480) {
+            return 1.6
+          }else return 0.2
+        }
+        const canvas = document.getElementById('canvasHolder')
+        console.log("Actual Vierport Width", ViewportWidth(window.innerWidth))
+        canvas.scrollLeft = (canvas.offsetWidth*ViewportWidth(window.innerWidth))
+        dibujarGrid(20, 20, 1, '#ececec')
+      }
+      setHalfPlano()
+
     }, [])
     
     const handleSendPay = () => {
@@ -193,7 +179,8 @@ const initialValues = {
           entradasOBJ: useCarrito,
         })
       })
-      setId(useId.evento)
+      console.log(useId)
+      setId(useId)
       setPayload(useCarrito)
       navigate(`/misdatos/${useId.evento}`)
     }
@@ -211,21 +198,53 @@ const initialValues = {
       setCarrito([])
       document.querySelectorAll('.selected').forEach(item => item.classList.remove('selected'))
     }
+    const dibujarGrid = (disX, disY, lineWidth, color) => {
+      if(document.getElementById('cuadricula')) {
+        const ctx = document.getElementById('cuadricula').getContext("2d")
+        // const canvas = document.getElementById('canvasContainer').getBoundingClientRect()
+        ctx.scale(1.5, 1.5)
+        ctx.canvas.width = 1600;
+        ctx.canvas.height = 1600;
+        ctx.strokeStyle = color
+        ctx.lineWidth = lineWidth
+        for (let i = disX; i< (ctx.canvas.width); i += disX) {
+          // Lineas Verticales
+          ctx.beginPath()
+          ctx.moveTo(i, 0)
+          ctx.lineTo(i, ctx.canvas.height)
+          ctx.stroke()
+        }
+        for (let i = disY; i< (ctx.canvas.height); i += disY) {
+          // Lineas horizontales
+          ctx.beginPath()
+          ctx.moveTo(0, i)
+          ctx.lineTo(ctx.canvas.width, i)
+          ctx.stroke()
+        }
+      }
+    }
     return (
       <>
       <section className='eventContainer'>
-      <div id='canvasHolder' className='canvasContainer scrollingOverflow'>
-        <div className="stageContainer">
-          <strong> Escenario </strong>
+        <div className="Plano">
+          <div className="scrollingTools">
+            <button className="btn btn-primary" onClick={() => document.getElementById('canvasHolder').scrollLeft += -100}><FontAwesomeIcon icon={faArrowLeft}/></button>
+            <button className="btn btn-primary" onClick={() => document.getElementById('canvasHolder').scrollLeft += 100}><FontAwesomeIcon icon={faArrowRight}/></button>
+          </div>
+          <div id='canvasHolder' className='canvasContainer scrollingOverflow'>
+            <div className="stageContainer">
+              <strong> Escenario </strong>
+            </div>
+              {usePlano ? ReactHtmlParser(usePlano.plano, {
+                transform(node, index) {
+                  if (node.data === ',') {
+                    return null
+                  }
+                }
+              }) : '' }
+            <canvas id='cuadricula'></canvas>
+          </div>
         </div>
-          {usePlano ? ReactHtmlParser(usePlano.plano, {
-            transform(node, index) {
-              if (node.data === ',') {
-                return null
-              }
-            }
-          }) : '' }
-      </div>
       <section className='zonasCart'>
         <section className='zonasPrices'>
             {usePlano && usePlano.zonas ? usePlano.zonas.map(function (zona) {
@@ -276,7 +295,8 @@ const initialValues = {
         </section>
       </section>
       <section className="entradasCart">
-      { useCarrito.length > 0 ? (
+      { isDesktop ? ( 
+      useCarrito.length > 0 ? (
         <>
         <table className="table">
             <thead>
@@ -309,17 +329,63 @@ const initialValues = {
               ))}
             </tbody>
           </table>
-          <div className="d-flex flex-column">
-              <div className='Headers carrito'>
-                <div>Zona</div>
-                <div>Fila y Asiento</div>
-                <div>Seguro</div>
-                <div>Asegurar entrada</div>
-                <div>Preico asiento</div>
+          </>
+          ) : (
+            <>
+              <div className="d-flex justify-content-center">
+                <span>No hay elementos en el carrito</span>
               </div>
-              {useCarrito.map((item, index) => (
+              <hr />
+              {/* <button className="btn btn-primary" onClick={handleSendPay}>
+              Generar entradas Total {useCarrito.length > 0 ? Intl.NumberFormat('es-ES', {style:'currency',currency:'EUR'}).format(useCarrito.reduce((a, b) => {
+                if (b.seguro) {
+                  return a + b.fullPrice
+              } else return a + b.sinSeguro
+              }, 0)) : 'precio'}
+            </button> */}
+            </>
+          )) : ''}
+        </section>
+        <section className="cartActions d-flex flex-column">
+          { isDesktop ? (
+            <>
+              <button className="btn btn-dark" onClick={() => setId('')}>Cambiar Evento</button>
+              <button className="btn btn-dark" onClick={emptyCart}>Borrar seleccion</button>
+              <button className="btn btn-success d-flex flex-column" onClick={handleSendPay}><FontAwesomeIcon icon={faTicket} />Continuar</button>
+            </>
+          ) : ''}
+        </section>
+        { isDesktop ? '' : (
+          <div className="mobile cartDisplay">
+            <div className="cartModal" onClick={() => setShowCart(true)}>
+              <FontAwesomeIcon icon={faShoppingCart}/>
+              <div className="subtotalInfo">
+                  Subtotal <br />
+                  {
+              useCarrito.length > 0 ? Intl.NumberFormat('es-ES', {style:'currency',currency:'EUR'}).format(useCarrito.reduce((a, b) => {
+                if (b.seguro) {
+                  return a + b.fullPrice
+              } else return a + b.sinSeguro
+              }, 0)) : ''}
+              </div>
+            </div>
+            <div className="mobile successCart">
+              <button className="btn btn-success d-flex flex-column" onClick={handleSendPay}>Continuar</button>
+            </div>
+          </div>
+        )}
+      </section>
+      <Modal show={showCart} onHide={() => setShowCart(false)} backdrop="static" keyboard="" size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Carrito</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="d-flex flex-column">
+        { useCarrito.length > 0 ? (
+          <>
+            <div className="col">
+                {useCarrito.map((item, index) => (
                   <>
-                    <div className="col carrito element" key={item.dbstring}>
+                    <div className="row" key={item.dbstring}>
                       <p className="col">
                         <strong>{item.seatInfo}</strong><br />
                         {item.reducedMobility ? (
@@ -345,7 +411,16 @@ const initialValues = {
                     <hr />
                   </>
               ))}
-          </div>
+            </div>
+            <button className="btn btn-primary">
+              Generar entradas Total {
+              useCarrito.length > 0 ? Intl.NumberFormat('es-ES', {style:'currency',currency:'EUR'}).format(useCarrito.reduce((a, b) => {
+                if (b.seguro) {
+                  return a + b.fullPrice
+              } else return a + b.sinSeguro
+              }, 0)) : 'precio'}
+            </button>
+            <Button variant="danger" onClick={() => setCarrito([])}>Vaciar Carrito</Button>
           </>
           ) : (
             <>
@@ -353,22 +428,10 @@ const initialValues = {
                 <span>No hay elementos en el carrito</span>
               </div>
               <hr />
-              {/* <button className="btn btn-primary" onClick={handleSendPay}>
-              Generar entradas Total {useCarrito.length > 0 ? Intl.NumberFormat('es-ES', {style:'currency',currency:'EUR'}).format(useCarrito.reduce((a, b) => {
-                if (b.seguro) {
-                  return a + b.fullPrice
-              } else return a + b.sinSeguro
-              }, 0)) : 'precio'}
-            </button> */}
             </>
           )}
-        </section>
-        <section className="cartActions d-flex flex-column">
-          <button className="btn btn-dark" onClick={() => setId('')}>Cambiar Evento</button>
-          <button className="btn btn-dark" onClick={emptyCart}>Borrar seleccion</button>
-          <button className="btn btn-success d-flex flex-column" onClick={handleSendPay}><FontAwesomeIcon icon={faTicket} />Continuar</button>
-        </section>
-      </section>
+        </Modal.Body>
+      </Modal>
   </>
     )
 }

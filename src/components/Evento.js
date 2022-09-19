@@ -28,8 +28,8 @@ const Evento = (evento) => {
           id={evento.eventID}
           data-planoid={evento.eventPlano}
           data-eventname={evento.eventName}
-          data-eventDate={Days[eventDay] + "., "  + Months[eventMonth] + "., " +evento.eventHour}
-          data-eventLocation={evento.eventPlace + ' | ' + evento.eventProvince}
+          data-eventdate={Days[eventDay] + "., "  + Months[eventMonth] + "., " +evento.eventHour}
+          data-eventlocation={evento.eventPlace + ' | ' + evento.eventProvince}
           onClick={(e) => handleClick(e)}
         >
             <div className="eventImage">

@@ -20,7 +20,7 @@ const Contact = () => {
                 </div>
             </div>
             <div className="row">
-                <div className="form-group">
+                <div className="col">
                     <label htmlFor="inputText">¿Que necesitas?</label>
                     <textarea maxLength="5000" data-msg-required="Indica lo que necesitas" rows="10" className="form-control" name="inputText" id="mensaje" required=""></textarea>
                 </div>

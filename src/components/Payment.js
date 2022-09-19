@@ -7,10 +7,19 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const Payment = (props) => {
-    const { useId, setId, usePayload, setPayload } = useAux()
+    const { 
+      useId,
+      setId,
+      usePayload,
+      setPayload,
+      useMinutes,
+      setMinutes,
+      useSeconds,
+      setSeconds,
+     } = useAux()
     const [usePrecio, setPrecio] = useState('')
-    const [useMinutes, setMinutes] = useState('10')
-    const [useSeconds, setSeconds] = useState('00')
+    // const [useMinutes, setMinutes] = useState('10')
+    // const [useSeconds, setSeconds] = useState('00')
     const [useEvent, setEvent] = useState({evento: ''})
     const [useNewsletter, setNewsletter] = useState(0)
     const [useGdgList, setGdgList] = useState([0,0])
@@ -50,10 +59,15 @@ const Payment = (props) => {
             }
           }
         }, 1000);
-            return () => {
-              clearInterval(sampleInterval);
-            };
-        
+
+        if (!useMinutes && !useSeconds) {
+          navigate('/')
+        }
+        return () => {
+          console.log("limpiando componente")
+          clearInterval(sampleInterval);
+        };
+      
       }, [useMinutes,useSeconds]);
     
     useEffect(() => {
@@ -69,16 +83,16 @@ const Payment = (props) => {
 
     useEffect(() => {
       async function retrieveEvent() {
-        const event = await getDoc(doc(db, 'Eventos', useId))
-        setEvent(event.data()) 
+        const event = await getDoc(doc(db, 'Eventos', useId.evento))
+        setEvent(event.data())
+        setId({
+          ...useId,
+          imgsrc: event.data().webImage ? event.data().webImage : 'https://mgt-media.fra1.cdn.digitaloceanspaces.com/varios/festentradas-logo.png'
+        })
       }
-      if(useId !== '' && useEvent.evento === '' ) retrieveEvent()
+      if(useId.evento !== '' && useEvent.evento === '' ) retrieveEvent()
     })
 
-    // console.log(usePayload, "USE TICKET payload")
-
-    // const path = window.location.pathname
-    
     const handleSubmit = async (e) => {
       e.preventDefault()
       console.log("Submit!")
@@ -96,7 +110,7 @@ const Payment = (props) => {
       const payload = {
         carrito: usePayload,
         cliente: datosClientes,
-        eventoId: useId,
+        eventoId: useId.evento,
         transactionType: 'Web',
         direccionIP: direccionIP,
 
@@ -115,7 +129,7 @@ const Payment = (props) => {
       }
 
       setPayload(payload)
-      navigate('/gateway/'+useId)
+      navigate('/gateway/'+useId.evento)
     }
     const convertUnix = (unix) => {
       const Days = ['Domingo','Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
@@ -140,13 +154,9 @@ const Payment = (props) => {
         <div className="container gridDisplay">
           <section>
         <div>
-          {Number(useMinutes) + ':' + Number(useSeconds)}
-      {!(Number(useMinutes) && Number(useSeconds)) ? "" : (
-        <p>
-          {" "}
-          {Number(useMinutes)}:{Number(useSeconds) < 10 ? `0${Number(useSeconds)}` : Number(useSeconds)}
+        <p className="timerEvent">
+          0{Number(useMinutes)}:{Number(useSeconds) < 10 ? `0${Number(useSeconds)}` : Number(useSeconds)}
         </p>
-      )}
     </div>
     <h1 className="eventTittle">
       <strong>{useEvent.name !== '' ? useEvent.name : ''}</strong>
@@ -172,9 +182,60 @@ const Payment = (props) => {
           <article className="GDGDeclaration">
               Se a&ntilde;adir&aacute; + {Intl.NumberFormat('es-ES',{ style: 'currency', currency: 'EUR'}).format(useGdgList.reduce((a, b) => Number(a) + Number(b)))} de gastos de gesti&oacute;n
           </article>
-            <form className="formPayment" onSubmit={(e) => handleSubmit(e)}>
               <h6 className="compradorInfo"><strong>COMPRADOR (A DONDE ENVIAREMOS LAS ENTRADAS)</strong></h6>
-              <div className="row">
+            <form className="formPayment" onSubmit={(e) => handleSubmit(e)}>
+              <div className="form-group dual">
+                <label htmlFor="staticEmail" className="col-form-label">E-mail</label>
+                <input type="email" className="form-control" id="staticEmail" required={true} aria-required="true" />
+              </div>
+              <div className="form-group dual">
+                <label htmlFor="staticEmail" className="col-form-label">Confirma tu e-mail</label>
+                <input type="email" className="form-control" id="confirmEmail" required={true} aria-required="true"/>
+              </div>
+              <div className="form-group dual">
+                <label htmlFor="staticEmail" className="col-form-label">Nombre</label>
+                <input type="text" className="form-control" id="name" required={true} aria-required="true"/>
+              </div>
+              <div className="form-group dual">
+                <label htmlFor="staticEmail"className="col-form-label">Apellidos</label>
+                <input type="text" className="form-control" id="surname" required={true} aria-required="true"/>
+              </div>
+              <div className="form-group dual">
+                <label htmlFor="staticEmail" className="col-form-label">DNI</label>
+                <input type="text" className="form-control" id="dni" required={true} aria-required="true"/>
+              </div>
+              <div className="form-group dual">
+                <label htmlFor="staticEmail" className="col-form-label">Telefono</label>
+                <input type="tel" className="form-control" id="tel" required={true} aria-required="true"/>
+              </div>
+              <div className="form-group">
+                <label htmlFor="staticEmail" className="col-form-label">C&oacute;digo Postal</label>
+                <input type="text" className="form-control" id="zipCode" required={true} aria-required="true"/>
+              </div>
+              <div className="form-group">
+                      <div className="col-md-12">
+                          <br />
+                          <h5>
+                            <strong className="compradorInfo">
+                              Debido a la situación expecional del Covid-19 indica los nombres, apellidos y teléfonos de las personas que irán contigo al evento
+                            </strong>
+                          </h5>
+                          <small>
+                          (Ejemplo: Pepe Pérez, 612123123 - María López, 612123123)
+                          </small>
+                      </div>
+              </div>
+              <div className="form-group">
+                      <div className="col-md-12">
+                          <textarea className="form-control" required="" name="datos[txtadicional]" style={{height: '200px'}}></textarea>
+                      </div>
+                  </div>
+              <div className="form-group">
+              <p><input type="checkbox" name="acceptNewsletter" onClick={(e) => toggleNewsletter(e)} /> Marca esta casilla para autorizarnos a enviarte información de otros eventos que realicemos</p>
+                          <p>Realizando la compra aceptas la <a href="/normativa-covid">normativa referente al Covid-19</a></p>
+                          <br/>
+              </div>
+              {/* <div className="row">
                   <div className="form-group">
                       <div className="col-md-6">
                           <label htmlFor="staticEmail" className="col-form-label">E-mail</label>
@@ -247,7 +308,7 @@ const Payment = (props) => {
                           <p>Realizando la compra aceptas la <a href="/normativa-covid">normativa referente al Covid-19</a></p>
                           <br/>
                       </div>
-              </div>
+              </div> */}
               <button className="btn btn-primary">Realizar pago</button>
             </form>
         </section>

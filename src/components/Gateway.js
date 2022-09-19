@@ -11,7 +11,13 @@ const Gateway = () => {
     } 
 
     const navigate = useNavigate()
-    const {useId,usePayload} = useAux()
+    const {
+      useId,
+      usePayload,
+      useMinutes,
+      setMinutes,
+      useSeconds,
+      setSeconds,} = useAux()
     const [useEvent, setEvent] = useState(initialValues)
 
     useEffect(() => {
@@ -27,6 +33,33 @@ const Gateway = () => {
         console.log(usePayload)
     }, [usePayload])
 
+    useEffect(() => {
+      let sampleInterval = setInterval(() => {
+        if (Number(useSeconds) > 0) {
+          console.log("number")
+          const newNumber = Number(useSeconds) - 1
+          console.log(newNumber, "newSecond")
+          setSeconds(newNumber);
+        }
+        if (Number(useSeconds) === 0) {
+          if (useMinutes === 0) {
+            clearInterval(sampleInterval);
+          } else {
+            setMinutes(useMinutes - 1);
+            setSeconds(59);
+          }
+        }
+      }, 1000);
+
+      if (!useMinutes && !useSeconds) {
+        navigate('/')
+      }
+          return () => {
+            clearInterval(sampleInterval);
+          };
+    
+    }, [useMinutes,useSeconds]);
+
     const PUBLICO = {
       '+12': 'Mayores de 12 años',
       '+14': 'Mayores de 14 años',
@@ -38,11 +71,6 @@ const Gateway = () => {
       'Otros':'Otros',
       'ATP': 'Todos los públicos'
     }
-    // const evento = useMemo(async() => {
-    //     const query = await getDoc(doc(db, 'Eventos', usePayload.eventoId))
-    //     const task = query.data()
-    //     return task
-    // }, [usePayload]) 
 
     const convertUnix = (unix) => {
         const Days = ['Doming','Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
@@ -61,6 +89,10 @@ const Gateway = () => {
     
     // console.log(evento)
     return(
+      <>
+          <p className="timerEvent">
+          0{Number(useMinutes)}:{Number(useSeconds) < 10 ? `0${Number(useSeconds)}` : Number(useSeconds)}
+        </p>
         <div className="container gridDisplay">
           <section className="ticketResume">
             <h1 className="eventTittle">
@@ -118,6 +150,7 @@ const Gateway = () => {
             </div>
           </section>
         </div>
+      </>
     )
 }
 

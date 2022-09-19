@@ -43,23 +43,31 @@ svg {
 .ul.sideBar {
   display: flex;
   flex-flow: column;
+  padding: 0 10px;
+  font-size: 12px;
 }
 .ul.navBar a {
   text-decoration: none;
   padding: 1%;
   font-weight: 400;
-  font-size: 11px;
+  font-size: 12px;
 }
-.ul.navBar a:hover, .ul.navBar .active{
+.ul.sideBar a {
+  text-decoration: none;
+  padding: 1.5rem 0;
+}
+.ul.navBar a:hover, .ul.navBar .active,
+.ul.sideBar a:hover, .ul.sideBar .active{
   /* border: solid 1px var(--main-color); */
   /* background-color: var(--main-color); */
   color: #fe393c;
   /* border-radius: 10%; */
 }
 .ul.sideBar a:hover, .ul.sideBar.active {
-  background-color: var(--main-color);
-  color: #fff;
-  border-radius: 10px;
+  color: #fe393c;
+}
+.ul.sideBar .btn-close {
+  align-self: flex-end;
 }
 .navBar.container {
   display: flex;
@@ -92,8 +100,9 @@ svg {
 }
 .eventContainer {
   display: grid;
-  grid-template-columns: 1fr 0.25fr;
+  grid-template-columns: 70% 30%;
   column-gap: 2rem;
+  row-gap: 15px;
 }
 .inside.container {
   display: grid;
@@ -111,23 +120,29 @@ svg {
 
 .nav-menu a {
   text-decoration: none;
-  border-bottom: 1px solid #e8e8e8;
-  padding: 7px 8px;
+  /* border-bottom: 1px solid #e8e8e8; */
+  margin: 10px 0;
+  padding: 7px 10px;
 }
 .nav-menu.active {
-  height: 230px;
+  position: absolute;
+  height: 100vh;
   transition: height .5s;
   margin-bottom: 10px;
+  background-color: #fff;
+  width: fit-content;
+  right: 35px;
 } 
 
 .navBar.container.mobile > svg {
-  background-color: var(--main-color);
-  color: #fff;
+  /* background-color: var(--main-color); */
+  color: #000;
   width: 2.9rem;
   height: 2.5rem;
   padding: 12px;
   border-radius: 4px;
   align-self: center;
+  pointer-events: all;
 }
 .navBar.container.mobile {
   padding: 0 10%;
@@ -163,11 +178,17 @@ footer {
 
 .contactContainer {
   margin: 4rem 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 3rem;
+  display: flex;
+  flex-flow: row wrap;
+  column-gap: 1rem;
+  justify-content: space-between;
 }
-
+.formContainer.newsletter {
+  width: 100%;
+}
+.formContainer, .textContainer {
+  width: 47%;
+}
 .textContainer h3 {
   color: var(--main-color);
 }
@@ -187,9 +208,12 @@ footer {
 
 .formContainer {
   color: var(--main-color);
-  width: 100%;
+  display: flex;
+  flex-flow: column;
 }
-
+.formContainer .row {
+  margin: 10px 0;
+}
 .formContainer span {
   font-weight: bold;
 }
@@ -420,6 +444,7 @@ margin-top: 1rem;
 height: 30rem;
 /* width: 70%; */
 padding-left: 0.5rem;
+scroll-behavior: smooth;
 }
 
 .toolTip {
@@ -468,8 +493,9 @@ span[data-zonaname='Bloqueada'] {
 
 .gridDisplay {
   display: grid;
-  grid-template-columns: 1.1fr 0.8fr;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 2fr));
   column-gap: 1rem;
+  margin-top: 20px;
 }
 
 strong.ticketData {
@@ -513,7 +539,7 @@ b, .eventTittle strong {
 
 .formPayment {
   display: flex;
-  flex-flow: column;
+  flex-flow: row wrap;
 }
 
 .strongPayment, .compradorInfo {
@@ -591,12 +617,17 @@ b, .eventTittle strong {
   margin-top: 3rem;
 }
 .cartModal {
-  position: fixed;
-  right: 30px;
-  bottom: 50px;
-  border-radius: 50% 50% 0 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  color: #fff;
+  flex-flow: row;
+  gap: 10px;
 }
-
+.cartModal svg {
+  height: 50%;
+}
 .homeFlyer {
   display: flex;
   flex-flow: column;
@@ -654,8 +685,87 @@ b, .eventTittle strong {
   gap: 10px;
   justify-content: flex-end;
 }
+.mobile.cartDisplay {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 10vh;
+  width: 100%;
+  background-color: #000;
+  z-index: 10;
+  border-radius: 5% 5% 0 0;
+  padding: 0 3%;
+  background: linear-gradient(180deg, #464646 43%, #6a6868 61%, #9f9f9f 80%);
+}
+.mobile.successCart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+}
+.mobile.successCart button {
+  width: 100%;
+}
+.offcanvas.offcanvas-end.show {
+  width: 52.5%;
+  /* right: 40px; */
+  padding-top: 15px;
+}
+.offcanvas-header {
+  justify-content: flex-end;
+}
 
+.timerEvent {
+  color: #f00;
+  font-size: 35px;
+  font-weight: 700;
+}
+.formPayment .form-group {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.form-group.dual {
+  width: 50%;
+}
+.scrollingTools .btn-warning {
+  color: #fff;
+}
+.scrollingTools {
+  display: flex;
+  justify-content: space-evenly;
+}
 @media (max-width: 728px) {
+  .formPayment {
+    flex-flow: column;
+  }
+  .formPayment .form-group {
+    width: 100%;
+  }
+  .contactContainer {
+    flex-flow: column;
+  }
+  .formContainer, .textContainer {
+    width: 100%;
+  }
+  .textContainer {
+    order: 1;
+  }
+  .formContainer {
+    order: 2;
+  }
+  .flyerText {
+    top: -75%;
+    padding-left: 10%;
+  }
+  .homeFlyer span {
+    top: -80%;
+    padding-left: 10%;
+  }
   .eventImage {
     max-width: 100%;
     width: auto;
@@ -665,6 +775,10 @@ b, .eventTittle strong {
   } 
   .buscador {
     width: 100%;
+    height: 5vh;
+  }
+  .buscador form {
+    height: 100%;
   }
   .inside.container {
     grid-template-columns: repeat(auto-fill, minmax(280px, 370px));
@@ -672,5 +786,11 @@ b, .eventTittle strong {
   .eventContainer {
     display: flex;
     flex-flow: column
+  }
+  .content {
+    flex-flow: column;
+  }
+  .content div {
+    width: 100%;
   }
 }
