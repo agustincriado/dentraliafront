@@ -11,8 +11,8 @@ const EventGenerator = () => {
     useEffect(
         () => { let queryPath = ''
             useQuery === '' || useQuery === []  
-              ? queryPath = collection(db, 'Eventos')
-              : queryPath = query(collection(db, 'Eventos'), where("Datos", "array-contains", useQuery), orderBy('name', 'asc'))
+              ? queryPath = query(collection(db, 'Eventos'), orderBy('unixDateStart', 'asc'))
+              : queryPath = query(collection(db, 'Eventos'), where("name", ">=", useQuery), orderBy('name', 'asc'))
             onSnapshot((queryPath), querySnapshot => {
                 
               setEvents(querySnapshot.docs.map(doc => {       

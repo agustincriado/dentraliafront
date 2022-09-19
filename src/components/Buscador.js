@@ -5,13 +5,14 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
 const Buscador = () => {
     const [usePath, setPath] = useState("")
-    const {useQuery, setQuery} = useContext(QueryContext)
+    const {setQuery} = useContext(QueryContext)
     useEffect(()=> {
         setQuery(usePath)
     }, [usePath, setQuery])
     const handleSubmit = (e) => {
         e.preventDefault()
-        const query = e.target['query'].value
+        const query = e.target['query'].value.toUpperCase()
+        console.log('Query value =>', query)
         setPath(query)
     }
     

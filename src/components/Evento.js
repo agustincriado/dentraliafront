@@ -37,7 +37,7 @@ const Evento = (evento) => {
             </div>
             <div className="eventData">
                 <h5 className="eventName"><span>{evento.eventName}</span></h5>
-                <h6 className="eventDate">{Days[eventDay]}., {Months[eventMonth]}., {evento.eventHour}</h6>
+                <h6 className="eventDate">{Days[eventDay]}., {eventDate} {Months[eventMonth]}., {evento.eventHour}</h6>
                 <small>
                 {evento.eventPlace}<br />
                 {evento.eventProvince}</small>

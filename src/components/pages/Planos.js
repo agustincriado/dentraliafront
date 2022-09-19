@@ -147,7 +147,7 @@ const Planos = () => {
         const canvas = document.getElementById('canvasHolder')
         console.log("Actual Vierport Width", ViewportWidth(window.innerWidth))
         canvas.scrollLeft = (canvas.offsetWidth*ViewportWidth(window.innerWidth))
-        dibujarGrid(20, 20, 1, '#ececec')
+        // dibujarGrid(20, 20, 1, '#ececec')
       }
       setHalfPlano()
 
@@ -198,31 +198,31 @@ const Planos = () => {
       setCarrito([])
       document.querySelectorAll('.selected').forEach(item => item.classList.remove('selected'))
     }
-    const dibujarGrid = (disX, disY, lineWidth, color) => {
-      if(document.getElementById('cuadricula')) {
-        const ctx = document.getElementById('cuadricula').getContext("2d")
-        // const canvas = document.getElementById('canvasContainer').getBoundingClientRect()
-        ctx.scale(1.5, 1.5)
-        ctx.canvas.width = 1600;
-        ctx.canvas.height = 1600;
-        ctx.strokeStyle = color
-        ctx.lineWidth = lineWidth
-        for (let i = disX; i< (ctx.canvas.width); i += disX) {
-          // Lineas Verticales
-          ctx.beginPath()
-          ctx.moveTo(i, 0)
-          ctx.lineTo(i, ctx.canvas.height)
-          ctx.stroke()
-        }
-        for (let i = disY; i< (ctx.canvas.height); i += disY) {
-          // Lineas horizontales
-          ctx.beginPath()
-          ctx.moveTo(0, i)
-          ctx.lineTo(ctx.canvas.width, i)
-          ctx.stroke()
-        }
-      }
-    }
+    // const dibujarGrid = (disX, disY, lineWidth, color) => {
+    //   if(document.getElementById('cuadricula')) {
+    //     const ctx = document.getElementById('cuadricula').getContext("2d")
+    //     // const canvas = document.getElementById('canvasContainer').getBoundingClientRect()
+    //     ctx.scale(1.5, 1.5)
+    //     ctx.canvas.width = 1600;
+    //     ctx.canvas.height = ;
+    //     ctx.strokeStyle = color
+    //     ctx.lineWidth = lineWidth
+    //     for (let i = disX; i< (ctx.canvas.width); i += disX) {
+    //       // Lineas Verticales
+    //       ctx.beginPath()
+    //       ctx.moveTo(i, 0)
+    //       ctx.lineTo(i, ctx.canvas.height)
+    //       ctx.stroke()
+    //     }
+    //     for (let i = disY; i< (ctx.canvas.height); i += disY) {
+    //       // Lineas horizontales
+    //       ctx.beginPath()
+    //       ctx.moveTo(0, i)
+    //       ctx.lineTo(ctx.canvas.width, i)
+    //       ctx.stroke()
+    //     }
+    //   }
+    // }
     return (
       <>
       <section className='eventContainer'>
