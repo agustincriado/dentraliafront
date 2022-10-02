@@ -131,6 +131,7 @@ const Planos = () => {
 
       const setHalfPlano = () => {
         const VIEWPORTS = {
+          420: 2.2,
           720: 1.9,
           1366: 0.5,
           1400: 0.2
@@ -141,7 +142,7 @@ const Planos = () => {
           } else if ( value <= 720 && value >= 480) {
             return 1.9
           } else if (value < 480) {
-            return 1.6
+            return 1.85
           }else return 0.2
         }
         const canvas = document.getElementById('canvasHolder')
@@ -169,7 +170,7 @@ const Planos = () => {
         eventoName: useId.eventName,
         estado: 'Reservado',
       }))
-      fetch('http://localhost:4242/api/v1/timer', {
+      fetch('http://www.dentralia.com/api/v1/timer', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -233,7 +234,7 @@ const Planos = () => {
           </div>
           <div id='canvasHolder' className='canvasContainer scrollingOverflow'>
             <div className="stageContainer">
-              <strong> Escenario </strong>
+              <strong>&nbsp;</strong>
             </div>
               {usePlano ? ReactHtmlParser(usePlano.plano, {
                 transform(node, index) {

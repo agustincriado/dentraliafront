@@ -85,7 +85,7 @@ const Gateway = () => {
       }
   
     const convertedDate = useEvent.unixDateStart !== '' ? convertUnix(useEvent.unixDateStart) : ''
-    const uriRedsys = 'http://localhost:4242/api/v1'//'https://sis-t.redsys.es:25443/sis/realizarPago'
+    const uriRedsys = 'http://www.dentralia.com/api/v1'//'https://sis-t.redsys.es:25443/sis/realizarPago'
     
     // console.log(evento)
     return(

@@ -646,7 +646,7 @@ b, .eventTittle strong {
 .homeFlyer img {
   height: 294px;
   opacity: 0.15;
-  margin-top: 100px;
+  /* margin-top: 100px; */
   object-fit: cover;
   object-position: 50% 50%;
 }
@@ -792,5 +792,34 @@ b, .eventTittle strong {
   }
   .content div {
     width: 100%;
+  }
+  .content h4 {
+    font-size: 14px;
+  }
+  .contactUs > .form-control {
+    flex-flow: column;
+    align-items: center;
+  }
+  .buttonAnchor {
+    margin: 0;
+    align-self: center;
+  }
+  .flyerText, .flyerSubText {
+    font-size: 20px;
+  }
+  footer {
+    font-size: 11px;
+  }
+  footer h4 {
+    font-size: 16px;
+  }
+}
+@media (max-width: 420px) {
+  .homeFlyer img {
+    margin-top: 80px;
+    height: 165px;
+  }
+  .homeFlyer {
+    height: 165px;
   }
 }
