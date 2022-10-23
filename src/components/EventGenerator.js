@@ -22,7 +22,6 @@ const EventGenerator = () => {
               }))
             }
         )}
-        
         , [useQuery])
 
     return (
