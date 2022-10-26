@@ -5,92 +5,95 @@ import { useEffect, useState } from "react"
 import { getDoc, doc } from "firebase/firestore"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCreditCard } from "@fortawesome/free-regular-svg-icons"
+import Flyer from '../components/Flyer';
 const Gateway = () => {
-    const initialValues = {
-        webImage: '',
-    } 
+  const initialValues = {
+    webImage: '',
+  }
 
-    const navigate = useNavigate()
-    const {
-      useId,
-      usePayload,
-      useMinutes,
-      setMinutes,
-      useSeconds,
-      setSeconds,} = useAux()
-    const [useEvent, setEvent] = useState(initialValues)
+  const navigate = useNavigate()
+  const {
+    useId,
+    usePayload,
+    useMinutes,
+    setMinutes,
+    useSeconds,
+    setSeconds, } = useAux()
+  const [useEvent, setEvent] = useState(initialValues)
 
-    useEffect(() => {
-        if(useId === '') navigate('/404')
-        const fullEvent = async () => {
-          console.log(useId, usePayload, 'a')
-          const task = await getDoc(doc(db, 'Eventos', useId))
-          console.log(task.data())
-          setEvent(task.data())
-        }
-        if(useId)fullEvent()
-
-        console.log(usePayload)
-    }, [usePayload])
-
-    useEffect(() => {
-      let sampleInterval = setInterval(() => {
-        if (Number(useSeconds) > 0) {
-          console.log("number")
-          const newNumber = Number(useSeconds) - 1
-          console.log(newNumber, "newSecond")
-          setSeconds(newNumber);
-        }
-        if (Number(useSeconds) === 0) {
-          if (useMinutes === 0) {
-            clearInterval(sampleInterval);
-          } else {
-            setMinutes(useMinutes - 1);
-            setSeconds(59);
-          }
-        }
-      }, 1000);
-
-      if (!useMinutes && !useSeconds) {
-        navigate('/')
-      }
-          return () => {
-            clearInterval(sampleInterval);
-          };
-    
-    }, [useMinutes,useSeconds]);
-
-    const PUBLICO = {
-      '+12': 'Mayores de 12 años',
-      '+14': 'Mayores de 14 años',
-      '+16': 'Mayores de 16 años',
-      '+18': 'Mayores de 18 años',
-      '+21': 'Mayores de 21 años',
-      '+25': 'Mayores de 25 años',
-      'MenoresAcomp': 'Menores Acompañados',
-      'Otros':'Otros',
-      'ATP': 'Todos los públicos'
+  useEffect(() => {
+    if (useId === '') navigate('/404')
+    const fullEvent = async () => {
+      console.log(useId, usePayload, 'a')
+      const task = await getDoc(doc(db, 'Eventos', useId))
+      console.log(task.data())
+      setEvent(task.data())
     }
+    if (useId) fullEvent()
 
-    const convertUnix = (unix) => {
-        const Days = ['Doming','Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
-        const date = unix ? new Date(unix*1000) : new Date() 
-        const stringDate = date.toISOString().split('T')[0]
-        const arrDate = stringDate.split('-')
-        const day = date.getDay()
-        return {
-          day: Days[day],
-          date: arrDate[2]+'/'+arrDate[1]+'/'+arrDate[0]
+    console.log(usePayload)
+  }, [usePayload])
+
+  useEffect(() => {
+    let sampleInterval = setInterval(() => {
+      if (Number(useSeconds) > 0) {
+        console.log("number")
+        const newNumber = Number(useSeconds) - 1
+        console.log(newNumber, "newSecond")
+        setSeconds(newNumber);
+      }
+      if (Number(useSeconds) === 0) {
+        if (useMinutes === 0) {
+          clearInterval(sampleInterval);
+        } else {
+          setMinutes(useMinutes - 1);
+          setSeconds(59);
         }
       }
-  
-    const convertedDate = useEvent.unixDateStart !== '' ? convertUnix(useEvent.unixDateStart) : ''
-    const uriRedsys = 'http://www.dentralia.com/api/v1'//'https://sis-t.redsys.es:25443/sis/realizarPago'
-    
-    // console.log(evento)
-    return(
-      <>
-          <p className="timerEvent">
+    }, 1000);
+
+    if (!useMinutes && !useSeconds) {
+      navigate('/')
+    }
+    return () => {
+      clearInterval(sampleInterval);
+    };
+
+  }, [useMinutes, useSeconds]);
+
+  const PUBLICO = {
+    '+12': 'Mayores de 12 años',
+    '+14': 'Mayores de 14 años',
+    '+16': 'Mayores de 16 años',
+    '+18': 'Mayores de 18 años',
+    '+21': 'Mayores de 21 años',
+    '+25': 'Mayores de 25 años',
+    'MenoresAcomp': 'Menores Acompañados',
+    'Otros': 'Otros',
+    'ATP': 'Todos los públicos'
+  }
+
+  const convertUnix = (unix) => {
+    const Days = ['Doming', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
+    const date = unix ? new Date(unix * 1000) : new Date()
+    const stringDate = date.toISOString().split('T')[0]
+    const arrDate = stringDate.split('-')
+    const day = date.getDay()
+    return {
+      day: Days[day],
+      date: arrDate[2] + '/' + arrDate[1] + '/' + arrDate[0]
+    }
+  }
+
+  const convertedDate = useEvent.unixDateStart !== '' ? convertUnix(useEvent.unixDateStart) : ''
+  const uriRedsys = 'http://www.dentralia.com/api/v1'//'https://sis-t.redsys.es:25443/sis/realizarPago'
+
+  // console.log(evento)
+  return (
+    <>
+      <Flyer />
+      <div className='contenedor'>
+        <p className="timerEvent">
           0{Number(useMinutes)}:{Number(useSeconds) < 10 ? `0${Number(useSeconds)}` : Number(useSeconds)}
         </p>
         <div className="container gridDisplay">
@@ -98,12 +101,12 @@ const Gateway = () => {
             <h1 className="eventTittle">
               <strong>
                 {useEvent.name !== '' ? useEvent.name : ''}
-                </strong>
+              </strong>
             </h1>
-            <h6 className="eventSubtittle">{useEvent.name !== '' ? convertedDate.day + ' ' + convertedDate.date +' @ '+ useEvent.recintoName + ' en ' + useEvent.province + ' (' + PUBLICO[useEvent.publico] +')' : ''}</h6>
+            <h6 className="eventSubtittle">{useEvent.name !== '' ? convertedDate.day + ' ' + convertedDate.date + ' @ ' + useEvent.recintoName + ' en ' + useEvent.province + ' (' + PUBLICO[useEvent.publico] + ')' : ''}</h6>
             <h6 className="eventDetailed"><b>VAS A REALIZAR UN PAGO POR IMPORTE DE <strong className="ticketData">"{Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload.totalPrice)}"</strong> CORRESPONDIENTE AL EVENTO DEL DÍA <strong className="ticketData">"{convertedDate.date}"</strong> EN <strong className="ticketData">{useEvent.recintoName}</strong>. PARA TU(S) <strong className="ticketData">"{usePayload.quantity}"</strong> ENTRADA(S) <strong className="ticketData">"
               {
-              usePayload ? usePayload.carrito.map(ticket => ticket.zona) : ''
+                usePayload ? usePayload.carrito.map(ticket => ticket.zona) : ''
               }"</strong></b></h6>
             <span className="ticketTittle">LOS DATOS ASOCIADOS A LA(S) ENTRADA(S) SON:</span>
             <ul className="ticketData">
@@ -121,9 +124,9 @@ const Gateway = () => {
                 return (<li key={ticket.dbstring}>{ticket.seatInfo}</li>)
               }) : ''}
             </ul>
-            
+
             <article className="GDGDeclaration">
-                En el importe a pagar se incluyen los gastos de gesti&oacute;n
+              En el importe a pagar se incluyen los gastos de gesti&oacute;n
             </article>
 
             <div className="normativaAnchor">
@@ -141,17 +144,18 @@ const Gateway = () => {
               <input type="hidden" name="seguroPrice" value={JSON.stringify(usePayload.seguroPrice)}></input>
               <input type="hidden" name="TotalPrice" value={JSON.stringify(usePayload.totalPrice)}></input>
               <input type="hidden" name="UnitPrice" value={JSON.stringify(usePayload.unitPrice)}></input> */}
-              <button className="btn btn-primary btn-lg mb-xlg"><FontAwesomeIcon icon={faCreditCard} className="faCreditCard"/>Pagar con tarjeta ({Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice)})</button>
+              <button className="btn btn-primary btn-lg mb-xlg"><FontAwesomeIcon icon={faCreditCard} className="faCreditCard" />Pagar con tarjeta ({Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice)})</button>
             </form>
           </section>
           <section>
             <div className="col-md-5">
-                <img style={{width: "100%"}} src={useEvent.webImage ? useEvent.webImage : 'https://mgt-media.fra1.cdn.digitaloceanspaces.com/varios/festentradas-logo.png'}></img>
+              <img style={{ width: "100%" }} src={useEvent.webImage ? useEvent.webImage : 'https://mgt-media.fra1.cdn.digitaloceanspaces.com/varios/festentradas-logo.png'}></img>
             </div>
           </section>
         </div>
-      </>
-    )
+      </div>
+    </>
+  )
 }
 
 export default Gateway

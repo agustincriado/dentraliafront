@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react"
+import Logo from "./Logo"
 import { useAux } from "../context/auxContext"
-const Flyer = () => {
+import { Breadcrumb, Image } from 'react-bootstrap';
+const PianoFlyer = () => {
 
   const initialValues = {
     text: 'Creamos Experiencias',
     subtext: 'Inolvidables',
     info: '#culturasegura',
-    imgsrc: '/images/banner-img.png'
+    imgsrc: '/images/piano-banner-bg.png'
   }
   const { useId } = useAux()
   const [useValues, setValues] = useState(initialValues)
@@ -25,15 +27,18 @@ const Flyer = () => {
     }
   }, [useId])
   return (
-    <div className="homeFlyer">
+    <div className="homeFlyer pianoFlyer">
       {useValues === initialValues ? (
         <>
           <img src={useValues.imgsrc}></img>
           <div className="homeFlyer-content">
             <div className="container">
               <div className="homeFlyer-inner">
-                <h4 className="flyerText">{useValues.text} {useValues.subtext}</h4>
-                <span>{useValues.info}</span>
+                <div className="homeFlyer-card">
+                  <h5>{useValues.text}</h5>
+                  <h6><Image src="/images/clock-icon.svg" /> {useValues.subtext}</h6>
+                  <span><Image src="/images/location-dot.svg" />{useValues.info}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -48,16 +53,22 @@ const Flyer = () => {
                   <img src='/images/festentradas-logo.png' alt="Festentradas" className="festentradas" />
                   <p>Experiencias</p>
                 </div>
-                <h4 className="flyerText">{useValues.text} {useValues.subtext}</h4>
-                <span>{useValues.info}</span>
+                <Breadcrumb>
+                  <Breadcrumb.Item href="#">Experiencias</Breadcrumb.Item>
+                  <Breadcrumb.Item active>Event Name</Breadcrumb.Item>
+                </Breadcrumb>
+                <div className="homeFlyer-card">
+                  <h5>{useValues.text}</h5>
+                  <h6><Image src="/images/clock-icon.svg" /> {useValues.subtext}</h6>
+                  <span><Image src="/images/location-dot.svg" /> {useValues.info}</span>
+                </div>
               </div>
             </div>
           </div>
         </>
       )}
-
     </div>
   )
 }
 
-export default Flyer
+export default PianoFlyer

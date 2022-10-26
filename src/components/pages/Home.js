@@ -3,26 +3,34 @@ import { useAux } from "../../context/auxContext"
 import { useEffect } from "react"
 import Buscador from "../Buscador"
 import { useMediaQuery } from "react-responsive"
+import { Row } from "react-bootstrap"
+import Flyer from '../Flyer';
 const Home = () => {
-    const {setId, setMinutes, setSeconds} = useAux()
+    const { setId, setMinutes, setSeconds } = useAux()
     const isDesktop = useMediaQuery({
         query: '(min-width: 1224px)'
-      })
+    })
 
-    useEffect(() =>{
+    useEffect(() => {
         setId('')
         setMinutes('08')
         setSeconds('59')
     })
     return (
-        <div className="col">
-            <div className="buscadorContainer container">
+        <>
+            <Flyer />
+            <div className='contenedor'>
+                {/* <div className="buscadorContainer container">
+                </div> */}
+                {/* {isDesktop ? '' : <Buscador />} */}
+                <div className="event-wrap">
+                    <h3>Eventos activos</h3>
+                    <Row>
+                        <EventGenerator />
+                    </Row>
+                </div>
             </div>
-            <div className="inside container">
-            { isDesktop ? '' : <Buscador />}
-            <EventGenerator/>
-            </div>
-        </div>
+        </>
     )
 }
 
