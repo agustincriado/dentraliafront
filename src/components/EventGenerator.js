@@ -1,28 +1,30 @@
 import { useContext, useEffect, useState } from 'react';
 import Evento from './Evento'
 import { db } from '../firebase'
-import { collection, onSnapshot, orderBy, query, Query, where} from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query, Query, where } from "firebase/firestore";
 import { QueryContext } from '../context/QueryContext';
 
 const EventGenerator = () => {
-    const {useQuery} = useContext(QueryContext)
-    
+    const { useQuery } = useContext(QueryContext)
+
     const [useEvents, setEvents] = useState([])
     useEffect(
-        () => { let queryPath = ''
-            useQuery === '' || useQuery === []  
-              ? queryPath = query(collection(db, 'Eventos'), orderBy('unixDateStart', 'asc'))
-              : queryPath = query(collection(db, 'Eventos'), where("name", ">=", useQuery), orderBy('name', 'asc'))
+        () => {
+            let queryPath = ''
+            useQuery === '' || useQuery === []
+                ? queryPath = query(collection(db, 'Eventos'), orderBy('unixDateStart', 'asc'))
+                : queryPath = query(collection(db, 'Eventos'), orderBy('name', 'asc'))
             onSnapshot((queryPath), querySnapshot => {
-                
-              setEvents(querySnapshot.docs.map(doc => {       
-              const task = doc.data()
-              task.id = doc.id
-              return task
-              }))
+
+                setEvents(querySnapshot.docs.map(doc => {
+                    const task = doc.data()
+                    task.id = doc.id
+                    return task
+                }))
             }
-        )}
-        
+            )
+        }
+
         , [useQuery])
 
     return (
@@ -37,7 +39,7 @@ const EventGenerator = () => {
                 eventHour={evento.hourStart}
                 eventID={evento.id}
                 eventPlano={evento.planoZonas}
-                />
+            />
         })
     )
 }

@@ -7,9 +7,6 @@ import { Row } from "react-bootstrap"
 import Flyer from '../Flyer';
 const Home = () => {
     const { setId, setMinutes, setSeconds } = useAux()
-    const isDesktop = useMediaQuery({
-        query: '(min-width: 1224px)'
-    })
 
     useEffect(() => {
         setId('')
@@ -19,10 +16,7 @@ const Home = () => {
     return (
         <>
             <Flyer />
-            <div className='contenedor'>
-                {/* <div className="buscadorContainer container">
-                </div> */}
-                {/* {isDesktop ? '' : <Buscador />} */}
+            <div className='contenedor event-pg'>
                 <div className="event-wrap">
                     <h3>Eventos activos</h3>
                     <Row>
