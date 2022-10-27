@@ -1,9 +1,13 @@
+import Flyer from '../Flyer';
 const NotFound = () => {
     return (
         <>
-        <span>
-            OOPS!!!! Not Found
-        </span>
+            <Flyer />
+            <div className='contenedor'>
+                <span>
+                    OOPS!!!! Not Found
+                </span>
+            </div>
         </>
     )
 }

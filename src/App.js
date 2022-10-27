@@ -3,7 +3,7 @@ import './App.css';
 import './Events.css';
 import NavBar from './components/pages/NavBar';
 import SideBar from './components/pages/SideBar';
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive';
 import Home from './components/pages/Home';
 import Footer from './components/pages/Footer';
@@ -21,29 +21,29 @@ import { QueryContextProvider } from './context/QueryContext';
 import Flyer from './components/Flyer';
 function App() {
   const isDesktop = useMediaQuery({
-    query: '(min-width: 1224px)'
+    query: '(min-width: 1200px)'
   })
   return (
     <BrowserRouter>
       <QueryContextProvider>
         <AuxProvider>
-        {isDesktop ? <NavBar/> : <SideBar/>}
-        <Flyer />
-        <div className='contenedor'>
+          {isDesktop ? <NavBar /> : <SideBar />}
+          {/* <Flyer />
+          <div className='contenedor'> */}
           <Routes>
-            <Route path="/" element={<Home/>}/>
-            <Route path="/about" element={<About/>} />
-            <Route path="/events" element={<MakeEvent/>}/>
-            <Route path="/faq" element={<FAQ/>}/>
-            <Route path="/newsletter" element={<Newsletter/>}/>
-            <Route path="/contact" element={<Contact/>}/>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/events" element={<MakeEvent />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/newsletter" element={<Newsletter />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/evento/:id" element={<Planos />} />
             <Route path="/misdatos/:id" element={<Payment />} />
             <Route path="/gateway/:id" element={<Gateway />} />
-            <Route path="*" element={<NotFound/>} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
-        </div>
-        <Footer />
+          {/* </div> */}
+          <Footer />
         </AuxProvider>
       </QueryContextProvider>
     </BrowserRouter>
