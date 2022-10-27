@@ -2,7 +2,7 @@ import { db } from '../../firebase'
 import { doc, getDoc, onSnapshot, collection, updateDoc, setDoc, addDoc } from "firebase/firestore";
 import React, { useEffect, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useAux } from '../../context/auxContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight, faMagnifyingGlassMinus, faMagnifyingGlassPlus, faShoppingCart, faDeleteLeft } from '@fortawesome/free-solid-svg-icons';
@@ -25,11 +25,36 @@ const Planos = () => {
   const [isLoaded, setLoaded] = useState(0)
   const [showCart, setShowCart] = useState(false)
   const [activeBtn, setActiveBtn] = useState(true)
+  const location = useLocation();
 
   useEffect(() => {
     console.log('Calling to useEffect', useId, usePlano)
-    if (useId === '') navigate('/')
-
+    async function CheckData() {
+    if (useId === '') {
+      console.log("Path", location.pathname)
+      const getArr = location.pathname.split('/')
+      const idOBJ = {[getArr[1]]: getArr[2]}
+      if (idOBJ.evento){
+        const Days = ['DOM', 'LUN', 'MART', 'MIER', 'JUE', 'VIE', 'SAB']
+    const Months = ['', 'ENE', 'FEB', 'MAR', 'ABR', 'JUN', 'JUL', 'AGO', 'SEPT', 'OCT', 'NOV', 'DIC']
+        const getEventData = await getDoc(doc(db, "Eventos", idOBJ.evento))
+        const eventInfo = getEventData.data();
+        const dateObject = new Date(eventInfo.unixDateStart * 1000)
+        const eventDay = dateObject.getDay()
+        const eventMonth = dateObject.getMonth()
+        // const eventDate = dateObject.getDate()
+        setId({
+          evento: idOBJ.evento,
+          plano: eventInfo.planoZonas,
+          eventName: eventInfo.name,
+          eventDate: Days[eventDay] + "., " + Months[eventMonth] + "., " + eventInfo.hourStart,
+          eventLocation: eventInfo.recintoName
+      })
+      }
+      return
+    }
+  }
+  CheckData()
   }, [isLoaded, useId])
   useEffect(() => {
     const addToCart = (e) => {
@@ -148,7 +173,7 @@ const Planos = () => {
         } else return 0.2
       }
       const canvas = document.getElementById('canvasHolder')
-      console.log("Actual Vierport Width", ViewportWidth(window.innerWidth))
+      // console.log("Actual Vierport Width", ViewportWidth(window.innerWidth))
       canvas.scrollLeft = (canvas.offsetWidth * ViewportWidth(window.innerWidth))
       // dibujarGrid(20, 20, 1, '#ececec')
     }

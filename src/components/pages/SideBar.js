@@ -4,6 +4,7 @@ import { FaBars } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import { Offcanvas, Container, CloseButton } from "react-bootstrap"; // https://react-bootstrap.github.io/components/offcanvas/
+import Buscador from "../Buscador.js"
 const SideBar = () => {
     const [sideMenu, setSideMenu] = useState(false)
     const [useNav, setNav] = useState('')
@@ -15,7 +16,7 @@ const SideBar = () => {
         <Container>
             <div className="navBar container mobile">
                 <div className="social-links-wrap">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    {/* <FontAwesomeIcon icon={faMagnifyingGlass} /> */}
                     <ul className="social-links">
                         <li><a href="/"><img src="/images/facebook-logo.png" alt="" /></a></li>
                         <li><a href="/"><img src="/images/twitter-logo.png" alt="" /></a></li>
@@ -36,6 +37,7 @@ const SideBar = () => {
                         </ul>
                     </Offcanvas.Body>
                 </Offcanvas>
+                <Buscador />
 
                 {/* <nav className={sideMenu ? 'nav-menu active' : 'nav-menu offcanvas offcanvas-start' } tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                     <ul className="ul sideBar">

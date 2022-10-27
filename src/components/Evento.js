@@ -18,7 +18,6 @@ const Evento = (evento) => {
         console.log(e.target.id, "e.target.id")
         navigate('/evento/' + e.target.id)
     }
-    // console.log(evento.eventName, evento.eventPlace)
     const dateObject = new Date(evento.eventUnixDate * 1000)
     const eventDay = dateObject.getDay()
     const eventMonth = dateObject.getMonth()
