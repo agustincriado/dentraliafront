@@ -183,7 +183,7 @@ const Planos = () => {
   }, [])
 
   const handleSendPay = async () => {
-    const getRsponse = await fetch('https://www.dentralia.com/api/v1/ticketAvailable', {
+    const getRsponse = await fetch('http://www.dentralia.com/api/v1/ticketAvailable', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({useCarrito: useCarrito, useId: useId})
