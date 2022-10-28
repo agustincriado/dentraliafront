@@ -259,7 +259,7 @@ header .navbar-link ul a.active::after {
 }
 
 .contenedor {
-  padding: 56px 8% 0;
+  padding: 10px 8% 0;
   min-height: 800px;
 }
 
@@ -984,7 +984,7 @@ b,
   color: #000;
   background: linear-gradient(109.3deg, #FF1E1E 5.63%, #E90067 97.66%);
   position: relative;
-  max-height: 1024px;
+  max-height: 600px;
 }
 
 .homeFlyer .homeFlyer-content {
@@ -1006,7 +1006,7 @@ b,
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 100px 0 61px;
+  padding: 30px 0 25px;
 }
 
 .homeFlyer .homeFlyer-content .homeFlyer-inner h4 {
@@ -1110,11 +1110,20 @@ b,
   width: 60%;
 }
 
-.reserve-seat .zonasCart {
-  padding: 0 15px;
+section.cartAndError {
   width: 40%;
 }
-
+.reserve-seat .zonasCart {
+  padding: 0 15px;
+  width: 100%;
+}
+.errorSection {
+  margin-top: 10px;
+  color: #721c24;
+  border: solid 1px #f5c6cb;
+  background-color: #f8d7da;
+  padding: 15px;
+}
 .zonasCart .zonasPrices {
   border: 0;
   padding: 0px;
@@ -1447,11 +1456,11 @@ b,
 }
 
 .pianoFlyer.homeFlyer {
-  max-height: 725px;
+  max-height: 600px;
 }
 
 .pianoFlyer.homeFlyer img {
-  min-height: 725px;
+  min-height: 600px;
 }
 
 .pianoFlyer.homeFlyer::after {
@@ -1481,13 +1490,13 @@ b,
 }
 
 .pianoFlyer.homeFlyer .homeFlyer-card {
-  max-width: 920px;
+  max-width: 600px;
   width: 100%;
-  margin: 0 auto;
+  margin: auto;
   background: url(../public/images/bannar-card.png) center center no-repeat;
   background-size: contain;
-  padding: 110px 197px 118px;
-  min-height: 520px;
+  padding: 50px 0 50px 117px;
+  min-height: 355px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1498,9 +1507,9 @@ b,
   content: "";
   background: url(../public/images/piano-banner-img2.png) center center no-repeat;
   background-size: contain;
-  bottom: 178px;
-  right: 160px;
-  width: 180px;
+  bottom: 110px;
+  right: 95px;
+  width: 134px;
   height: 140px;
   position: absolute;
 }
@@ -2329,6 +2338,15 @@ b,
 }
 
 @media (max-width: 728px) {
+  header .buscador {
+    max-width: 128px;
+  }
+  header .buscador .form-control {
+    height: 35px;
+    font-size: 15px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
   .formPayment {
     flex-flow: column;
   }

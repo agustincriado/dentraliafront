@@ -23,6 +23,7 @@ const SideBar = () => {
                         <li><a href="/"><img src="/images/instagram-logo.png" alt="" /></a></li>
                     </ul>
                 </div>
+                <Buscador />
                 <FaBars onClick={toggleSideMenu} />
                 <Offcanvas show={sideMenu} placement="end" onHide={toggleSideMenu}>
                     <Offcanvas.Body>
@@ -37,7 +38,6 @@ const SideBar = () => {
                         </ul>
                     </Offcanvas.Body>
                 </Offcanvas>
-                <Buscador />
 
                 {/* <nav className={sideMenu ? 'nav-menu active' : 'nav-menu offcanvas offcanvas-start' } tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                     <ul className="ul sideBar">
