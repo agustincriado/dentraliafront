@@ -183,14 +183,15 @@ const Planos = () => {
   }, [])
 
   const handleSendPay = async () => {
-    const getRsponse = await fetch('http://www.dentralia.com/api/v1/ticketAvailable', {
+    const getResponse = await fetch('http://www.dentralia.com/api/v1/ticketAvailable', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({useCarrito: useCarrito, useId: useId})
     })
-    if (!getRsponse.ticketStatus) {
-      const newCarrito = useCarrito.filter(obj => !getRsponse.ticketsAvailable.includes(obj.seatInfo))
-      const notAvailable = useCarrito.filter(obj => getRsponse.ticketsAvailable.includes(obj.seatInfo))
+    const responseJSON = await getResponse.json()
+    if (!responseJSON.ticketStatus) {
+      const newCarrito = useCarrito.filter(obj => !responseJSON.ticketsAvailable.some(f => f.seatInfo === obj.seatInfo))
+      const notAvailable = useCarrito.filter(obj => responseJSON.ticketsAvailable.some(f => f.seatInfo === obj.seatInfo))
       setCarrito(newCarrito)
       setCartErr(notAvailable)
     } else {
