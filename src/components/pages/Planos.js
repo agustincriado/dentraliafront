@@ -183,6 +183,9 @@ const Planos = () => {
   }, [])
 
   const handleSendPay = async () => {
+    if (!useCarrito.length) {
+      return 
+    }
     const getResponse = await fetch('http://www.dentralia.com/api/v1/ticketAvailable', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

@@ -1168,7 +1168,7 @@ label#telLabel::before {
 }
 
 .homeFlyer img {
-  min-height: 500px;
+  /* min-height: 500px; */
   width: 100%;
   object-fit: cover;
 }
@@ -2586,6 +2586,32 @@ color: #FF1E1E;
 }
 
 @media (max-width: 375px) {
+  .eventTittle {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 0;
+  }
+  .eventTittle::before {
+    width: 72px;
+  }
+  .checkoutDate, .checkoutLocation{
+    font-size: 22px;
+    justify-content: center;
+  }
+  .iconLocation svg, .iconClock svg {
+    width: 20px;
+    height: 20px;
+  }
+  .iconClock, .iconLocation {
+    margin: 0;
+  }
+  .dottedSeparator {
+    width: 200px;
+    margin: auto;
+  }
+  .timerContainer {
+    text-align: center;
+  }
   .pianoFlyer.homeFlyer .homeFlyer-card::before {
     bottom: 78px;
     right: 40px;
@@ -2599,4 +2625,22 @@ color: #FF1E1E;
 }
 .btnCheckout {
   width: 100%;
+}
+#acceptNewsletter {
+  display: none;
+}
+#acceptNewsletter + label {
+  background: url(../public/images/check-circle.svg) no-repeat;
+    height: 25px;
+    width: 25px;
+    display:inline-block;
+    padding: 0;
+}
+#acceptNewsletter:checked + label{
+background:url(../public/images/check-circle.svg) no-repeat;
+filter: invert(33%) sepia(61%) saturate(7358%) hue-rotate(347deg) brightness(105%) contrast(113%);
+height: 25px;
+width: 25px;
+display:inline-block;
+padding: 0 0 0 0px;
 }

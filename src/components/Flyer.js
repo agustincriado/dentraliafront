@@ -26,9 +26,10 @@ const Flyer = () => {
   }, [useId])
   return (
     <div className="homeFlyer">
+      <span>!</span>
       {useValues === initialValues ? (
         <>
-          <img src={useValues.imgsrc}></img>
+          <img src={useValues.imgsrc} style={{minHeight: "500px"}}></img>
           <div className="homeFlyer-content">
             <div className="container">
               <div className="homeFlyer-inner">
@@ -40,19 +41,19 @@ const Flyer = () => {
         </>
       ) : (
         <>
-          <img src={useValues.imgsrc}></img>
-          <div className="homeFlyer-content">
+          <img src={useValues.imgsrc} style={{opacity: 0.3, maxHeight: "10 0px"}}></img>
+          {/* <div className="homeFlyer-content">
             <div className="container">
               <div className="homeFlyer-inner">
                 <div className="homeFlyer-logo-wrap">
-                  <img src='/images/festentradas-logo.png' alt="Festentradas" className="festentradas" />
+                  <img src='/images/festentradas-logo.png' alt="Festentradas" className="festentradas"/>
                   <p>Experiencias</p>
                 </div>
                 <h4 className="flyerText">{useValues.text} {useValues.subtext}</h4>
                 <span>{useValues.info}</span>
               </div>
             </div>
-          </div>
+          </div> */}
         </>
       )}
 

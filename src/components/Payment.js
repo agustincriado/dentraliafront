@@ -3,6 +3,7 @@ import { useAux } from '../context/auxContext'
 import { useNavigate } from "react-router"
 import { getDoc, doc } from "firebase/firestore"
 import { db } from "../firebase"
+import { useMediaQuery } from 'react-responsive';
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Flyer from '../components/Flyer';
@@ -37,6 +38,9 @@ const Payment = (props) => {
     'MenoresAcomp': '(Menores acompañados)',
     'Otros': '(Otros)',
   }
+  const isDesktop = useMediaQuery({
+      query: '(min-width: 450px)'
+  })
   useEffect(() => {
     if (!useId) navigate('/404')
     console.log(usePayload)
@@ -189,6 +193,15 @@ const Payment = (props) => {
           {/* <article className="GDGDeclaration">
             Se a&ntilde;adir&aacute; + {Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(useGdgList.reduce((a, b) => Number(a) + Number(b)))} de gastos de gesti&oacute;n
           </article> */}
+          {
+            isDesktop ? '' : (
+            <div className="mobileImage">
+              <div className="">
+                <img style={{ width: "358px", borderRadius: "15px", height:"453px" }} src={useEvent.webImage ? useEvent.webImage : 'https://mgt-media.fra1.cdn.digitaloceanspaces.com/varios/festentradas-logo.png'}></img>
+              </div>
+            </div>
+            )
+          }
           <div className="timerContainer">
             <span className="timesUp">¡Date Prisa! La Reserva De Tu Pedido Termina En:</span>
             <p className="timerEvent">
@@ -226,111 +239,23 @@ const Payment = (props) => {
               <label id="zipCodeLabel"htmlFor="zipCode" className="col-form-label">C&oacute;digo Postal</label>
               <input type="text" placeholder="00000" className="form-control" id="zipCode" required={true} aria-required="true" />
             </div>
-            {/* <div className="form-group">
-              <div className="col-md-12">
-                <br />
-                <h5>
-                  <strong className="compradorInfo">
-                    Debido a la situación expecional del Covid-19 indica los nombres, apellidos y teléfonos de las personas que irán contigo al evento
-                  </strong>
-                </h5>
-                <small>
-                  (Ejemplo: Pepe Pérez, 612123123 - María López, 612123123)
-                </small>
-              </div>
-            </div> */}
-            {/* <div className="form-group">
-              <div className="col-md-12">
-                <textarea className="form-control" required="" name="datos[txtadicional]" style={{ height: '200px' }}></textarea>
-              </div>
-            </div> */}
             <div className="form-group">
-              <p><input type="checkbox" name="acceptNewsletter" onClick={(e) => toggleNewsletter(e)} /> Marca esta casilla para autorizarnos a enviarte información de otros eventos que realicemos</p>
-              {/* <p>Realizando la compra aceptas la <a href="/normativa-covid">normativa referente al Covid-19</a></p> */}
+              <p>
+              <input type="checkbox" id="acceptNewsletter" name="acceptNewsletter" onClick={(e) => toggleNewsletter(e)} />
+              <label htmlFor="acceptNewsletter" id="newsletterLabel" />Marca esta casilla para autorizarnos a enviarte información de otros eventos que realicemos</p>
               <br />
             </div>
-            {/* <div className="row">
-                  <div className="form-group">
-                      <div className="col-md-6">
-                          <label htmlFor="staticEmail" className="col-form-label">E-mail</label>
-                          <input type="email" className="form-control" id="staticEmail" required={true} aria-required="true" />
-                      </div>
-                      <div className="col-md-6">
-                        <label htmlFor="staticEmail" className="col-form-label">Confirma tu e-mail</label>
-                        <input type="email" className="form-control" id="confirmEmail" required={true} aria-required="true"/>
-                      </div>
-                  </div>
-              </div>
-              <div className="row">
-                  <div className="form-group">
-                      <div className="col-md-6">
-                          <label htmlFor="staticEmail" className="col-form-label">Nombre</label>
-                          <input type="text" className="form-control" id="name" required={true} aria-required="true"/>
-                      </div>
-                      <div className="col-md-6">
-                        <label htmlFor="staticEmail"className="col-form-label">Apellidos</label>
-                        <input type="text" className="form-control" id="surname" required={true} aria-required="true"/>
-                      </div>
-                  </div>
-              </div>
-              <div className="row">
-                  <div className="form-group">
-                      <div className="col-md-6">
-                          <label htmlFor="staticEmail" className="col-form-label">DNI</label>
-                          <input type="text" className="form-control" id="dni" required={true} aria-required="true"/>
-                      </div>
-                      <div className="col-md-6">
-                        <label htmlFor="staticEmail" className="col-form-label">Telefono</label>
-                        <input type="tel" className="form-control" id="tel" required={true} aria-required="true"/>
-                      </div>
-                  </div>
-              </div>
-              <div className="row">
-                  <div className="form-group">
-                      <div className="col-md-12">
-                          <label htmlFor="staticEmail" className="col-form-label">C&oacute;digo Postal</label>
-                          <input type="text" className="form-control" id="zipCode" required={true} aria-required="true"/>
-                      </div>
-                  </div>
-              </div>
-              <div className="row">
-                  <div className="form-group">
-                      <div className="col-md-12">
-                          <br />
-                          <h5>
-                            <strong className="compradorInfo">
-                              Debido a la situación expecional del Covid-19 indica los nombres, apellidos y teléfonos de las personas que irán contigo al evento
-                            </strong>
-                          </h5>
-                          <small>
-                          (Ejemplo: Pepe Pérez, 612123123 - María López, 612123123)
-                          </small>
-                      </div>
-                  </div>
-              </div>
-              <br/>
-              <div className="row">
-                  <div className="form-group">
-                      <div className="col-md-12">
-                          <textarea className="form-control" required="" name="datos[txtadicional]" style={{height: '200px'}}></textarea>
-                      </div>
-                  </div>
-              </div>
-              <div className="row">
-                  <div className="col-md-12">
-                          <p><input type="checkbox" name="acceptNewsletter" onClick={(e) => toggleNewsletter(e)} /> Marca esta casilla para autorizarnos a enviarte información de otros eventos que realicemos</p>
-                          <p>Realizando la compra aceptas la <a href="/normativa-covid">normativa referente al Covid-19</a></p>
-                          <br/>
-                      </div>
-              </div> */}
             <button className="btn btnCheckout">Realizar pago</button>
           </form>
         </section>
-        <section>
+        {
+          isDesktop ? (<section className="desktopImage">
           <div className="">
             <img style={{ width: "572px", borderRadius: "25px", height:"724px" }} src={useEvent.webImage ? useEvent.webImage : 'https://mgt-media.fra1.cdn.digitaloceanspaces.com/varios/festentradas-logo.png'}></img>
           </div>
-        </section>
+        </section>) : ''
+        }
+        
       </div>
     </div>
   </>
