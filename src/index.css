@@ -1719,7 +1719,9 @@ color: #FF1E1E;
   background: url(../public/images/pattern-bg.png) center center repeat;
   background-size: cover;
 }
-
+.homeFlyer-image {
+  min-height: 500px;
+}
 @media (max-width: 1399px) {
 
   header .main-nav {
@@ -2586,6 +2588,12 @@ color: #FF1E1E;
 }
 
 @media (max-width: 375px) {
+  section.cartAndError {
+    width: 100%;
+  }
+  .homeFlyer .homeFlyer-content .homeFlyer-inner h4 {
+    padding-top: 20px;
+  }
   .eventTittle {
     text-align: center;
     font-size: 24px;
@@ -2623,6 +2631,7 @@ color: #FF1E1E;
     padding: 50px 52px 52px;
   }
 }
+
 .btnCheckout {
   width: 100%;
 }

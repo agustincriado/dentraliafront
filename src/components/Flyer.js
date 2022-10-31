@@ -26,10 +26,9 @@ const Flyer = () => {
   }, [useId])
   return (
     <div className="homeFlyer">
-      <span>!</span>
       {useValues === initialValues ? (
         <>
-          <img src={useValues.imgsrc} style={{minHeight: "500px"}}></img>
+          <img className="homeFlyer-image" src={useValues.imgsrc}></img>
           <div className="homeFlyer-content">
             <div className="container">
               <div className="homeFlyer-inner">
