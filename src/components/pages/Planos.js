@@ -186,7 +186,7 @@ const Planos = () => {
     if (!useCarrito.length) {
       return 
     }
-    const getResponse = await fetch('https://dentraliaserver.herokuapp.com//api/v1/ticketAvailable', {
+    const getResponse = await fetch('https://dentraliaserver.herokuapp.com/api/v1/ticketAvailable', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({useCarrito: useCarrito, useId: useId})
@@ -198,7 +198,7 @@ const Planos = () => {
       setCarrito(newCarrito)
       setCartErr(notAvailable)
     } else {
-      fetch('https://dentraliaserver.herokuapp.com//api/v1/timer', {
+      fetch('https://dentraliaserver.herokuapp.com/api/v1/timer', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
