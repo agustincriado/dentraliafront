@@ -11,7 +11,7 @@ const Flyer = () => {
   const { useId } = useAux()
   const [useValues, setValues] = useState(initialValues)
   useEffect(() => {
-    if (useId === '') {
+    if (useId == '' || !useId) {
       setValues(initialValues)
     } else {
       // console.log("seteando values")
@@ -26,7 +26,7 @@ const Flyer = () => {
   }, [useId])
   return (
     <div className="homeFlyer">
-      {useValues === initialValues ? (
+      {JSON.stringify(useValues) === JSON.stringify(initialValues) ? (
         <>
           <img className="homeFlyer-image" src={useValues.imgsrc}></img>
           <div className="homeFlyer-content">
@@ -40,7 +40,7 @@ const Flyer = () => {
         </>
       ) : (
         <>
-          <img src={useValues.imgsrc} style={{opacity: 0.3, maxHeight: "10 0px"}}></img>
+          <img src={useValues.imgsrc} style={{opacity: 0.3, maxHeight: "100px"}}></img>
           {/* <div className="homeFlyer-content">
             <div className="container">
               <div className="homeFlyer-inner">

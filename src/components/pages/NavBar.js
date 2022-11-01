@@ -3,15 +3,17 @@ import Logo from "../Logo"
 import { Image } from "react-bootstrap"
 import { Link, useLocation } from 'react-router-dom'
 import Buscador from "../Buscador.js"
+import { useAux } from "../../context/auxContext"
 const NavBar = () => {
     const [useNav, setNav] = useState('')
     const location = useLocation();
-
+    const { setId } = useAux(); 
     useEffect(() => {
         console.log(location)
         setNav(location.pathname)
     }, [location, setNav])
 
+    const handleClick = () => setId("");
     return (
         <header>
             <div className="main-nav">
@@ -30,12 +32,12 @@ const NavBar = () => {
             <nav className=" navbar-link">
                 <div className="container">
                     <ul>
-                        <Link className={useNav === '/' ? 'active' : ''} to="/">Experiencias</Link>
-                        <Link className={useNav === '/about' ? 'active' : ''} to="/about">Quiénes Somos</Link>
-                        <Link className={useNav === '/events' ? 'active' : ''} to="/events">Crea Tu Evento</Link>
-                        <Link className={useNav === '/faq' ? 'active' : ''} to="/faq">Preguntas Frecuentes</Link>
-                        <Link className={useNav === '/newsletter' ? 'active' : ''} to="/newsletter">Newsletter</Link>
-                        <Link className={useNav === '/contact' ? 'active' : ''} to="/contact">Contacto</Link>
+                        <Link onClick={handleClick} className={useNav === '/' ? 'active' : ''} to="/">Experiencias</Link>
+                        <Link onClick={handleClick} className={useNav === '/about' ? 'active' : ''} to="/about">Quiénes Somos</Link>
+                        <Link onClick={handleClick} className={useNav === '/events' ? 'active' : ''} to="/events">Crea Tu Evento</Link>
+                        <Link onClick={handleClick} className={useNav === '/faq' ? 'active' : ''} to="/faq">Preguntas Frecuentes</Link>
+                        <Link onClick={handleClick} className={useNav === '/newsletter' ? 'active' : ''} to="/newsletter">Newsletter</Link>
+                        <Link onClick={handleClick} className={useNav === '/contact' ? 'active' : ''} to="/contact">Contacto</Link>
                     </ul>
                 </div>
             </nav>
