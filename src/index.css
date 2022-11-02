@@ -932,7 +932,8 @@ strong.ticketData {
 .GDGDeclaration {
   display: flex;
   justify-content: center;
-  background-color: #d9edf7;
+  /* background-color: #d9edf7; */
+  background: linear-gradient(109.3deg, #FF1E1E 5.63%, #E90067 97.66%);
   padding: 1rem 0.8rem;
   margin: 1rem 0;
 }
@@ -2747,4 +2748,7 @@ header .buscador .search-btn {
 }
 img.checkoutImage {
   opacity: 0.5;
+}
+.btnPagar {
+  background: linear-gradient(109.3deg, #FF1E1E 5.63%, #E90067 97.66%);
 }

@@ -21,6 +21,7 @@ const Gateway = () => {
     useSeconds,
     setSeconds, } = useAux()
   const [useEvent, setEvent] = useState(initialValues)
+  const [ useResponse, setResponse ] = useState('')
 
   useEffect(() => {
     if (useId === '') navigate('/404')
@@ -61,7 +62,10 @@ const Gateway = () => {
     };
 
   }, [useMinutes, useSeconds]);
-
+  useEffect(() => {
+    if(document.getElementById('autosubmit')) document.getElementById('autosubmit').submit()
+    return
+  }, [useResponse])
   const PUBLICO = {
     '+12': 'Mayores de 12 años',
     '+14': 'Mayores de 14 años',
@@ -88,7 +92,18 @@ const Gateway = () => {
 
   const convertedDate = useEvent.unixDateStart !== '' ? convertUnix(useEvent.unixDateStart) : ''
   const uriRedsys = 'https://dentraliaserver.herokuapp.com/api/v1'//'https://sis-t.redsys.es:25443/sis/realizarPago'
-
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log(usePayload)
+    const getResponse = await fetch('https://dentraliaserver.herokuapp.com/api/v1', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({usePayload})
+    })
+    const responseJSON = await getResponse.json()
+    console.log(responseJSON)
+    setResponse(responseJSON.response)
+  }
   // console.log(evento)
   return (
     <>
@@ -130,22 +145,12 @@ const Gateway = () => {
               En el importe a pagar se incluyen los gastos de gesti&oacute;n
             </article>
 
-            <div className="normativaAnchor">
+            {/* <div className="normativaAnchor">
               Realizando la compra aceptas la <a href="/">normativa referente al Covid-19</a>
-            </div>
-            <form action={uriRedsys} method="POST">
+            </div> */}
+            <form action={uriRedsys} method="POST" onSubmit={handleSubmit}>
               <input type="hidden" name="payload" value={JSON.stringify(usePayload)}></input>
-              {/* <input type="hidden" name="Carrito" value={JSON.stringify(usePayload.carrito)}></input>
-              <input type="hidden" name="ClientData" value={JSON.stringify(usePayload.cliente)}></input>
-              <input type="hidden" name="data" value={JSON.stringify(usePayload.direccionIP)}></input>
-              <input type="hidden" name="eventoID" value={JSON.stringify(usePayload.eventoId)}></input>
-              <input type="hidden" name="info" value={JSON.stringify(usePayload.info)}></input>
-              <input type="hidden" name="quantity" value={JSON.stringify(usePayload.quantity)}></input>
-              <input type="hidden" name="seguro" value={JSON.stringify(usePayload.seguro)}></input>
-              <input type="hidden" name="seguroPrice" value={JSON.stringify(usePayload.seguroPrice)}></input>
-              <input type="hidden" name="TotalPrice" value={JSON.stringify(usePayload.totalPrice)}></input>
-              <input type="hidden" name="UnitPrice" value={JSON.stringify(usePayload.unitPrice)}></input> */}
-              <button className="btn btn-primary btn-lg mb-xlg"><FontAwesomeIcon icon={faCreditCard} className="faCreditCard" />Pagar con tarjeta ({Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice)})</button>
+              <button className="btn btn-primary btn-lg mb-xlg btnPagar"><FontAwesomeIcon icon={faCreditCard} className="faCreditCard" />Pagar con tarjeta ({Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice)})</button>
             </form>
           </section>
           <section>
@@ -155,6 +160,7 @@ const Gateway = () => {
           </section>
         </div>
       </div>
+      {useResponse == '' ? '' : <div dangerouslySetInnerHTML={{__html: useResponse}}></div>}
     </>
   )
 }
