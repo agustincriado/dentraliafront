@@ -12,7 +12,7 @@ const EventGenerator = () => {
         () => {
             let queryPath = ''
             useQuery === '' || useQuery === []
-                ? queryPath = query(collection(db, 'Eventos'), orderBy('unixDateStart', 'asc'))
+                ? queryPath = query(collection(db, 'Eventos'), orderBy('unixDateStart', 'asc'), where("state", "==", "Activo"))
                 : queryPath = query(collection(db, 'Eventos'), where("searchData", "array-contains", useQuery), orderBy('name', 'asc'))
             onSnapshot((queryPath), querySnapshot => {
 
