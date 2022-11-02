@@ -712,7 +712,7 @@ footer .copyright-wrap {
 .divContainer {
   display: flex;
   flex-flow: column;
-  gap: 23.3px;
+  /* gap: 23.3px; THIS WILL BREAK THE SCHEMES*/
 }
 
 .divContainer>div {
