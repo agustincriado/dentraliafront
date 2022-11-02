@@ -859,7 +859,7 @@ strong.ticketData {
   background: url(../public/images/piano-banner-img2.png) center center no-repeat;
   background-size: contain;
   bottom: -100px;
-  right: 0;
+  right: 50px;
   width: 134px;
   height: 240px;
   position: absolute;
@@ -1131,7 +1131,7 @@ label#telLabel::before {
   color: #000;
   background: linear-gradient(109.3deg, #FF1E1E 5.63%, #E90067 97.66%);
   position: relative;
-  max-height: 750px;
+  max-height: 650px;
 }
 
 .homeFlyer .homeFlyer-content {
@@ -2664,10 +2664,44 @@ header .buscador .search-btn {
   }
 }
 
-@media (max-width: 374px) {
+@media (max-width: 375px) {
+  section.cartAndError {
+    width: 100%;
+  }
+  .homeFlyer .homeFlyer-content .homeFlyer-inner h4 {
+    padding-top: 20px;
+  }
+  .eventTittle {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 0;
+  }
+  .eventTittle::before {
+    width: 48px;
+    right: 30px;
+    bottom: -113px;
+  }
+  .checkoutDate, .checkoutLocation{
+    font-size: 22px;
+    justify-content: center;
+  }
+  .iconLocation svg, .iconClock svg {
+    width: 20px;
+    height: 20px;
+  }
+  .iconClock, .iconLocation {
+    margin: 0;
+  }
+  .dottedSeparator {
+    width: 200px;
+    margin: auto;
+  }
+  .timerContainer {
+    text-align: center;
+  }
   .pianoFlyer.homeFlyer .homeFlyer-card::before {
     bottom: 78px;
-    right: 40px;
+    right: 60px;
     width: 50px;
     height: 44px;
   }
