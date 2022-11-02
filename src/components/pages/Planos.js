@@ -266,7 +266,7 @@ const Planos = () => {
   }
   return (
     <>
-      <PianoFlyer />
+      <PianoFlyer checkout={false} />
       <div className='contenedor reserve-contenedor'>
         <div className='reserve-seat'>
           <div className="Plano">

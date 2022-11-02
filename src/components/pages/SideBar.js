@@ -15,9 +15,9 @@ const SideBar = () => {
 
     const toggleSideMenu = () => setSideMenu(!sideMenu)
 
-    const handleClick = () => {
+    const handleClick = (param) => {
         toggleSideMenu()
-        setId("");
+        setId(param);
     }
     return (<header>
         <Container>
@@ -35,12 +35,12 @@ const SideBar = () => {
                     <Offcanvas.Body>
                         <CloseButton onClick={toggleSideMenu} />
                         <ul className="ul sideBar">
-                            <li><Link onClick={handleClick} className={useNav === '/' ? 'active' : ''} to="/">Experiencias</Link></li>
-                            <li><Link onClick={handleClick} className={useNav === '/about' ? 'active' : ''} to="/about">Quiénes Somos</Link></li>
-                            <li><Link onClick={handleClick} className={useNav === '/events' ? 'active' : ''} to="/events">Crea Tu Evento</Link></li>
-                            <li><Link onClick={handleClick} className={useNav === '/faq' ? 'active' : ''} to="/faq">Preguntas Frecuentes</Link></li>
-                            <li><Link onClick={handleClick} className={useNav === '/newsletter' ? 'active' : ''} to="/newsletter">Newsletter</Link></li>
-                            <li><Link onClick={handleClick} className={useNav === '/contact' ? 'active' : ''} to="/contact">Contacto</Link></li>
+                            <li><Link onClick={() => handleClick("")} className={useNav === '/' ? 'active' : ''} to="/">Experiencias</Link></li>
+                            <li><Link onClick={() => handleClick("about")} className={useNav === '/about' ? 'active' : ''} to="/about">Quiénes Somos</Link></li>
+                            <li><Link onClick={() => handleClick("events")} className={useNav === '/events' ? 'active' : ''} to="/events">Crea Tu Evento</Link></li>
+                            <li><Link onClick={() => handleClick("faq")} className={useNav === '/faq' ? 'active' : ''} to="/faq">Preguntas Frecuentes</Link></li>
+                            <li><Link onClick={() => handleClick("newsletter")} className={useNav === '/newsletter' ? 'active' : ''} to="/newsletter">Newsletter</Link></li>
+                            <li><Link onClick={() => handleClick("contact")} className={useNav === '/contact' ? 'active' : ''} to="/contact">Contacto</Link></li>
                         </ul>
                     </Offcanvas.Body>
                 </Offcanvas>

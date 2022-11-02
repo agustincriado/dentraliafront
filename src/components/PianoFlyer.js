@@ -2,8 +2,9 @@ import { useEffect, useState } from "react"
 import Logo from "./Logo"
 import { useAux } from "../context/auxContext"
 import { Breadcrumb, Image } from 'react-bootstrap';
-const PianoFlyer = () => {
+const PianoFlyer = ({ checkout }) => {
 
+  
   const initialValues = {
     text: 'Creamos Experiencias',
     subtext: 'Inolvidables',
@@ -13,6 +14,7 @@ const PianoFlyer = () => {
   const { useId } = useAux()
   const [useValues, setValues] = useState(initialValues)
   useEffect(() => {
+    console.log("Checkout",checkout)
     if (useId === '') {
       setValues(initialValues)
     } else {
@@ -45,7 +47,7 @@ const PianoFlyer = () => {
         </>
       ) : (
         <>
-          <img src={useValues.imgsrc}></img>
+          <img src={useValues.imgsrc} style={{opacity: checkout ? '0.3' : '1'}}></img>
           <div className="homeFlyer-content">
             <div className="container">
               <div className="homeFlyer-inner">

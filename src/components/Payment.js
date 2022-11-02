@@ -6,7 +6,7 @@ import { db } from "../firebase"
 import { useMediaQuery } from 'react-responsive';
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import Flyer from '../components/Flyer';
+import CheckoutFlyer from '../components/CheckoutFlyer';
 
 const Payment = (props) => {
   const {
@@ -156,7 +156,7 @@ const Payment = (props) => {
 
 
   return (<>
-    <Flyer />
+    <CheckoutFlyer />
     <div className='contenedorCheckout'>
       <div className="container gridDisplay">
         <section>

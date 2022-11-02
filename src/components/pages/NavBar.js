@@ -13,7 +13,7 @@ const NavBar = () => {
         setNav(location.pathname)
     }, [location, setNav])
 
-    const handleClick = () => setId("");
+    const handleClick = (param) => setId(param);
     return (
         <header>
             <div className="main-nav">
@@ -32,12 +32,12 @@ const NavBar = () => {
             <nav className=" navbar-link">
                 <div className="container">
                     <ul>
-                        <Link onClick={handleClick} className={useNav === '/' ? 'active' : ''} to="/">Experiencias</Link>
-                        <Link onClick={handleClick} className={useNav === '/about' ? 'active' : ''} to="/about">Quiénes Somos</Link>
-                        <Link onClick={handleClick} className={useNav === '/events' ? 'active' : ''} to="/events">Crea Tu Evento</Link>
-                        <Link onClick={handleClick} className={useNav === '/faq' ? 'active' : ''} to="/faq">Preguntas Frecuentes</Link>
-                        <Link onClick={handleClick} className={useNav === '/newsletter' ? 'active' : ''} to="/newsletter">Newsletter</Link>
-                        <Link onClick={handleClick} className={useNav === '/contact' ? 'active' : ''} to="/contact">Contacto</Link>
+                        <Link onClick={() =>handleClick("")} className={useNav === '/' ? 'active' : ''} to="/">Experiencias</Link>
+                        <Link onClick={() =>handleClick("about")} className={useNav === '/about' ? 'active' : ''} to="/about">Quiénes Somos</Link>
+                        <Link onClick={() =>handleClick("events")} className={useNav === '/events' ? 'active' : ''} to="/events">Crea Tu Evento</Link>
+                        <Link onClick={() =>handleClick("faq")} className={useNav === '/faq' ? 'active' : ''} to="/faq">Preguntas Frecuentes</Link>
+                        <Link onClick={() =>handleClick("newsletter")} className={useNav === '/newsletter' ? 'active' : ''} to="/newsletter">Newsletter</Link>
+                        <Link onClick={() =>handleClick("contact")} className={useNav === '/contact' ? 'active' : ''} to="/contact">Contacto</Link>
                     </ul>
                 </div>
             </nav>

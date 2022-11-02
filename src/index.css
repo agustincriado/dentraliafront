@@ -858,12 +858,12 @@ strong.ticketData {
   content: "";
   background: url(../public/images/piano-banner-img2.png) center center no-repeat;
   background-size: contain;
-  bottom: -100px;
-  right: 50px;
-  width: 134px;
+  bottom: -125px;
+  right: 0px;
+  width: 135px;
   height: 240px;
   position: absolute;
-  transform: scale(2);
+  transform: scale(1);
 }
 
 .dottedSeparator {
@@ -2410,7 +2410,6 @@ header .buscador .search-btn {
   .homeFlyer.pianoFlyer>img {
     min-height: 424px;
   }
-
   .pianoFlyer.homeFlyer::after {
     border-bottom: 1px dashed #fff;
     width: 100%;
@@ -2734,4 +2733,18 @@ header .buscador .search-btn {
   width: 25px;
   display: inline-block;
   padding: 0 0 0 0px;
+}
+.checkoutFlyer {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  width: 100%;
+  color: #000;
+  background: linear-gradient(109.3deg, #FF1E1E 5.63%, #E90067 97.66%);
+  position: relative;
+  max-height: 150px;
+  overflow: hidden;
+}
+img.checkoutImage {
+  opacity: 0.5;
 }

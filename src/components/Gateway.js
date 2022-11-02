@@ -6,6 +6,7 @@ import { getDoc, doc } from "firebase/firestore"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCreditCard } from "@fortawesome/free-regular-svg-icons"
 import Flyer from '../components/Flyer';
+import CheckoutFlyer from "./CheckoutFlyer"
 const Gateway = () => {
   const initialValues = {
     webImage: '',
@@ -91,7 +92,7 @@ const Gateway = () => {
   // console.log(evento)
   return (
     <>
-      <Flyer />
+      <CheckoutFlyer />
       <div className='contenedor'>
         <p className="timerEvent">
           0{Number(useMinutes)}:{Number(useSeconds) < 10 ? `0${Number(useSeconds)}` : Number(useSeconds)}
