@@ -1188,7 +1188,7 @@ label#telLabel::before {
 
 .homeFlyer img {
   height: 100%;
-  max-height: 750px;
+  max-height: 650px;
   width: 100%;
   object-fit: cover;
 }
