@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom"
 import { FaBars } from "react-icons/fa";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
-import { Offcanvas, Container, CloseButton } from "react-bootstrap"; // https://react-bootstrap.github.io/components/offcanvas/
+import { Offcanvas, Container, CloseButton } from "react-bootstrap";
+import Buscador from "../Buscador.js"
+// https://react-bootstrap.github.io/components/offcanvas/
 const SideBar = () => {
     const [sideMenu, setSideMenu] = useState(false)
     const [useNav, setNav] = useState('')
@@ -15,7 +15,7 @@ const SideBar = () => {
         <Container>
             <div className="navBar container mobile">
                 <div className="social-links-wrap">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    <Buscador />
                     <ul className="social-links">
                         <li><a href="/"><img src="/images/facebook-logo.png" alt="" /></a></li>
                         <li><a href="/"><img src="/images/twitter-logo.png" alt="" /></a></li>

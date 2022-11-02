@@ -5,6 +5,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
 const Buscador = () => {
     const [usePath, setPath] = useState("")
+    const [showInput, setShowInput] = useState(false)
     const { setQuery } = useContext(QueryContext)
     useEffect(() => {
         setQuery(usePath)
@@ -21,10 +22,13 @@ const Buscador = () => {
             <form className="input-group" onSubmit={handleSubmit}>
                 <label className="input-group-text">
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    <button className="search-btn" onClick={() => setShowInput(true)}>
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </button>
                     <input
                         type="text"
                         name="query"
-                        className="form-control"
+                        className={showInput ? "form-control showInput" : "form-control"}
                         placeholder={"Buscar Eventos por nombre o ciudad"}
                     />
                 </label>
