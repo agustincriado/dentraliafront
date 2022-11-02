@@ -5,10 +5,6 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 import { useMediaQuery } from "react-responsive"
 
 const Buscador = () => {
-    const initialStyles = {
-        height: "0px",
-        padding: "0 20px 0 58px"
-    }
     const [usePath, setPath] = useState("")
     const [ useStyles, setStyles] = useState(false)
     const { setQuery } = useContext(QueryContext)
@@ -27,33 +23,20 @@ const Buscador = () => {
         query: '(max-width: 400px)'
     })
 
-    const changeStyles = () => { setStyles(!useStyles)}
+    const changeStyles = () => { setStyles(!useStyles) }
     return (
         <div className="buscador">
-            <form className="input-group" onSubmit={handleSubmit}>
-                {isMobile ? (
-                    <label onClick={changeStyles} className="input-group-text">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    <input
-                        style={{width: useStyles ? "30px": "0px", padding: useStyles ? '0 20px 0 58px': '0px'}}
-                        type="text"
-                        name="query"
-                        className="form-control"
-                        placeholder={"Buscar Eventos por nombre o ciudad"}
-                    />
-                </label>
-                ) : (
+            <form className="input-group" onClick={changeStyles} onSubmit={handleSubmit}>
                     <label className="input-group-text">
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                     <input
+                        style={{height: useStyles ? '0px' : "30px"}}
                         type="text"
                         name="query"
-                        className="form-control"
+                        className={`form-control ${useStyles ? 'show' : 'hide'}`}
                         placeholder={"Buscar Eventos por nombre o ciudad"}
                     />
                 </label>
-                )}
-                
             </form>
         </div>
     )
