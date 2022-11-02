@@ -2,7 +2,7 @@ import { db } from '../../firebase'
 import { doc, getDoc, onSnapshot, collection, updateDoc, setDoc, addDoc } from "firebase/firestore";
 import React, { useEffect, useState } from 'react';
 import ReactHtmlParser from 'react-html-parser'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useAux } from '../../context/auxContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight, faMagnifyingGlassMinus, faMagnifyingGlassPlus, faShoppingCart, faDeleteLeft } from '@fortawesome/free-solid-svg-icons';
@@ -25,11 +25,37 @@ const Planos = () => {
   const [isLoaded, setLoaded] = useState(0)
   const [showCart, setShowCart] = useState(false)
   const [activeBtn, setActiveBtn] = useState(true)
+  const [cartErr, setCartErr] = useState([])
+  const location = useLocation();
 
   useEffect(() => {
     console.log('Calling to useEffect', useId, usePlano)
-    if (useId === '') navigate('/')
-
+    async function CheckData() {
+    if (useId === '') {
+      console.log("Path", location.pathname)
+      const getArr = location.pathname.split('/')
+      const idOBJ = {[getArr[1]]: getArr[2]}
+      if (idOBJ.evento){
+        const Days = ['DOM', 'LUN', 'MART', 'MIER', 'JUE', 'VIE', 'SAB']
+    const Months = ['', 'ENE', 'FEB', 'MAR', 'ABR', 'JUN', 'JUL', 'AGO', 'SEPT', 'OCT', 'NOV', 'DIC']
+        const getEventData = await getDoc(doc(db, "Eventos", idOBJ.evento))
+        const eventInfo = getEventData.data();
+        const dateObject = new Date(eventInfo.unixDateStart * 1000)
+        const eventDay = dateObject.getDay()
+        const eventMonth = dateObject.getMonth()
+        // const eventDate = dateObject.getDate()
+        setId({
+          evento: idOBJ.evento,
+          plano: eventInfo.planoZonas,
+          eventName: eventInfo.name,
+          eventDate: Days[eventDay] + "., " + Months[eventMonth] + "., " + eventInfo.hourStart,
+          eventLocation: eventInfo.recintoName
+      })
+      }
+      return
+    }
+  }
+  CheckData()
   }, [isLoaded, useId])
   useEffect(() => {
     const addToCart = (e) => {
@@ -148,7 +174,7 @@ const Planos = () => {
         } else return 0.2
       }
       const canvas = document.getElementById('canvasHolder')
-      console.log("Actual Vierport Width", ViewportWidth(window.innerWidth))
+      // console.log("Actual Vierport Width", ViewportWidth(window.innerWidth))
       canvas.scrollLeft = (canvas.offsetWidth * ViewportWidth(window.innerWidth))
       // dibujarGrid(20, 20, 1, '#ececec')
     }
@@ -156,36 +182,37 @@ const Planos = () => {
 
   }, [])
 
-  const handleSendPay = () => {
-    useCarrito.forEach(async (entrada) => {
-      await updateDoc(doc(db, 'Eventos', useId.evento, 'Entradas', entrada.dbid), {
-        estado: 'Reservado'
-      })
-      await addDoc(collection(db, 'Eventos', useId.evento, 'Entradas', entrada.dbid, 'Logs'), {
-        FechaInitialUnix: Math.floor(new Date().getTime() / 1000),
-        registro: 'Cambio de estado Libre a Reservado'
-      })
-    })
-    useCarrito.forEach(async (entrada) => await setDoc(doc(db, 'MonitorRT', entrada.dbid), {
-      ...entrada,
-      eventoId: useId.evento,
-      eventoName: useId.eventName,
-      estado: 'Reservado',
-    }))
-    fetch('http://www.dentralia.com/api/v1/timer', {
+  const handleSendPay = async () => {
+    if (!useCarrito.length) {
+      return 
+    }
+    const getResponse = await fetch('https://dentraliaserver.herokuapp.com/api/v1/ticketAvailable', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        eventoId: useId.evento,
-        entradasOBJ: useCarrito,
-      })
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({useCarrito: useCarrito, useId: useId})
     })
-    console.log(useId)
-    setId(useId)
-    setPayload(useCarrito)
-    navigate(`/misdatos/${useId.evento}`)
+    const responseJSON = await getResponse.json()
+    if (!responseJSON.ticketStatus) {
+      const newCarrito = useCarrito.filter(obj => !responseJSON.ticketsAvailable.some(f => f.seatInfo === obj.seatInfo))
+      const notAvailable = useCarrito.filter(obj => responseJSON.ticketsAvailable.some(f => f.seatInfo === obj.seatInfo))
+      setCarrito(newCarrito)
+      setCartErr(notAvailable)
+    } else {
+      fetch('https://dentraliaserver.herokuapp.com/api/v1/timer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          eventoId: useId.evento,
+          entradasOBJ: useCarrito,
+        })
+      })
+      console.log(useId)
+      setId(useId)
+      setPayload(useCarrito)
+      navigate(`/misdatos/${useId.evento}`)
+    }
   }
   const handleSeguro = (string, index) => {
     console.log(string, index)
@@ -261,6 +288,7 @@ const Planos = () => {
               <canvas id='cuadricula'></canvas>
             </div>
           </div>
+          <section className='cartAndError'>
           <div className='zonasCart'>
             <div className='zonasPrices'>
               {usePlano && usePlano.zonas ? usePlano.zonas.map(function (zona) {
@@ -320,6 +348,20 @@ const Planos = () => {
               }) : ''}
             </div>
           </div>
+          <div className='errorContainer'>
+              {cartErr.length ? (
+                <div className='errorSection'>
+                  <p>Los siguientes asientos fueron reservados y se han quitado de su carrito, por favor reviselo e intente nuevamente</p>
+                  {cartErr.map((item) => (
+                    <ul>
+                      <li>{item.zonaName}, {item.seatInfo}, {Intl.NumberFormat('es-es', { style: 'currency', currency: 'EUR' }).format((Number(item.zonaPrice) + Number(item.zonaGDG)))}</li>
+                    </ul>
+              ))}
+                </div>
+              ) : ('')
+              }
+          </div>
+          </section>
         </div>
         <div className='entradasCart-btn-wrap'>
           <div className="entradasCart">
@@ -376,7 +418,7 @@ const Planos = () => {
           <div className="cartActions">
             {/* {isDesktop ? (
               <> */}
-            <button className="btn" onClick={() => setId('')}><span>Cambiar Evento</span></button>
+            <button className="btn" onClick={() => navigate('/')}><span>Cambiar Evento</span></button>
             <button className="btn" onClick={handleSendPay}><span>Continuar</span></button>
             <button className="btn emptyCart" onClick={emptyCart}><span><FontAwesomeIcon icon={faDeleteLeft} />Borrar seleccion</span></button>
             {/* </>

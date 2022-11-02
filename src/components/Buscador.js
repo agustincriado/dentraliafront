@@ -2,11 +2,13 @@ import { useContext, useEffect, useState } from "react"
 import { QueryContext } from "../context/QueryContext"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
+import { useMediaQuery } from "react-responsive"
 
 const Buscador = () => {
     const [usePath, setPath] = useState("")
     const [showInput, setShowInput] = useState(false)
     const { setQuery } = useContext(QueryContext)
+
     useEffect(() => {
         setQuery(usePath)
     }, [usePath, setQuery])
@@ -17,6 +19,11 @@ const Buscador = () => {
         setPath(query)
     }
 
+    const isMobile = useMediaQuery({
+        query: '(max-width: 400px)'
+    })
+
+    // const changeStyles = () => { setStyles(!useStyles) }
     return (
         <div className="buscador">
             <form className="input-group" onSubmit={handleSubmit}>

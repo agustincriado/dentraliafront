@@ -259,7 +259,7 @@ header .navbar-link ul a.active::after {
 }
 
 .contenedor {
-  padding: 56px 8% 0;
+  padding: 10px 8% 0;
   min-height: 800px;
 }
 
@@ -842,9 +842,91 @@ strong.ticketData {
   color: #f00;
 }
 
-b,
-.eventTittle strong {
-  color: #000;
+.eventTittle {
+  font-family: 'Baloo 2';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 88px;
+  text-transform: uppercase;
+  /* #FF1E1E */
+  color: #FF1E1E;
+  position: relative;
+}
+
+.eventTittle::before {
+  content: "";
+  background: url(../public/images/piano-banner-img2.png) center center no-repeat;
+  background-size: contain;
+  bottom: -100px;
+  right: 0;
+  width: 134px;
+  height: 240px;
+  position: absolute;
+  transform: scale(2);
+}
+
+.dottedSeparator {
+  content: "";
+  background: url(../public/images/dottedLine.svg) center center no-repeat;
+  background-size: contain;
+  bottom: 0;
+  right: 0;
+  width: 312px;
+  height: 40px;
+  position: relative;
+}
+
+.checkoutDate {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  /* identical to box height */
+  text-align: center;
+  text-transform: capitalize;
+
+  color: #000000;
+}
+
+.checkoutLocation {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 34px;
+  /* identical to box height */
+  text-transform: capitalize;
+  color: #000000;
+}
+
+.iconClock {
+  width: 40px;
+  height: 40px;
+  margin-right: 21px;
+}
+
+.iconLocation {
+  width: 30px;
+  height: 40px;
+  margin-right: 31px;
+}
+
+.timerContainer {
+  margin-top: 38px;
+}
+
+.timesUp {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  /* identical to box height */
+  text-transform: capitalize;
+
+  color: #000000;
 }
 
 .GDGDeclaration {
@@ -881,6 +963,72 @@ b,
 .formPayment {
   display: flex;
   flex-flow: row wrap;
+}
+
+.formPayment input::placeholder {
+  color: #BEBEBE;
+}
+
+.formPayment input {
+  background-color: #fff;
+  border: solid 2px #DADADA;
+  box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+  border-radius: 25px;
+  padding: 24px 45px;
+  height: 60px;
+}
+
+.formPayment label {
+  position: relative;
+  color: #000;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+label#staticEmailLabel::before,
+label#confirmEmailLabel::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  left: 15px;
+  top: 20px;
+  bottom: -75px;
+  background: url(../public/images/iconLetter.svg) center / contain no-repeat;
+}
+
+label#surnameLabel::before,
+label#nameLabel::before,
+label#dniLabel::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  left: 15px;
+  top: 20px;
+  bottom: -75px;
+  background: url(../public/images/iconPerson.svg) center / contain no-repeat;
+}
+
+label#zipCodeLabel::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  left: 15px;
+  top: 20px;
+  bottom: -75px;
+  background: url(../public/images/iconLocation.svg) center / contain no-repeat;
+}
+
+label#telLabel::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  left: 15px;
+  top: 20px;
+  bottom: -75px;
+  background: url(../public/images/iconTel.svg) center / contain no-repeat;
 }
 
 .strongPayment,
@@ -1005,7 +1153,7 @@ b,
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 100px 0 61px;
+  padding: 30px 0 25px;
 }
 
 .homeFlyer .homeFlyer-content .homeFlyer-inner h4 {
@@ -1039,7 +1187,8 @@ b,
 }
 
 .homeFlyer img {
-  min-height: 500px;
+  height: 100%;
+  max-height: 750px;
   width: 100%;
   object-fit: cover;
 }
@@ -1109,9 +1258,21 @@ b,
   width: 60%;
 }
 
+section.cartAndError {
+  width: 40%;
+}
+
 .reserve-seat .zonasCart {
   padding: 0 15px;
-  width: 40%;
+  width: 100%;
+}
+
+.errorSection {
+  margin-top: 10px;
+  color: #721c24;
+  border: solid 1px #f5c6cb;
+  background-color: #f8d7da;
+  padding: 15px;
 }
 
 .zonasCart .zonasPrices {
@@ -1205,7 +1366,8 @@ b,
   justify-content: center;
 }
 
-.cartActions button {
+.cartActions button,
+.btnCheckout {
   font-family: 'Baloo 2';
   font-weight: 700;
   font-size: 32px;
@@ -1235,7 +1397,7 @@ b,
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-fill-color: transparent;
+  -text-fill-color: transparent;
   position: relative;
   z-index: 1;
 }
@@ -1251,7 +1413,8 @@ b,
   background: #fff;
 }
 
-.cartActions button:nth-child(2) {
+.cartActions button:nth-child(2),
+.btnCheckout {
   background: linear-gradient(90deg, #FF1E1E 0%, #E90067 100%);
   color: #fff;
 }
@@ -1375,9 +1538,18 @@ b,
 }
 
 .timerEvent {
-  color: #f00;
-  font-size: 35px;
+  margin-top: 26px;
+  font-family: 'Baloo 2';
+  font-style: normal;
   font-weight: 700;
+  font-size: 28px;
+  line-height: 20px;
+
+  /* identical to box height, or 71% */
+  text-transform: uppercase;
+
+  /* #FF1E1E */
+  color: #FF1E1E;
 }
 
 .formPayment .form-group {
@@ -1446,11 +1618,11 @@ b,
 }
 
 .pianoFlyer.homeFlyer {
-  max-height: 725px;
+  max-height: 600px;
 }
 
 .pianoFlyer.homeFlyer img {
-  min-height: 725px;
+  min-height: 600px;
 }
 
 .pianoFlyer.homeFlyer::after {
@@ -1480,13 +1652,13 @@ b,
 }
 
 .pianoFlyer.homeFlyer .homeFlyer-card {
-  max-width: 920px;
+  max-width: 600px;
   width: 100%;
-  margin: 0 auto;
+  margin: auto;
   background: url(../public/images/bannar-card.png) center center no-repeat;
   background-size: contain;
-  padding: 110px 197px 118px;
-  min-height: 520px;
+  padding: 50px 0 50px 117px;
+  min-height: 355px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1497,9 +1669,9 @@ b,
   content: "";
   background: url(../public/images/piano-banner-img2.png) center center no-repeat;
   background-size: contain;
-  bottom: 178px;
-  right: 160px;
-  width: 180px;
+  bottom: 110px;
+  right: 95px;
+  width: 134px;
   height: 140px;
   position: absolute;
 }
@@ -1507,11 +1679,11 @@ b,
 .pianoFlyer.homeFlyer .homeFlyer-card h5 {
   font-family: 'Baloo 2';
   font-weight: 700;
-  font-size: 36px;
-  line-height: 1.3;
+  font-size: 30px;
+  line-height: 1.5835;
   color: #FF1E1E;
-  max-width: 380px;
-  margin-bottom: 24px;
+  max-width: 350px;
+  margin-bottom: 12px;
   position: relative;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding-bottom: 8px;
@@ -1542,8 +1714,8 @@ b,
 }
 
 .pianoFlyer.homeFlyer .homeFlyer-card h6 img {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   min-height: unset;
   object-fit: contain;
   margin-right: 10px;
@@ -1562,14 +1734,15 @@ b,
 }
 
 .pianoFlyer.homeFlyer .homeFlyer-card span img {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   min-height: unset;
   object-fit: contain;
   margin-right: 10px;
 }
 
-.reserve-contenedor.contenedor {
+.reserve-contenedor.contenedor,
+.contenedorCheckout {
   background: url(../public/images/pattern-bg.png) center center repeat;
   background-size: cover;
 }
@@ -1855,6 +2028,10 @@ header .buscador .search-btn {
 @media (max-width:991px) {
   .homeFlyer .homeFlyer-content .homeFlyer-inner {
     padding: 80px 0 45px;
+  }
+
+  div.social-links-wrap {
+    width: calc(100% - 35px);
   }
 
   .homeFlyer .homeFlyer-content .homeFlyer-inner h4 {
@@ -2372,6 +2549,17 @@ header .buscador .search-btn {
 }
 
 @media (max-width: 728px) {
+  header .buscador {
+    max-width: 128px;
+  }
+
+  header .buscador .form-control {
+    height: 35px;
+    font-size: 15px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
   .formPayment {
     flex-flow: column;
   }
@@ -2487,4 +2675,29 @@ header .buscador .search-btn {
   .pianoFlyer.homeFlyer .homeFlyer-card {
     padding: 50px 20% 52px;
   }
+}
+
+.btnCheckout {
+  width: 100%;
+}
+
+#acceptNewsletter {
+  display: none;
+}
+
+#acceptNewsletter+label {
+  background: url(../public/images/check-circle.svg) no-repeat;
+  height: 25px;
+  width: 25px;
+  display: inline-block;
+  padding: 0;
+}
+
+#acceptNewsletter:checked+label {
+  background: url(../public/images/check-circle.svg) no-repeat;
+  filter: invert(33%) sepia(61%) saturate(7358%) hue-rotate(347deg) brightness(105%) contrast(113%);
+  height: 25px;
+  width: 25px;
+  display: inline-block;
+  padding: 0 0 0 0px;
 }

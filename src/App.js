@@ -21,7 +21,7 @@ import { QueryContextProvider } from './context/QueryContext';
 import Flyer from './components/Flyer';
 function App() {
   const isDesktop = useMediaQuery({
-    query: '(min-width: 1200px)'
+    query: '(min-width: 1000px)'
   })
   return (
     <BrowserRouter>
