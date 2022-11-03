@@ -27,7 +27,7 @@ const Gateway = () => {
     if (useId === '') navigate('/404')
     const fullEvent = async () => {
       console.log(useId, usePayload, 'a')
-      const task = await getDoc(doc(db, 'Eventos', useId))
+      const task = await getDoc(doc(db, 'Eventos', useId.evento))
       console.log(task.data())
       setEvent(task.data())
     }
@@ -153,7 +153,7 @@ const Gateway = () => {
               <button className="btn btn-primary btn-lg mb-xlg btnPagar"><FontAwesomeIcon icon={faCreditCard} className="faCreditCard" />Pagar con tarjeta ({Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice)})</button>
             </form>
           </section>
-          <section>
+          <section className="imageCheckout">
             <div className="col-md-5">
               <img style={{ width: "100%" }} src={useEvent.webImage ? useEvent.webImage : 'https://mgt-media.fra1.cdn.digitaloceanspaces.com/varios/festentradas-logo.png'}></img>
             </div>

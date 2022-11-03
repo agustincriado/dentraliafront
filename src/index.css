@@ -933,9 +933,11 @@ strong.ticketData {
   display: flex;
   justify-content: center;
   /* background-color: #d9edf7; */
+  color: #fff;
   background: linear-gradient(109.3deg, #FF1E1E 5.63%, #E90067 97.66%);
   padding: 1rem 0.8rem;
   margin: 1rem 0;
+  border-radius: 15px;
 }
 
 .normativaAnchor {
@@ -1104,6 +1106,7 @@ label#telLabel::before {
 
 .eventSubtittle {
   margin: 1rem 0;
+  padding-right: 135px;
 }
 
 .btnPago {
@@ -2665,6 +2668,16 @@ header .buscador .search-btn {
 }
 
 @media (max-width: 375px) {
+  .ticketResume {
+    width: 90%;
+  }
+  .eventSubtittle {
+    padding: 0;
+  }
+  .imageCheckout {
+    margin: 25px 0;
+    width: 90%;
+  }
   section.cartAndError {
     width: 100%;
   }
