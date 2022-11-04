@@ -276,7 +276,7 @@ const Planos = () => {
             </div>
             <div id='canvasHolder' className='canvasContainer scrollingOverflow'>
               <div className="stageContainer">
-                <strong>&nbsp;</strong>
+                <strong>&nbsp;Escenario&nbsp;</strong>
               </div>
               {usePlano ? ReactHtmlParser(usePlano.plano, {
                 transform(node, index) {

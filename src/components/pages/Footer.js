@@ -10,7 +10,7 @@ const Footer = () => {
                         <Row>
                             <Col sm={12}>
                                 <div className="footer-logo">
-                                    <Link to=""><Image src="/images/festentradas-logo.png" /></Link>
+                                    <Link to=""><Image src="/images/dentralia-logo.png" /></Link>
                                 </div>
                             </Col>
                             <Col lg={4}>

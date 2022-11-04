@@ -718,7 +718,7 @@ footer .copyright-wrap {
 .divContainer>div {
   display: flex;
   flex-flow: row nowrap;
-  gap: 1.7px;
+  /* gap: 1.7px; */
 }
 
 .divContainer>div>span:hover {
@@ -726,10 +726,17 @@ footer .copyright-wrap {
 }
 
 .divContainer>div>span {
-  min-width: 1.2rem;
+  /* min-width: 1.2rem;
   max-width: 1.2rem;
   max-height: 1.7rem;
+  font-size: 11px; */
+
   font-size: 11px;
+  height: 20px;
+  max-height: 1.7rem;
+  max-width: 20px;
+  min-width: 1.2rem;
+  width: 20px;
 }
 
 .palco span {
@@ -1661,7 +1668,7 @@ section.cartAndError {
   margin: auto;
   background: url(../public/images/bannar-card.png) center center no-repeat;
   background-size: contain;
-  padding: 50px 0 50px 117px;
+  padding: 50px 70px 50px 117px;
   min-height: 355px;
   display: flex;
   flex-direction: column;
@@ -1673,9 +1680,9 @@ section.cartAndError {
   content: "";
   background: url(../public/images/piano-banner-img2.png) center center no-repeat;
   background-size: contain;
-  bottom: 110px;
-  right: 95px;
-  width: 134px;
+  bottom: 90px;
+  right: 80px;
+  width: 125px;
   height: 140px;
   position: absolute;
 }
@@ -1683,7 +1690,7 @@ section.cartAndError {
 .pianoFlyer.homeFlyer .homeFlyer-card h5 {
   font-family: 'Baloo 2';
   font-weight: 700;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 1.5835;
   color: #FF1E1E;
   max-width: 350px;
@@ -1708,7 +1715,7 @@ section.cartAndError {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 1.2;
   text-transform: capitalize;
   color: #000000;
@@ -1718,8 +1725,8 @@ section.cartAndError {
 }
 
 .pianoFlyer.homeFlyer .homeFlyer-card h6 img {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   min-height: unset;
   object-fit: contain;
   margin-right: 10px;
@@ -1729,7 +1736,7 @@ section.cartAndError {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 15px;
   line-height: 1.2;
   text-transform: capitalize;
   color: #000000;
@@ -1738,8 +1745,8 @@ section.cartAndError {
 }
 
 .pianoFlyer.homeFlyer .homeFlyer-card span img {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   min-height: unset;
   object-fit: contain;
   margin-right: 10px;
