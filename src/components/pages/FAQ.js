@@ -1,6 +1,12 @@
+import { useEffect } from 'react';
+import { useAux } from '../../context/auxContext';
 import Flyer from '../Flyer';
 
 const FAQ = () => {
+  const { useId, setId } = useAux();
+  useEffect(() => {
+    if(!useId) setId('faq')
+  }, [useId])
   return (
     <>
       <Flyer />

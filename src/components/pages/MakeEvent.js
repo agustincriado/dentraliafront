@@ -4,8 +4,16 @@ import * as Ai from 'react-icons/ai'
 import * as Gi from 'react-icons/gi'
 import { Link } from 'react-router-dom'
 import Flyer from '../Flyer';
+import { useAux } from '../../context/auxContext'
+import { useEffect } from 'react'
 const MakeEvent = () => {
-    return (<>
+
+    const { useId, setId } = useAux()
+    useEffect(() => {
+        if(!useId) setId('events')
+    }, [useId])
+    return (
+    <>
         <Flyer />
         <div className='contenedor'>
             <div className="inside">

@@ -15,6 +15,8 @@ import MakeEvent from './components/pages/MakeEvent';
 import Planos from './components/pages/Planos';
 import Payment from './components/Payment';
 import Gateway from './components/Gateway';
+import Legal from './components/pages/Legal';
+import Privacy from './components/pages/Privacy';
 import NotFound from './components/pages/NotFound';
 import { AuxProvider } from './context/auxContext';
 import { QueryContextProvider } from './context/QueryContext';
@@ -40,6 +42,8 @@ function App() {
             <Route path="/evento/:id" element={<Planos />} />
             <Route path="/misdatos/:id" element={<Payment />} />
             <Route path="/gateway/:id" element={<Gateway />} />
+            <Route path="/aviso-legal" element={<Legal />} />
+            <Route path="/politica-de-privacidad" element={<Privacy />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           {/* </div> */}

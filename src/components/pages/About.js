@@ -2,9 +2,14 @@ import * as Bs from 'react-icons/bs'
 import * as Ai from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import Flyer from '../Flyer';
+import { useEffect } from 'react';
+import { useAux } from '../../context/auxContext';
 
 const About = () => {
-
+    const { useId, setId } = useAux();
+    useEffect(() => {
+        if(!useId) setId('about')
+    }, [useId])
     return (
         <>
             <Flyer />

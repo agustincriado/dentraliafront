@@ -1,5 +1,11 @@
 import Flyer from '../Flyer';
+import { useAux } from '../../context/auxContext';
+import { useEffect } from 'react';
 const Newsletter = () => {
+    const { useId, setId } = useAux()
+    useEffect( () => {
+        if(!useId) setId('newsletter')
+    })
     return (
         <>
             <Flyer />

@@ -63,8 +63,8 @@ const Footer = () => {
                     <div className="copyright-content">
                         <p>&copy; 2022 Dentralia</p>
                         <div className="privacyPolitic">
-                            <a href=".">Aviso Legal</a>
-                            <a href=".">Politica de privacidad</a>
+                            <a href="/aviso-legal">Aviso Legal</a>
+                            <a href="/politica-de-privacidad">Politica de privacidad</a>
                         </div>
                     </div>
                 </Container>

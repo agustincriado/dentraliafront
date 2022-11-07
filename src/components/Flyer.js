@@ -12,13 +12,27 @@ const Flyer = () => {
     'faq': 'Preguntas frecuentes',
     'newsletter': 'Newsletter',
     'contact': 'Contacto',
+    'privacy': 'Política de privacidad',
+    'legal': 'Aviso legal',
   }
   const { useId } = useAux()
   const [useValues, setValues] = useState(initialValues)
+
+  const PAGES = {
+    'about': true,
+    'events': true,
+    'faq': true,
+    'newsletter': true,
+    'contact': true,
+    'privacy': true,
+    'legal': true,
+}
   useEffect(() => {
-    if (useId == '' || !useId) {
+    console.log(PAGES[useId], useId)
+    if (useId === '' || !useId) {
       setValues(initialValues)
-    } else if (useId === 'about' || useId === 'events' || useId === 'faq' || useId === 'newsletter' || useId === 'contact' ) {
+    } else if (PAGES[useId]) {
+      console.log(PAGES[useId])
       setValues({...useValues,
         text: TEXTS[useId]
       })
