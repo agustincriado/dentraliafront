@@ -6,6 +6,20 @@ const Contact = () => {
     useEffect(() => {
         if(!useId) setId('contact')
     }, [useId])
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const {inputEmail, inputName, inputTel, inputText} = e.target
+        const email = inputEmail.value
+        const name = inputEmail.value
+        const tel = inputTel.value
+        const textContent = inputText.value
+        fetch('https://dentraliaserver.herokuapp.com/api/v1/contact-form', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email: email, name: name, tel: tel, textContent: textContent})
+        })
+    }
     return (
         <>
             <Flyer />
@@ -13,6 +27,7 @@ const Contact = () => {
                 <div className="inside">
                     <div className="contactContainer">
                         <div className="formContainer">
+                        <form onSubmit={handleSubmit}>
                             <div className="row">
                                 <div className="col">
                                     <label htmlFor="inputName">¿Como te llamas?</label>
@@ -40,6 +55,7 @@ const Contact = () => {
                                     <button className="btn btn-primary btn-lg mb-xlg">Enviar mensaje</button>
                                 </div>
                             </div>
+                        </form>
                         </div>
                         <div className="textContainer">
                             <h3>Estamos para <span>ayudarte</span></h3>
