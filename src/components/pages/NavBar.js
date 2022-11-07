@@ -19,7 +19,7 @@ const NavBar = () => {
             <div className="main-nav">
                 <div className="container">
                     <div className="navBar inside">
-                        <Logo src='/images/dentralia-logo.png' alt="Festentradas" />
+                        <Logo src='/images/dentralia-logo.png' alt="Dentralia Logo" />
                         <Buscador />
                         <ul className="social-links">
                             <li><Link to="/"><Image src="/images/facebook-logo.png" /></Link></li>

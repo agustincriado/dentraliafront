@@ -2402,7 +2402,7 @@ header .buscador .search-btn {
     font-size: 12px;
     line-height: 15px;
     margin-bottom: 6px;
-    max-width: 180px;
+    /* max-width: 180px; */
   }
 
   .pianoFlyer.homeFlyer .homeFlyer-card h6 img,
@@ -2415,7 +2415,7 @@ header .buscador .search-btn {
   .pianoFlyer.homeFlyer .homeFlyer-content .homeFlyer-inner span {
     font-size: 11px;
     line-height: 15px;
-    max-width: 180px;
+    /* max-width: 180px; */
   }
 
   .homeFlyer.pianoFlyer>img {

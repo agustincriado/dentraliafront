@@ -12,8 +12,8 @@ const About = () => {
                 <div className='inside'>
                     <div className='aboutSection'>
                         <div>
-                            <h4 className='bold'>{<Ai.AiOutlineLike />}Festentradas, tu plataforma de ticketing</h4>
-                            <p>Confía en Festentradas la organización y/o venta de tickets de tus eventos. Contamos con años de experiencia en el sector, y un gran know-how. Centraliza la venta de tus entradas, y controla en completo tiempo real todo tipo de estadísticas. Toma decisiones al momento, y aumenta la tasa de conversión de las personas que visitan nuestro portal.</p>
+                            <h4 className='bold'>{<Ai.AiOutlineLike />}Dentralia, tu plataforma de ticketing</h4>
+                            <p>Confía en Dentralia la organización y/o venta de tickets de tus eventos. Contamos con años de experiencia en el sector, y un gran know-how. Centraliza la venta de tus entradas, y controla en completo tiempo real todo tipo de estadísticas. Toma decisiones al momento, y aumenta la tasa de conversión de las personas que visitan nuestro portal.</p>
                         </div>
                         <div>
                             <h4>{<Ai.AiOutlineTablet />}Control de accesos</h4>

@@ -52,7 +52,7 @@ const PianoFlyer = ({ checkout }) => {
             <div className="container">
               <div className="homeFlyer-inner">
                 <div className="homeFlyer-logo-wrap">
-                  <img src='/images/dentralia-logo.png' alt="Festentradas" className="festentradas" />
+                  <img src='/images/dentralia-logo.png' alt="Dentralia Logo" className="festentradas" />
                   <p>Experiencias</p>
                 </div>
                 <Breadcrumb>
