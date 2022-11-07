@@ -1188,7 +1188,7 @@ label#telLabel::before {
 
 .homeFlyer img {
   height: 100%;
-  max-height: 750px;
+  max-height: 650px;
   width: 100%;
   object-fit: cover;
 }
@@ -1680,10 +1680,10 @@ section.cartAndError {
   font-family: 'Baloo 2';
   font-weight: 700;
   font-size: 30px;
-  line-height: 1.5835;
+  line-height: 1.2;
   color: #FF1E1E;
-  max-width: 350px;
-  margin-bottom: 12px;
+  max-width: 310px;
+  margin-bottom: 10px;
   position: relative;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding-bottom: 8px;
@@ -1704,18 +1704,19 @@ section.cartAndError {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.2;
   text-transform: capitalize;
   color: #000000;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   display: flex;
   align-items: center;
+  max-width: 310px;
 }
 
 .pianoFlyer.homeFlyer .homeFlyer-card h6 img {
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
   min-height: unset;
   object-fit: contain;
   margin-right: 10px;
@@ -1725,17 +1726,18 @@ section.cartAndError {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.2;
   text-transform: capitalize;
   color: #000000;
   display: flex;
   align-items: center;
+  max-width: 310px;
 }
 
 .pianoFlyer.homeFlyer .homeFlyer-card span img {
-  width: 30px;
-  height: 30px;
+  width: 27px;
+  height: 27px;
   min-height: unset;
   object-fit: contain;
   margin-right: 10px;
@@ -1901,7 +1903,7 @@ header .buscador .search-btn {
   }
 
   .homeFlyer .homeFlyer-content .homeFlyer-inner {
-    padding: 90px 0 55px;
+    padding: 215px 0 55px;
   }
 
   .homeFlyer .homeFlyer-content .homeFlyer-inner h4 {
@@ -1918,14 +1920,14 @@ header .buscador .search-btn {
   }
 
   .pianoFlyer.homeFlyer .homeFlyer-content .homeFlyer-inner {
-    padding: 70px 0 55px;
+    padding: 220px 0 55px;
   }
 
-  .pianoFlyer.homeFlyer .homeFlyer-card {
+  /* .pianoFlyer.homeFlyer .homeFlyer-card {
     max-width: 840px;
     padding: 100px 175px;
     min-height: 460px;
-  }
+  } */
 
   .pianoFlyer.homeFlyer {
     max-height: 650px;
@@ -1935,19 +1937,24 @@ header .buscador .search-btn {
     min-height: 650px;
   }
 
-  .pianoFlyer.homeFlyer .homeFlyer-card::before {
-    bottom: 160px;
-    right: 150px;
-    width: 170px;
-    height: 134px;
+  .pianoFlyer.homeFlyer .homeFlyer-card h5 {
+    font-size: 28px;
   }
 
+  .pianoFlyer.homeFlyer .homeFlyer-card::before {
+    bottom: 100px;
+    right: 85px;
+    width: 130px;
+    height: 135px;
+  }
+
+  /* 
   .pianoFlyer.homeFlyer .homeFlyer-card h6 img,
   .pianoFlyer.homeFlyer .homeFlyer-card span img {
     width: 35px;
     height: 35px;
     margin-right: 16px;
-  }
+  } */
 
   .pianoFlyer.homeFlyer::before {
     display: none;
@@ -2087,10 +2094,8 @@ header .buscador .search-btn {
   }
 
   .pianoFlyer.homeFlyer .homeFlyer-card h5 {
-    font-size: 32px;
     line-height: 1.2;
     max-width: 300px;
-    margin-bottom: 20px;
   }
 
   .pianoFlyer.homeFlyer .homeFlyer-card h5::before {
@@ -2368,16 +2373,16 @@ header .buscador .search-btn {
 
   .pianoFlyer.homeFlyer .homeFlyer-card h5 {
     font-size: 18px;
-    line-height: 20px;
+    line-height: 1.1;
     padding: 0;
-    margin-bottom: 13px;
+    margin-bottom: 9px;
     max-width: 180px;
   }
 
   .pianoFlyer.homeFlyer .homeFlyer-card h5::before {
     width: 87.81px;
     height: 2px;
-    bottom: -5px;
+    bottom: -4px;
   }
 
   .pianoFlyer.homeFlyer .homeFlyer-card::before {
@@ -2389,8 +2394,8 @@ header .buscador .search-btn {
 
   .pianoFlyer.homeFlyer .homeFlyer-card h6 {
     font-size: 12px;
-    line-height: 15px;
-    margin-bottom: 6px;
+    line-height: 1.2;
+    margin-bottom: 5px;
     max-width: 180px;
   }
 
@@ -2403,7 +2408,7 @@ header .buscador .search-btn {
 
   .pianoFlyer.homeFlyer .homeFlyer-content .homeFlyer-inner span {
     font-size: 12px;
-    line-height: 15px;
+    line-height: 1.2;
     max-width: 180px;
   }
 
@@ -2668,46 +2673,83 @@ header .buscador .search-btn {
   section.cartAndError {
     width: 100%;
   }
+
   .homeFlyer .homeFlyer-content .homeFlyer-inner h4 {
     padding-top: 20px;
   }
+
   .eventTittle {
     text-align: center;
     font-size: 40px;
     margin-bottom: 0;
   }
+
   .eventTittle::before {
     width: 48px;
     right: 30px;
     bottom: -113px;
   }
-  .checkoutDate, .checkoutLocation{
+
+  .checkoutDate,
+  .checkoutLocation {
     font-size: 22px;
     justify-content: center;
   }
-  .iconLocation svg, .iconClock svg {
+
+  .iconLocation svg,
+  .iconClock svg {
     width: 20px;
     height: 20px;
   }
-  .iconClock, .iconLocation {
+
+  .iconClock,
+  .iconLocation {
     margin: 0;
   }
+
   .dottedSeparator {
     width: 200px;
     margin: auto;
   }
+
   .timerContainer {
     text-align: center;
   }
+
   .pianoFlyer.homeFlyer .homeFlyer-card::before {
     bottom: 78px;
-    right: 60px;
+    right: 17%;
     width: 50px;
     height: 44px;
   }
 
   .pianoFlyer.homeFlyer .homeFlyer-card {
     padding: 50px 20% 52px;
+  }
+
+  .pianoFlyer.homeFlyer .homeFlyer-card h5 {
+    font-size: 15px;
+    max-width: 150px;
+    margin-bottom: 8px;
+  }
+
+  .pianoFlyer.homeFlyer .homeFlyer-card h5::before {
+    width: 70px;
+    height: 2px;
+    bottom: -3px;
+  }
+
+  .pianoFlyer.homeFlyer .homeFlyer-card h6 {
+    font-size: 10px;
+    line-height: 1.2;
+    margin-bottom: 4px;
+    max-width: 150px;
+  }
+
+  .pianoFlyer.homeFlyer .homeFlyer-content .homeFlyer-inner span {
+    font-size: 10px;
+    line-height: 1.2;
+    max-width: 150px;
   }
 }
 
