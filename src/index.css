@@ -1668,7 +1668,7 @@ section.cartAndError {
   margin: auto;
   background: url(../public/images/bannar-card.png) center center no-repeat;
   background-size: contain;
-  padding: 50px 70px 50px 117px;
+  padding: 50px 70px 50px 110px;
   min-height: 355px;
   display: flex;
   flex-direction: column;
@@ -2737,7 +2737,7 @@ header .buscador .search-btn {
   }
 
   .pianoFlyer.homeFlyer .homeFlyer-card {
-    padding: 50px 20% 52px;
+    padding: 50px 19% 52px;
   }
 }
 

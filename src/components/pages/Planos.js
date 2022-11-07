@@ -180,7 +180,7 @@ const Planos = () => {
     }
     setHalfPlano()
 
-  }, [])
+  }, [useId])
 
   const handleSendPay = async () => {
     if (!useCarrito.length) {
