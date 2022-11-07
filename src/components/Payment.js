@@ -65,9 +65,9 @@ const Payment = (props) => {
       }
     }, 1000);
 
-    // if (!useMinutes && !useSeconds) {
-    //   navigate('/')
-    // }
+    if (!useMinutes && !useSeconds) {
+      navigate('/')
+    }
     return () => {
       console.log("limpiando componente")
       clearInterval(sampleInterval);

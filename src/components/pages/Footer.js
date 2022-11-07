@@ -61,7 +61,7 @@ const Footer = () => {
             <div className="copyright-wrap">
                 <Container>
                     <div className="copyright-content">
-                        <p>&copy; 2022 Festentradas</p>
+                        <p>&copy; 2022 Dentralia</p>
                         <div className="privacyPolitic">
                             <a href=".">Aviso Legal</a>
                             <a href=".">Politica de privacidad</a>
