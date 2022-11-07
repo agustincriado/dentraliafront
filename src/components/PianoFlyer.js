@@ -56,8 +56,8 @@ const PianoFlyer = ({ checkout }) => {
                   <p>Experiencias</p>
                 </div>
                 <Breadcrumb>
-                  <Breadcrumb.Item href="#">Experiencias</Breadcrumb.Item>
-                  <Breadcrumb.Item active>Event Name</Breadcrumb.Item>
+                  <Breadcrumb.Item href="/">Experiencias</Breadcrumb.Item>
+                  <Breadcrumb.Item active className="breadcrumInfo">{useValues.text}</Breadcrumb.Item>
                 </Breadcrumb>
                 <div className="homeFlyer-card">
                   <h5>{useValues.text}</h5>

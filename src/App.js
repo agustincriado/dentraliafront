@@ -34,11 +34,11 @@ function App() {
           <div className='contenedor'> */}
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/events" element={<MakeEvent />} />
+            <Route path="/quienes-somos" element={<About />} />
+            <Route path="/crea-tu-evento" element={<MakeEvent />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/newsletter" element={<Newsletter />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/contacto" element={<Contact />} />
             <Route path="/evento/:id" element={<Planos />} />
             <Route path="/misdatos/:id" element={<Payment />} />
             <Route path="/gateway/:id" element={<Gateway />} />

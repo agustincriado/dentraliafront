@@ -33,11 +33,11 @@ const NavBar = () => {
                 <div className="container">
                     <ul>
                         <Link onClick={() =>handleClick("")} className={useNav === '/' ? 'active' : ''} to="/">Experiencias</Link>
-                        <Link onClick={() =>handleClick("about")} className={useNav === '/about' ? 'active' : ''} to="/about">Quiénes Somos</Link>
-                        <Link onClick={() =>handleClick("events")} className={useNav === '/events' ? 'active' : ''} to="/events">Crea Tu Evento</Link>
+                        <Link onClick={() =>handleClick("about")} className={useNav === '/quienes-somos' ? 'active' : ''} to="/quienes-somos">Quiénes Somos</Link>
+                        <Link onClick={() =>handleClick("events")} className={useNav === '/crea-tu-evento' ? 'active' : ''} to="/crea-tu-evento">Crea Tu Evento</Link>
                         <Link onClick={() =>handleClick("faq")} className={useNav === '/faq' ? 'active' : ''} to="/faq">Preguntas Frecuentes</Link>
                         <Link onClick={() =>handleClick("newsletter")} className={useNav === '/newsletter' ? 'active' : ''} to="/newsletter">Newsletter</Link>
-                        <Link onClick={() =>handleClick("contact")} className={useNav === '/contact' ? 'active' : ''} to="/contact">Contacto</Link>
+                        <Link onClick={() =>handleClick("contact")} className={useNav === '/contacto' ? 'active' : ''} to="/contacto">Contacto</Link>
                     </ul>
                 </div>
             </nav>

@@ -16,25 +16,33 @@ const Footer = () => {
                             <Col lg={4}>
                                 <div className="footer-content">
                                     <h6>Quiénes Somos</h6>
-                                    <p>Confía en Dentralia la organización y/o venta de tickets de tus eventos. Contamos con años de experiencia en el sector, y un gran know-how. Centraliza la venta de tus entradas, y controla en completo tiempo real todo tipo de estadísticas. <Link to="">Para más info.</Link></p>
+                                    <p>Confía en Dentralia la organización y/o venta de tickets de tus eventos. Contamos con años de experiencia en el sector, y un gran know-how. Centraliza la venta de tus entradas, y controla en completo tiempo real todo tipo de estadísticas. <Link to="/quienes-somos">Para más info.</Link></p>
                                 </div>
                             </Col>
                             <Col lg={4}>
                                 <div className="footer-content">
-                                    <h6>Experiencias</h6>
                                     <ul className="footer-links">
                                         <li>
-                                            <Link to="">Crea Tu Evento</Link>
+                                            <Link to="/">Experiencias</Link>
+                                        </li>
+                                    </ul>
+                                    <ul className="footer-links">
+                                        <li>
+                                            <Link to="/crea-tu-evento">Crea Tu Evento</Link>
                                         </li>
                                     </ul>
                                 </div>
                             </Col>
                             <Col lg={4}>
                                 <div className="footer-content">
-                                    <h6>Preguntas Frecuentes</h6>
                                     <ul className="footer-links">
                                         <li>
-                                            <Link to="">Contacto</Link>
+                                            <Link to="/faq">Preguntas Frecuentes</Link>
+                                        </li>
+                                    </ul>
+                                    <ul className="footer-links">
+                                        <li>
+                                            <Link to="/contacto">Contacto</Link>
                                         </li>
                                     </ul>
                                     <ul className="footer-social-links">

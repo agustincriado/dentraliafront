@@ -36,11 +36,11 @@ const SideBar = () => {
                         <CloseButton onClick={toggleSideMenu} />
                         <ul className="ul sideBar">
                             <li><Link onClick={() => handleClick("")} className={useNav === '/' ? 'active' : ''} to="/">Experiencias</Link></li>
-                            <li><Link onClick={() => handleClick("about")} className={useNav === '/about' ? 'active' : ''} to="/about">Quiénes Somos</Link></li>
-                            <li><Link onClick={() => handleClick("events")} className={useNav === '/events' ? 'active' : ''} to="/events">Crea Tu Evento</Link></li>
+                            <li><Link onClick={() => handleClick("about")} className={useNav === '/quienes-somos' ? 'active' : ''} to="/quienes-somos">Quiénes Somos</Link></li>
+                            <li><Link onClick={() => handleClick("events")} className={useNav === '/crea-tu-evento' ? 'active' : ''} to="/crea-tu-evento">Crea Tu Evento</Link></li>
                             <li><Link onClick={() => handleClick("faq")} className={useNav === '/faq' ? 'active' : ''} to="/faq">Preguntas Frecuentes</Link></li>
                             <li><Link onClick={() => handleClick("newsletter")} className={useNav === '/newsletter' ? 'active' : ''} to="/newsletter">Newsletter</Link></li>
-                            <li><Link onClick={() => handleClick("contact")} className={useNav === '/contact' ? 'active' : ''} to="/contact">Contacto</Link></li>
+                            <li><Link onClick={() => handleClick("contact")} className={useNav === '/contacto' ? 'active' : ''} to="/contacto">Contacto</Link></li>
                         </ul>
                     </Offcanvas.Body>
                 </Offcanvas>

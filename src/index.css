@@ -2237,6 +2237,7 @@ header .buscador .search-btn {
   .homeFlyer-content .homeFlyer-logo-wrap .festentradas {
     width: 117px;
     min-height: unset;
+    object-fit: contain;
   }
 
   .homeFlyer-content .homeFlyer-logo-wrap p {
@@ -2675,6 +2676,9 @@ header .buscador .search-btn {
 }
 
 @media (max-width: 375px) {
+  .breadcrumInfo {
+    max-width: 145px;
+  }
   .cartAndError {
     width: 100%;
   }
