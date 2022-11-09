@@ -249,7 +249,7 @@ const Payment = (props) => {
             <div className="form-group">
               <p>
               <input type="checkbox" id="condicionesSeguro" name="condicionesSeguro" required />
-              <label htmlFor="acceptNewsletter" id="newsletterLabel" />Al marcar esta casilla esta aceptando nuestras <Link to="/condiciones-seguro">Condiciones de seguro</Link></p>
+              <label htmlFor="condicionesSeguro" id="condicionesSeguroLabel" />Al marcar esta casilla esta aceptando nuestras <a href="/condiciones-seguro" target={"condiciones-seguro"}>Condiciones de seguro</a></p>
               <br />
             </div>
             <button className="btn btnCheckout">Realizar pago</button>

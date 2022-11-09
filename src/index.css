@@ -2749,11 +2749,12 @@ header .buscador .search-btn {
   width: 100%;
 }
 
-#acceptNewsletter {
+#acceptNewsletter, #condicionesSeguro {
   display: none;
 }
 
-#acceptNewsletter+label {
+#acceptNewsletter+label,
+#condicionesSeguro+label {
   background: url(../public/images/check-circle.svg) no-repeat;
   height: 25px;
   width: 25px;
@@ -2761,7 +2762,8 @@ header .buscador .search-btn {
   padding: 0;
 }
 
-#acceptNewsletter:checked+label {
+#acceptNewsletter:checked+label,
+#condicionesSeguro:checked+label {
   background: url(../public/images/check-circle.svg) no-repeat;
   filter: invert(33%) sepia(61%) saturate(7358%) hue-rotate(347deg) brightness(105%) contrast(113%);
   height: 25px;
