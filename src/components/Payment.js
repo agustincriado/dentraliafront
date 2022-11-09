@@ -4,6 +4,7 @@ import { useNavigate } from "react-router"
 import { getDoc, doc } from "firebase/firestore"
 import { db } from "../firebase"
 import { useMediaQuery } from 'react-responsive';
+import { Link } from 'react-router-dom';
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import CheckoutFlyer from '../components/CheckoutFlyer';
@@ -245,6 +246,12 @@ const Payment = (props) => {
               <label htmlFor="acceptNewsletter" id="newsletterLabel" />Marca esta casilla para autorizarnos a enviarte información de otros eventos que realicemos</p>
               <br />
             </div>
+            <div className="form-group">
+              <p>
+              <input type="checkbox" id="condicionesSeguro" name="condicionesSeguro" required />
+              <label htmlFor="acceptNewsletter" id="newsletterLabel" />Al marcar esta casilla esta aceptando nuestras <Link to="/condiciones-seguro">Condiciones de seguro</Link></p>
+              <br />
+            </div>
             <button className="btn btnCheckout">Realizar pago</button>
           </form>
         </section>
@@ -255,6 +262,7 @@ const Payment = (props) => {
           </div>
         </section>) : ''
         }
+        
         
       </div>
     </div>

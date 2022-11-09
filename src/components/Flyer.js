@@ -14,6 +14,7 @@ const Flyer = () => {
     'contact': 'Contacto',
     'privacy': 'Política de privacidad',
     'legal': 'Aviso legal',
+    'condiciones-seguro': 'Condiciones seguro'
   }
   const { useId } = useAux()
   const [useValues, setValues] = useState(initialValues)
@@ -26,6 +27,7 @@ const Flyer = () => {
     'contact': true,
     'privacy': true,
     'legal': true,
+    'condiciones-seguro': true,
 }
   useEffect(() => {
     console.log(PAGES[useId], useId)

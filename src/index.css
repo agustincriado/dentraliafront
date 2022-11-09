@@ -1259,10 +1259,10 @@ label#telLabel::before {
   background-color: #E1E1E1;
 }
 
-.reserve-seat .stageContainer {
+/* .reserve-seat .stageContainer {
   opacity: 0;
   padding: 0;
-}
+} */
 
 .reserve-seat .Plano {
   padding: 0 15px;

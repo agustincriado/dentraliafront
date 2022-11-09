@@ -21,6 +21,7 @@ import NotFound from './components/pages/NotFound';
 import { AuxProvider } from './context/auxContext';
 import { QueryContextProvider } from './context/QueryContext';
 import Flyer from './components/Flyer';
+import Seguro from './components/pages/Seguro';
 function App() {
   const isDesktop = useMediaQuery({
     query: '(min-width: 1000px)'
@@ -44,6 +45,7 @@ function App() {
             <Route path="/gateway/:id" element={<Gateway />} />
             <Route path="/aviso-legal" element={<Legal />} />
             <Route path="/politica-de-privacidad" element={<Privacy />} />
+            <Route path="/condiciones-seguro" element={<Seguro />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           {/* </div> */}
