@@ -227,28 +227,6 @@ const Payment = (props) => {
               <label htmlFor="acceptNewsletter" id="newsletterLabel" />Marca esta casilla para autorizarnos a enviarte información de otros eventos que realicemos</p>
               <br />
             </div>
-            <div className="form-group">
-              {
-                usePayload.filter(item => item.seguro).length  
-                ? <>
-                <strong>¿Qué está asegurado?</strong>
-            <ul>
-                <li>Cancelación voluntaria antes de 24 horas del inicio del evento</li>
-                <li>Anulación hasta un límite de 200€ por persona</li>
-                <li>Enfermedad grave o fallecimiento del asegurado o de sus familiares</li>
-                <li>Accidente corporal grave del asegurado o de sus familiares</li>
-                <li>Perjuicios graves en la residencia habitual o local profesional del asegurado</li>
-                <li>Despido laboral</li>
-                <li>Citación en un procedimiento judicial</li>
-                <li>Avería o accidente del vehículo propiedad del asegurado</li>
-                <li>Traslado geográfico del puesto de trabajo</li>
-                <li>Demora de la llegada del medio de transporte público que utilice el asegurado para llegar al evento</li>
-                <li>Se puede ejercer el derecho a devolución antes del inicio del espectáculo, una vez haya empezado ya no se puede hacer uso de él</li>
-            </ul>
-                </>: ''
-              }
-            
-            </div>
             <button className="btn btnCheckout">Realizar pago</button>
           </form>
         </section>

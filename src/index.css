@@ -1199,7 +1199,7 @@ label#telLabel::before {
 
 .homeFlyer img {
   height: 100%;
-  max-height: 650px;
+  max-height: 450px;
   width: 100%;
   object-fit: cover;
 }
@@ -1795,7 +1795,7 @@ header .buscador .search-btn {
   }
 
   .homeFlyer .homeFlyer-content .homeFlyer-inner {
-    padding: 90px 0 55px;
+    padding: 40px 0 55px;
   }
 
   .homeFlyer .homeFlyer-content .homeFlyer-inner h4 {
@@ -2787,4 +2787,28 @@ img.checkoutImage {
 }
 .btnPagar {
   background: linear-gradient(109.3deg, #FF1E1E 5.63%, #E90067 97.66%);
+}
+tool-tip {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+
+  box-shadow: 0 0 10px #0e0e0e;
+  padding: .5rem 1rem;
+  font-size: .8rem;
+  border-radius: 8px;
+
+  opacity: 0;
+  transition: opacity .1s ease;
+  max-width: 520px;
+  background-color: #fff;
+}
+
+tool-tip li {
+  margin: .5rem 0;
+}
+
+picture {
+  cursor: pointer;
 }

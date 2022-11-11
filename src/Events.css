@@ -75,7 +75,12 @@
 .eventCard .eventData {
     padding: 16px 24px 27px;
 }
-
+.eventData {
+    flex-grow: 1;
+    flex-flow: column;
+    display: flex;
+    justify-content: space-between;
+}
 .eventCard .eventData .eventDate {
     font-family: 'Inter';
     font-weight: 700;

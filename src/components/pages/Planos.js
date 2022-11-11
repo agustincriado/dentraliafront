@@ -5,9 +5,10 @@ import ReactHtmlParser from 'react-html-parser'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAux } from '../../context/auxContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faArrowRight, faMagnifyingGlassMinus, faMagnifyingGlassPlus, faShoppingCart, faDeleteLeft } from '@fortawesome/free-solid-svg-icons';
+import { faDeleteLeft } from '@fortawesome/free-solid-svg-icons';
 import { Modal, Button, Image } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons"
 import PianoFlyer from '../PianoFlyer';
 
 const Planos = () => {
@@ -26,6 +27,7 @@ const Planos = () => {
   const [showCart, setShowCart] = useState(false)
   const [activeBtn, setActiveBtn] = useState(true)
   const [cartErr, setCartErr] = useState([])
+  const [useOpacity, setOpacity] = useState(0)
   const location = useLocation();
 
   useEffect(() => {
@@ -392,6 +394,26 @@ const Planos = () => {
                             checked={item.seguro ? item.seguro : false}
                             onChange={() => handleSeguro(item.dbstring, index)}
                           />
+                          <picture className='mx-2' onClick={() => setOpacity(!useOpacity)} onMouseEnter={() => setOpacity(1)} onMouseLeave={() =>setOpacity(0)}>
+                          <FontAwesomeIcon icon={faCircleInfo} />
+                            <tool-tip role="tooltip" style={{opacity: useOpacity}}>
+                              <strong>¿Qué está asegurado?</strong>
+                              <ul>
+                                <li>Cancelación voluntaria antes de 24 horas del inicio del evento</li>
+                                <li>Anulación hasta un límite de 200€ por persona</li>
+                                <li>Enfermedad grave o fallecimiento del asegurado o de sus familiares</li>
+                                <li>Accidente corporal grave del asegurado o de sus familiares</li>
+                                <li>Perjuicios graves en la residencia habitual o local profesional del asegurado</li>
+                                <li>Despido laboral</li>
+                                <li>Citación en un procedimiento judicial</li>
+                                <li>Avería o accidente del vehículo propiedad del asegurado</li>
+                                <li>Traslado geográfico del puesto de trabajo</li>
+                                <li>Demora de la llegada del medio de transporte público que utilice el asegurado para llegar al evento</li>
+                                <li>Se puede ejercer el derecho a devolución antes del inicio del espectáculo, una vez haya empezado ya no se puede hacer uso de él</li>
+                              </ul>
+                            </tool-tip>
+                          </picture>
+            
                         </td>
                         <td>{Intl.NumberFormat('es-es', { style: 'currency', currency: 'EUR' }).format((Number(item.zonaPrice) + Number(item.zonaGDG)))}</td>
                       </tr>
@@ -415,6 +437,28 @@ const Planos = () => {
               </>
             )}
           </div>
+          {
+            !isDesktop ? (<div className="mobileInsurance">
+              {useCarrito.filter(item => item.seguro).length ? (<>
+                            <strong>¿Qué está asegurado?</strong>
+                              <ul>
+                                <li>Cancelación voluntaria antes de 24 horas del inicio del evento</li>
+                                <li>Anulación hasta un límite de 200€ por persona</li>
+                                <li>Enfermedad grave o fallecimiento del asegurado o de sus familiares</li>
+                                <li>Accidente corporal grave del asegurado o de sus familiares</li>
+                                <li>Perjuicios graves en la residencia habitual o local profesional del asegurado</li>
+                                <li>Despido laboral</li>
+                                <li>Citación en un procedimiento judicial</li>
+                                <li>Avería o accidente del vehículo propiedad del asegurado</li>
+                                <li>Traslado geográfico del puesto de trabajo</li>
+                                <li>Demora de la llegada del medio de transporte público que utilice el asegurado para llegar al evento</li>
+                                <li>Se puede ejercer el derecho a devolución antes del inicio del espectáculo, una vez haya empezado ya no se puede hacer uso de él</li>
+                              </ul>
+                            </>)
+                            : ('')}
+            </div>
+            ) : ('')
+          }
           <div className="cartActions">
             {/* {isDesktop ? (
               <> */}
