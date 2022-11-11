@@ -5,6 +5,7 @@ import Flyer from "../Flyer"
 const Seguro = () => {
     const { useId, setId } = useAux()
     useEffect(() => {
+        window.scrollTo(0, 0)
         if(!useId) setId('condiciones-seguro')
     }, [useId])
     return (

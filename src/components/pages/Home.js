@@ -9,6 +9,7 @@ const Home = () => {
     const { setId, setMinutes, setSeconds } = useAux()
 
     useEffect(() => {
+        window.scrollTo(0, 0)
         setId('')
         setMinutes('08')
         setSeconds('59')

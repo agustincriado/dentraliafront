@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 const Contact = () => {
     const { useId, setId } = useAux()
     useEffect(() => {
+        window.scrollTo(0, 0)
         if(!useId) setId('contact')
     }, [useId])
 

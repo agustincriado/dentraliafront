@@ -8,6 +8,7 @@ import { useAux } from '../../context/auxContext';
 const About = () => {
     const { useId, setId } = useAux();
     useEffect(() => {
+        window.scrollTo(0, 0)
         if(!useId) setId('about')
     }, [useId])
     return (

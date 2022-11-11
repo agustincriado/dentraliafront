@@ -29,7 +29,7 @@ const Planos = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log('Calling to useEffect', useId, usePlano)
+    window.scrollTo(0, 0)
     async function CheckData() {
     if (useId === '') {
       console.log("Path", location.pathname)

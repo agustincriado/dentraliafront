@@ -5,8 +5,10 @@ import Flyer from "../Flyer"
 const Privacy = () => {
     const { useId, setId } = useAux()
     useEffect(() => {
+        window.scrollTo(0, 0)
         if(!useId) setId('privacy')
     }, [useId])
+
  return (
     <>
     <Flyer />

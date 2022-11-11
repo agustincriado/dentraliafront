@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 const Newsletter = () => {
     const { useId, setId } = useAux()
     useEffect( () => {
+        window.scrollTo(0, 0)
         if(!useId) setId('newsletter')
     })
     return (

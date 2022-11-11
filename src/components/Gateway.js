@@ -1,17 +1,17 @@
 import { db } from "../firebase"
 import { useAux } from "../context/auxContext"
 import { useNavigate } from "react-router"
-import { useEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useState } from "react"
 import { getDoc, doc } from "firebase/firestore"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCreditCard } from "@fortawesome/free-regular-svg-icons"
+import { faMobileAlt } from "@fortawesome/free-solid-svg-icons"
 import Flyer from '../components/Flyer';
 import CheckoutFlyer from "./CheckoutFlyer"
 const Gateway = () => {
   const initialValues = {
     webImage: '',
   }
-
   const navigate = useNavigate()
   const {
     useId,
@@ -24,6 +24,7 @@ const Gateway = () => {
   const [ useResponse, setResponse ] = useState('')
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     if (useId === '') navigate('/404')
     const fullEvent = async () => {
       console.log(useId, usePayload, 'a')
@@ -92,6 +93,7 @@ const Gateway = () => {
 
   const convertedDate = useEvent.unixDateStart !== '' ? convertUnix(useEvent.unixDateStart) : ''
   const uriRedsys = 'https://dentraliaserver.herokuapp.com/api/v1'//'https://sis-t.redsys.es:25443/sis/realizarPago'
+  const uriRedsysBizum = 'https://dentraliaserver.herokuapp.com/api/v1/bizum'//'https://sis-t.redsys.es:25443/sis/realizarPago'
   const handleSubmit = async (e) => {
     e.preventDefault()
     console.log(usePayload)
@@ -148,10 +150,16 @@ const Gateway = () => {
             {/* <div className="normativaAnchor">
               Realizando la compra aceptas la <a href="/">normativa referente al Covid-19</a>
             </div> */}
-            <form action={uriRedsys} method="POST" onSubmit={handleSubmit}>
-              <input type="hidden" name="payload" value={JSON.stringify(usePayload)}></input>
-              <button className="btn btn-primary btn-lg mb-xlg btnPagar"><FontAwesomeIcon icon={faCreditCard} className="faCreditCard" />Pagar con tarjeta ({Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice)})</button>
-            </form>
+            <div className="d-flex mb-2">
+              <form className="mx-2" action={uriRedsys} method="POST" onSubmit={handleSubmit}>
+                <input type="hidden" name="payload" value={JSON.stringify(usePayload)}></input>
+                <button className="btn btn-primary btn-lg mb-xlg btnPagar"><FontAwesomeIcon icon={faCreditCard} className="faCreditCard" />Pagar con tarjeta ({Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice)})</button>
+              </form>
+              <form action={uriRedsysBizum} method="POST" onSubmit={handleSubmit}>
+                <input type="hidden" name="payload" value={JSON.stringify(usePayload)}></input>
+                <button className="btn btn-primary btn-lg mb-xlg btnPagar"><FontAwesomeIcon icon={faMobileAlt} className="faMobileAlt" /> Pagar con Bizum ({Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice)})</button>
+              </form>
+            </div>
           </section>
           <section className="imageCheckout">
             <div className="col-md-5">
