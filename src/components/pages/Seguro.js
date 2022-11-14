@@ -6,6 +6,8 @@ const Seguro = () => {
     const { useId, setId } = useAux()
     useEffect(() => {
         window.scrollTo(0, 0)
+      })
+    useEffect(() => {
         if(!useId) setId('condiciones-seguro')
     }, [useId])
     return (

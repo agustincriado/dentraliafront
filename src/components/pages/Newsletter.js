@@ -3,8 +3,10 @@ import { useAux } from '../../context/auxContext';
 import { useEffect } from 'react';
 const Newsletter = () => {
     const { useId, setId } = useAux()
-    useEffect( () => {
+    useEffect(() => {
         window.scrollTo(0, 0)
+      })
+    useEffect( () => {
         if(!useId) setId('newsletter')
     })
     return (

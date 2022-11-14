@@ -1,7 +1,11 @@
 import { Container, Col, Row, Image } from "react-bootstrap"
 import { Link } from 'react-router-dom'
+import { useAux } from "../../context/auxContext"
 
 const Footer = () => {
+    const { setId } = useAux();
+
+    const handleClick = (param) => setId(param)
     return (
         <footer>
             <div className="mainFooter-wrap">
@@ -10,7 +14,7 @@ const Footer = () => {
                         <Row>
                             <Col sm={12}>
                                 <div className="footer-logo">
-                                    <Link to=""><Image src="/images/dentralia-logo.png" /></Link>
+                                    <Link onClick={() => handleClick('')} to="/"><Image src="/images/dentralia-logo.png" /></Link>
                                 </div>
                             </Col>
                             <Col lg={4}>
@@ -23,12 +27,12 @@ const Footer = () => {
                                 <div className="footer-content">
                                     <ul className="footer-links">
                                         <li>
-                                            <Link to="/">Experiencias</Link>
+                                            <Link onClick={() => handleClick('')} to="/">Experiencias</Link>
                                         </li>
                                     </ul>
                                     <ul className="footer-links">
                                         <li>
-                                            <Link to="/crea-tu-evento">Crea Tu Evento</Link>
+                                            <Link onClick={() => handleClick('events')} to="/crea-tu-evento">Crea Tu Evento</Link>
                                         </li>
                                     </ul>
                                 </div>
@@ -37,12 +41,12 @@ const Footer = () => {
                                 <div className="footer-content">
                                     <ul className="footer-links">
                                         <li>
-                                            <Link to="/faq">Preguntas Frecuentes</Link>
+                                            <Link onClick={() => handleClick('faq')} to="/faq">Preguntas Frecuentes</Link>
                                         </li>
                                     </ul>
                                     <ul className="footer-links">
                                         <li>
-                                            <Link to="/contacto">Contacto</Link>
+                                            <Link onClick={() => handleClick('contact')} to="/contacto">Contacto</Link>
                                         </li>
                                     </ul>
                                     <ul className="footer-social-links">

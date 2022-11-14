@@ -50,7 +50,7 @@ const Planos = () => {
           evento: idOBJ.evento,
           plano: eventInfo.planoZonas,
           eventName: eventInfo.name,
-          eventDate: Days[eventDay] + "., " + Months[eventMonth] + "., " + eventInfo.hourStart,
+          eventDate: Days[eventDay] + ", " + Months[eventMonth] + ", " + eventInfo.hourStart,
           eventLocation: eventInfo.recintoName
       })
       }
@@ -375,7 +375,25 @@ const Planos = () => {
                       <th>Zona</th>
                       <th>Fila y Asiento</th>
                       <th>Seguro</th>
-                      <th>Asegurar entrada</th>
+                      <th>Asegurar entrada<picture className='mx-2' onClick={() => setOpacity(!useOpacity)} onMouseEnter={() => setOpacity(1)} onMouseLeave={() =>setOpacity(0)}>
+                          <FontAwesomeIcon icon={faCircleInfo} />
+                            <tool-tip role="tooltip" style={{opacity: useOpacity}}>
+                              <strong>¿Qué está asegurado?</strong>
+                              <ul>
+                                <li>Cancelación voluntaria antes de 24 horas del inicio del evento</li>
+                                <li>Anulación hasta un límite de 200€ por persona</li>
+                                <li>Enfermedad grave o fallecimiento del asegurado o de sus familiares</li>
+                                <li>Accidente corporal grave del asegurado o de sus familiares</li>
+                                <li>Perjuicios graves en la residencia habitual o local profesional del asegurado</li>
+                                <li>Despido laboral</li>
+                                <li>Citación en un procedimiento judicial</li>
+                                <li>Avería o accidente del vehículo propiedad del asegurado</li>
+                                <li>Traslado geográfico del puesto de trabajo</li>
+                                <li>Demora de la llegada del medio de transporte público que utilice el asegurado para llegar al evento</li>
+                                <li>Se puede ejercer el derecho a devolución antes del inicio del espectáculo, una vez haya empezado ya no se puede hacer uso de él</li>
+                              </ul>
+                            </tool-tip>
+                          </picture></th>
                       <th>Precio asiento</th>
                     </tr>
                   </thead>
@@ -394,26 +412,6 @@ const Planos = () => {
                             checked={item.seguro ? item.seguro : false}
                             onChange={() => handleSeguro(item.dbstring, index)}
                           />
-                          <picture className='mx-2' onClick={() => setOpacity(!useOpacity)} onMouseEnter={() => setOpacity(1)} onMouseLeave={() =>setOpacity(0)}>
-                          <FontAwesomeIcon icon={faCircleInfo} />
-                            <tool-tip role="tooltip" style={{opacity: useOpacity}}>
-                              <strong>¿Qué está asegurado?</strong>
-                              <ul>
-                                <li>Cancelación voluntaria antes de 24 horas del inicio del evento</li>
-                                <li>Anulación hasta un límite de 200€ por persona</li>
-                                <li>Enfermedad grave o fallecimiento del asegurado o de sus familiares</li>
-                                <li>Accidente corporal grave del asegurado o de sus familiares</li>
-                                <li>Perjuicios graves en la residencia habitual o local profesional del asegurado</li>
-                                <li>Despido laboral</li>
-                                <li>Citación en un procedimiento judicial</li>
-                                <li>Avería o accidente del vehículo propiedad del asegurado</li>
-                                <li>Traslado geográfico del puesto de trabajo</li>
-                                <li>Demora de la llegada del medio de transporte público que utilice el asegurado para llegar al evento</li>
-                                <li>Se puede ejercer el derecho a devolución antes del inicio del espectáculo, una vez haya empezado ya no se puede hacer uso de él</li>
-                              </ul>
-                            </tool-tip>
-                          </picture>
-            
                         </td>
                         <td>{Intl.NumberFormat('es-es', { style: 'currency', currency: 'EUR' }).format((Number(item.zonaPrice) + Number(item.zonaGDG)))}</td>
                       </tr>
@@ -427,13 +425,6 @@ const Planos = () => {
                   <span>No hay elementos en el carrito</span>
                   <Image src="/images/cart-is-empty.png" />
                 </div>
-                {/* <button className="btn btn-primary" onClick={handleSendPay}>
-              Generar entradas Total {useCarrito.length > 0 ? Intl.NumberFormat('es-ES', {style:'currency',currency:'EUR'}).format(useCarrito.reduce((a, b) => {
-                if (b.seguro) {
-                  return a + b.fullPrice
-              } else return a + b.sinSeguro
-              }, 0)) : 'precio'}
-            </button> */}
               </>
             )}
           </div>

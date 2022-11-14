@@ -6,6 +6,8 @@ const Privacy = () => {
     const { useId, setId } = useAux()
     useEffect(() => {
         window.scrollTo(0, 0)
+      })
+    useEffect(() => {
         if(!useId) setId('privacy')
     }, [useId])
 

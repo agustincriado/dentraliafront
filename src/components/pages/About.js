@@ -9,6 +9,8 @@ const About = () => {
     const { useId, setId } = useAux();
     useEffect(() => {
         window.scrollTo(0, 0)
+      })
+    useEffect(() => {
         if(!useId) setId('about')
     }, [useId])
     return (

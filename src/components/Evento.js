@@ -30,7 +30,7 @@ const Evento = (evento) => {
                 id={evento.eventID}
                 data-planoid={evento.eventPlano}
                 data-eventname={evento.eventName}
-                data-eventdate={Days[eventDay] + "., " + Months[eventMonth] + "., " + evento.eventHour}
+                data-eventdate={Days[eventDay] + ", " + Months[eventMonth] + ", " + evento.eventHour}
                 data-eventlocation={evento.eventPlace + ' | ' + evento.eventProvince}
                 onClick={(e) => handleClick(e)}
             >
