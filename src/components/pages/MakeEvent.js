@@ -15,6 +15,8 @@ const MakeEvent = () => {
     useEffect(() => {
         if(!useId) setId('events')
     }, [useId])
+
+    const handleClick = (param) => setId(param)
     return (
     <>
         <Flyer />
@@ -52,8 +54,8 @@ const MakeEvent = () => {
                 <div className='contactUs'>
                     <div className='form-control'>
                         <h2>Escríbenos y cuéntanos tu evento</h2>
-                        <Link to='/contact' className='anchor'>hola@festentradas.com</Link>
-                        <Link to='/contact' className='buttonAnchor'><button className='btn btn-primary'>Contáctanos</button></Link>
+                        <Link onClick={() => handleClick('contact')} to='/contacto' className='anchor'>hola@festentradas.com</Link>
+                        <Link onClick={() => handleClick('contact')} to='/contacto' className='buttonAnchor'><button className='btn btn-primary'>Contáctanos</button></Link>
                     </div>
                 </div>
             </div>
