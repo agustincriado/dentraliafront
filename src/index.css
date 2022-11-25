@@ -2790,7 +2790,7 @@ img.checkoutImage {
 }
 tool-tip {
   position: absolute;
-  z-index: 1;
+  z-index: 5;
   pointer-events: none;
   user-select: none;
 
