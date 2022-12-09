@@ -25,6 +25,7 @@ const Payment = (props) => {
   // const [useSeconds, setSeconds] = useState('00')
   const [useEvent, setEvent] = useState({ evento: '' })
   const [useNewsletter, setNewsletter] = useState(0)
+  const [useDiscount, setDiscount] = useState('')
   const [useGdgList, setGdgList] = useState([0, 0])
   const navigate = useNavigate()
 
@@ -71,7 +72,6 @@ const Payment = (props) => {
       navigate('/')
     }
     return () => {
-      console.log("limpiando componente")
       clearInterval(sampleInterval);
     };
 
@@ -156,7 +156,19 @@ const Payment = (props) => {
 
   const toggleNewsletter = () => setNewsletter(!useNewsletter)
 
+  const handleChange = (e) => {
+    const { value } = e.target
+    setDiscount(value)
+  }
 
+  const handleDiscount = async () => {
+    const event = await getDoc(doc(db, 'Eventos', useId.evento))
+    const descuentos = event.data().descuentos
+    const exist = descuentos.filter(descuento => {
+      if(descuento.descuentoCheck && descuento.descuentoName === useDiscount) return descuento
+    })
+    setId({...useId, descuento: exist[0]})
+  }
   return (<>
     <CheckoutFlyer />
     <div className='contenedorCheckout'>
@@ -226,6 +238,23 @@ const Payment = (props) => {
               <input type="checkbox" id="acceptNewsletter" name="acceptNewsletter" onClick={(e) => toggleNewsletter(e)} />
               <label htmlFor="acceptNewsletter" id="newsletterLabel" />Marca esta casilla para autorizarnos a enviarte información de otros eventos que realicemos</p>
               <br />
+            </div>
+            <div className="form-group dual">
+              <label id="discountLabel" htmlFor="discount" className="col-form-label">C&oacute;digo de descuento</label>
+              <input 
+                type="text" 
+                placeholder="Codigo"
+                className="form-control"
+                id="discountCode"
+                required={true}
+                aria-required="true"
+                onChange={handleChange}
+                value={useDiscount}
+              />
+            </div>
+            <div className="form-group dual d-flex flex-row">
+              <button id="btnDiscount" className="btn btn-success " onClick={handleDiscount}>{useId.descuento ? 'Descuento Aplicado' : 'Aplicar descuento'}</button>
+              <label id="discountApplied" className={useId.descuento ? 'active' : ''}></label>
             </div>
             <button className="btn btnCheckout">Realizar pago</button>
           </form>

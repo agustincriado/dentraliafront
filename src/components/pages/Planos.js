@@ -13,6 +13,10 @@ import PianoFlyer from '../PianoFlyer';
 
 const Planos = () => {
   const initialValues = {
+    plano: `<div style="display:flex;justify-content:center;align-items:center;width: 1600px;">
+    <span style="color:#000;font-size:32px;font-family:'Baloo 2';font-weight:700;">Aun no hemos subido el plano</span>
+    <img src="/images/cart-is-empty.png">
+    </div>`,
     zonas: ''
   }
   const isDesktop = useMediaQuery({
@@ -136,6 +140,10 @@ const Planos = () => {
   useEffect(() => {
     async function retrievePlano() {
       console.log("calling retrieve plano")
+      if(!useId.plano) {
+        setPlano(initialValues)
+        return
+      }
       const planoQuery = await getDoc(doc(db, 'Eventos', useId.evento, 'PlanoZonas', useId.plano))
       const planoRetrieved = planoQuery.data()
       setPlano(planoRetrieved)

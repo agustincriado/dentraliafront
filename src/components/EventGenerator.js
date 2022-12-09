@@ -8,29 +8,14 @@ const EventGenerator = () => {
     const { useQuery } = useContext(QueryContext)
 
     const [useEvents, setEvents] = useState([])
-    useEffect(
-        () => {
-            // async function callEvents() {
-            //     let queryPath = ''
-            // useQuery === '' || useQuery === []
-            //     ? queryPath = query(collection(db, 'Eventos'), where("state", "==", "Activo"), orderBy('unixDateStart', 'asc'))
-            //     : queryPath = query(collection(db, 'Eventos'), where("searchData", "array-contains", useQuery), orderBy('name', 'asc'))
-            // const querySnapshot = await getDocs(queryPath)
-            // querySnapshot.forEach(doc => {
-            //     console.log(doc.data())
-            //     setEvents(querySnapshot.docs.map(doc => {
-            //         const task = doc.data()
-            //         task.id = doc.id
-            //         return task
-            //     }))
-            // })
-            // }
-            // callEvents()
-            // Use this in case you cant get the events properly
+    useEffect(() => {
+        async function retrieveEvents() {
             let queryPath = ''
             useQuery === '' || useQuery === []
                 ? queryPath = query(collection(db, 'Eventos'), where("state", "==", "Activo"), orderBy('unixDateStart', 'asc'))
                 : queryPath = query(collection(db, 'Eventos'), where("searchData", "array-contains", useQuery), orderBy('name', 'asc'))
+            // const documents = await getDocs(queryPath)
+            // documents.forEach(querySnapshot => {
             onSnapshot((queryPath), querySnapshot => {
                 setEvents(querySnapshot.docs.map(doc => {
                     const task = doc.data()
@@ -39,7 +24,8 @@ const EventGenerator = () => {
                 }))
             })
         }
-        , [useQuery])
+        retrieveEvents()
+    }, [useQuery])
 
     return (
         useEvents.map(evento => {

@@ -33,16 +33,13 @@ const Gateway = () => {
       setEvent(task.data())
     }
     if (useId) fullEvent()
-
     console.log(usePayload)
   }, [usePayload])
 
   useEffect(() => {
     let sampleInterval = setInterval(() => {
       if (Number(useSeconds) > 0) {
-        console.log("number")
         const newNumber = Number(useSeconds) - 1
-        console.log(newNumber, "newSecond")
         setSeconds(newNumber);
       }
       if (Number(useSeconds) === 0) {
@@ -95,8 +92,10 @@ const Gateway = () => {
   const uriRedsys = 'https://dentraliaserver.herokuapp.com/api/v1'//'https://sis-t.redsys.es:25443/sis/realizarPago'
   const uriRedsysBizum = 'https://dentraliaserver.herokuapp.com/api/v1/bizum'//'https://sis-t.redsys.es:25443/sis/realizarPago'
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    console.log(usePayload)
+    e.preventDefault() 
+    if (useId.descuento.descuentoCheck) {
+      usePayload.totalPrice = usePayload.totalPrice - useId.descuento.descuentoPrice
+    }
     const getResponse = await fetch('https://dentraliaserver.herokuapp.com/api/v1', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -122,7 +121,9 @@ const Gateway = () => {
               </strong>
             </h1>
             <h6 className="eventSubtittle">{useEvent.name !== '' ? convertedDate.day + ' ' + convertedDate.date + ' @ ' + useEvent.recintoName + ' en ' + useEvent.province + ' (' + PUBLICO[useEvent.publico] + ')' : ''}</h6>
-            <h6 className="eventDetailed"><b>VAS A REALIZAR UN PAGO POR IMPORTE DE <strong className="ticketData">"{Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload.totalPrice)}"</strong> CORRESPONDIENTE AL EVENTO DEL DÍA <strong className="ticketData">"{convertedDate.date}"</strong> EN <strong className="ticketData">{useEvent.recintoName}</strong>. PARA TU(S) <strong className="ticketData">"{usePayload.quantity}"</strong> ENTRADA(S) <strong className="ticketData">"
+            <h6 className="eventDetailed"><b>VAS A REALIZAR UN PAGO POR IMPORTE DE <strong className="ticketData">"{useId.descuento.descuentoCheck 
+              ? Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload.totalPrice - useId.descuento.descuentoPrice) 
+              : Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice) }"</strong> CORRESPONDIENTE AL EVENTO DEL DÍA <strong className="ticketData">"{convertedDate.date}"</strong> EN <strong className="ticketData">{useEvent.recintoName}</strong>. PARA TU(S) <strong className="ticketData">"{usePayload.quantity}"</strong> ENTRADA(S) <strong className="ticketData">"
               {
                 usePayload ? usePayload.carrito.map(ticket => ticket.zona) : ''
               }"</strong></b></h6>
@@ -133,7 +134,9 @@ const Gateway = () => {
               <li>Tel&eacute;fono: {usePayload?.cliente?.tel}</li>
               <li>Cantidad: {usePayload?.quantity}</li>
               <li>Precio unitario: {Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.unitPrice)}</li>
-              <li>Precio total: {Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice)}</li>
+              <li>Precio total: {useId.descuento.descuentoCheck 
+              ? Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload.totalPrice - useId.descuento.descuentoPrice) 
+              : Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice) }</li>
             </ul>
 
             <b>TU(S) ASIENTO(S) SELECCIONADO(S) SON:</b>
@@ -153,11 +156,15 @@ const Gateway = () => {
             <div className="d-flex mb-2">
               <form className="mx-2" action={uriRedsys} method="POST" onSubmit={handleSubmit}>
                 <input type="hidden" name="payload" value={JSON.stringify(usePayload)}></input>
-                <button className="btn btn-primary btn-lg mb-xlg btnPagar"><FontAwesomeIcon icon={faCreditCard} className="faCreditCard" />Pagar con tarjeta ({Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice)})</button>
+                <button className="btn btn-primary btn-lg mb-xlg btnPagar"><FontAwesomeIcon icon={faCreditCard} className="faCreditCard" />Pagar con tarjeta ({useId.descuento.descuentoCheck 
+              ? Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload.totalPrice - useId.descuento.descuentoPrice) 
+              : Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice) })</button>
               </form>
               <form action={uriRedsysBizum} method="POST" onSubmit={handleSubmit}>
                 <input type="hidden" name="payload" value={JSON.stringify(usePayload)}></input>
-                <button className="btn btn-primary btn-lg mb-xlg btnPagar"><FontAwesomeIcon icon={faMobileAlt} className="faMobileAlt" /> Pagar con Bizum ({Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice)})</button>
+                <button className="btn btn-primary btn-lg mb-xlg btnPagar"><FontAwesomeIcon icon={faMobileAlt} className="faMobileAlt" /> Pagar con Bizum ({useId.descuento.descuentoCheck 
+              ? Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload.totalPrice - useId.descuento.descuentoPrice) 
+              : Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice) })</button>
               </form>
             </div>
           </section>

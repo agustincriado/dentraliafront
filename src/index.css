@@ -979,7 +979,8 @@ strong.ticketData {
   color: #BEBEBE;
 }
 
-.formPayment input {
+.formPayment input,
+input#discountCode {
   background-color: #fff;
   border: solid 2px #DADADA;
   box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
@@ -988,7 +989,8 @@ strong.ticketData {
   height: 60px;
 }
 
-.formPayment label {
+.formPayment label, 
+label#discountLabel {
   position: relative;
   color: #000;
   font-family: 'Inter';
@@ -2760,6 +2762,18 @@ header .buscador .search-btn {
   width: 25px;
   display: inline-block;
   padding: 0;
+}
+#discountApplied.active {
+  background: url(../public/images/check-circle.svg) no-repeat;
+  filter: invert(33%) sepia(61%) saturate(7358%) hue-rotate(347deg) brightness(105%) contrast(113%);
+  height: 25px;
+  width: 25px;
+  display: inline-block;
+  padding: 0;
+  margin: auto;
+}
+#btnDiscount {
+  margin: auto
 }
 
 #acceptNewsletter:checked+label,
