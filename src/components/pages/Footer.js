@@ -20,7 +20,7 @@ const Footer = () => {
                             <Col lg={4}>
                                 <div className="footer-content">
                                     <h6>Quiénes Somos</h6>
-                                    <p>Confía en Dentralia la organización y/o venta de tickets de tus eventos. Contamos con años de experiencia en el sector, y un gran know-how. Centraliza la venta de tus entradas, y controla en completo tiempo real todo tipo de estadísticas. <Link to="/quienes-somos">Para más info.</Link></p>
+                                    <p>Confía en Dentralia la organización y/o venta de tickets de tus eventos. Contamos con años de experiencia en el sector, y un gran know-how. Centraliza la venta de tus entradas, y controla en completo tiempo real todo tipo de estadísticas. <Link onClick={() => handleClick('')} to="/quienes-somos">Para más info.</Link></p>
                                 </div>
                             </Col>
                             <Col lg={4}>

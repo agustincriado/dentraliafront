@@ -13,9 +13,14 @@ import PianoFlyer from '../PianoFlyer';
 
 const Planos = () => {
   const initialValues = {
-    plano: `<div style="display:flex;justify-content:center;align-items:center;width: 1600px;">
-    <span style="color:#000;font-size:32px;font-family:'Baloo 2';font-weight:700;">Aun no hemos subido el plano</span>
-    <img src="/images/cart-is-empty.png">
+    plano: `
+    <div class="entradasCart-btn-wrap planoWrap">
+      <div class="entradasCart">
+        <div class="emptyCard">
+          <span>Aun no hemos subido el plano</span>
+          <img src="/images/cart-is-empty.png">
+        </div>
+      </div>
     </div>`,
     zonas: ''
   }

@@ -1334,6 +1334,10 @@ section.cartAndError {
   margin: 0 -15px;
   padding: 50px 0 120px;
 }
+.entradasCart-btn-wrap.planoWrap {
+  width: 1600px;
+  justify-content: center;
+}
 
 .entradasCart-btn-wrap .entradasCart {
   padding: 0 15px;
