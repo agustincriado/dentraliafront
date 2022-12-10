@@ -13,9 +13,13 @@ const Evento = (evento) => {
             plano: e.target.dataset.planoid,
             eventName: e.target.dataset.eventname,
             eventDate: e.target.dataset.eventdate,
-            eventLocation: e.target.dataset.eventlocation
+            eventLocation: e.target.dataset.eventlocation,
+            descuento: {
+                descuentoCheck: false,
+                descuentoName: '',
+                descuentoPrice: ''
+            }
         })
-        console.log(e.target.id, "e.target.id")
         navigate('/evento/' + e.target.id)
     }
     const dateObject = new Date(evento.eventUnixDate * 1000)

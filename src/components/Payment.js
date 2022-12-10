@@ -46,16 +46,14 @@ const Payment = (props) => {
   useEffect(() => {
     window.scrollTo(0, 0)
     if (!useId) navigate('/404')
-    console.log(usePayload)
+    console.log(useId)
   }, [useId])
 
 
   useEffect(() => {
     let sampleInterval = setInterval(() => {
       if (Number(useSeconds) > 0) {
-        console.log("number")
         const newNumber = Number(useSeconds) - 1
-        console.log(newNumber, "newSecond")
         setSeconds(newNumber);
       }
       if (Number(useSeconds) === 0) {
@@ -134,7 +132,13 @@ const Payment = (props) => {
       }, 0),
       info: usePayload.map(obj => obj.seatInfo),
     }
-
+    if (!useId.descuento) {
+      setId({...useId, descuento: {
+        descuentoCheck: false,
+        descuentoName: '',
+        descuentoPrice: ''
+      }})
+    }
     setPayload(payload)
     navigate('/gateway/' + useId.evento)
   }
@@ -246,15 +250,13 @@ const Payment = (props) => {
                 placeholder="Codigo"
                 className="form-control"
                 id="discountCode"
-                required={true}
-                aria-required="true"
                 onChange={handleChange}
                 value={useDiscount}
               />
             </div>
             <div className="form-group dual d-flex flex-row">
-              <button id="btnDiscount" className="btn btn-success " onClick={handleDiscount}>{useId.descuento ? 'Descuento Aplicado' : 'Aplicar descuento'}</button>
-              <label id="discountApplied" className={useId.descuento ? 'active' : ''}></label>
+              <button role="button" id="btnDiscount" className="btn btn-success " onClick={handleDiscount}>{useId.descuento.descuentoCheck ? 'Descuento Aplicado' : 'Aplicar descuento'}</button>
+              <label id="discountApplied" className={useId.descuento.descuentoCheck ? 'active' : ''}></label>
             </div>
             <button className="btn btnCheckout">Realizar pago</button>
           </form>

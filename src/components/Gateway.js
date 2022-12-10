@@ -15,6 +15,7 @@ const Gateway = () => {
   const navigate = useNavigate()
   const {
     useId,
+    setId,
     usePayload,
     useMinutes,
     setMinutes,
@@ -26,6 +27,12 @@ const Gateway = () => {
   useEffect(() => {
     window.scrollTo(0, 0)
     if (useId === '') navigate('/404')
+
+    if(!useId.descuento) {
+      setId({...useId, descuento: {
+        descuentoCheck: false
+      }})
+    }
     const fullEvent = async () => {
       console.log(useId, usePayload, 'a')
       const task = await getDoc(doc(db, 'Eventos', useId.evento))
@@ -121,9 +128,9 @@ const Gateway = () => {
               </strong>
             </h1>
             <h6 className="eventSubtittle">{useEvent.name !== '' ? convertedDate.day + ' ' + convertedDate.date + ' @ ' + useEvent.recintoName + ' en ' + useEvent.province + ' (' + PUBLICO[useEvent.publico] + ')' : ''}</h6>
-            <h6 className="eventDetailed"><b>VAS A REALIZAR UN PAGO POR IMPORTE DE <strong className="ticketData">"{useId.descuento.descuentoCheck 
+            <h6 className="eventDetailed"><b>VAS A REALIZAR UN PAGO POR IMPORTE DE <strong className="ticketData">"{useId.descuento 
               ? Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload.totalPrice - useId.descuento.descuentoPrice) 
-              : Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload?.totalPrice) }"</strong> CORRESPONDIENTE AL EVENTO DEL DÍA <strong className="ticketData">"{convertedDate.date}"</strong> EN <strong className="ticketData">{useEvent.recintoName}</strong>. PARA TU(S) <strong className="ticketData">"{usePayload.quantity}"</strong> ENTRADA(S) <strong className="ticketData">"
+              : Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(usePayload.totalPrice) }"</strong> CORRESPONDIENTE AL EVENTO DEL DÍA <strong className="ticketData">"{convertedDate.date}"</strong> EN <strong className="ticketData">{useEvent.recintoName}</strong>. PARA TU(S) <strong className="ticketData">"{usePayload.quantity}"</strong> ENTRADA(S) <strong className="ticketData">"
               {
                 usePayload ? usePayload.carrito.map(ticket => ticket.zona) : ''
               }"</strong></b></h6>
